@@ -1,9 +1,11 @@
 <script lang="ts">
+  import { dev } from "$app/environment";
   import { Canvas } from "@threlte/core";
-  import Scene from "../lib/components/Scene.svelte";
   import { useProgress } from "@threlte/extras";
   import { tweened } from "svelte/motion";
   import { fade } from "svelte/transition";
+  import Scene from "$lib/components/Scene.svelte";
+  import ZoomOutButton from "$lib/components/ZoomOutButton.svelte";
 
   const { progress } = useProgress();
 
@@ -21,7 +23,7 @@
 </div>
 
 <!-- Loading page -->
-{#if $tweenedProgress < 1}
+{#if $tweenedProgress < 1 && !dev}
   <div
     transition:fade={{
       duration: 2000,
@@ -38,6 +40,8 @@
     {/if}
   </div>
 {/if}
+
+<ZoomOutButton />
 
 <style>
   @keyframes spinner {

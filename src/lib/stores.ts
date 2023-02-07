@@ -1,12 +1,16 @@
 import { tweened } from "svelte/motion";
 import { writable } from "svelte/store";
 import { sineInOut } from "svelte/easing";
-import { Vector3 } from "three";
+import { Camera, Vector3 } from "three";
 
 export const tweenedOptions = {
   duration: 1500,
   easing: sineInOut,
 };
+
+export const zoomedIn = writable(false);
+
+export const cameraClone = writable(new Camera());
 
 export const ogCameraPosition = new Vector3(10, 5, 5);
 export const ogTargetPosition = new Vector3(0, 0, 0);
