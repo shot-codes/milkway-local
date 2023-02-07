@@ -93,8 +93,8 @@ export const sunMaterial = () => {
 
   const material = new PointsMaterial({
     size: 0.125,
-    transparent: true,
-    depthTest: false,
+    transparent: false,
+    depthTest: true,
     blending: AdditiveBlending,
     onBeforeCompile: shader => {
       shader.uniforms.time = gu.time;
