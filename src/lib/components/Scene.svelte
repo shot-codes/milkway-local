@@ -5,8 +5,9 @@
   import { degToRad } from "three/src/math/MathUtils";
   import { cameraClone, cameraPosition, targetPosition } from "$lib/stores";
   import MindFuture from "$lib/components/planets/MindFuture.svelte";
+    import Sun from "./Sun.svelte";
 
-  const orbitRadius = 10;
+  const orbitRadius = 20;
 
   const { camera } = useThrelte();
   $: cameraClone.set($camera);
@@ -29,6 +30,8 @@
     target={$targetPosition}
   />
 </PerspectiveCamera>
+
+<Sun position={[0, 0, 0]}></Sun>
 
 <MindFuture
   position={[

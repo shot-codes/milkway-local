@@ -12,7 +12,7 @@ export const zoomedIn = writable(false);
 
 export const cameraClone = writable(new Camera());
 
-export const ogCameraPosition = new Vector3(10, 5, 5);
+export const ogCameraPosition = new Vector3(10, 5, 25);
 export const ogTargetPosition = new Vector3(0, 0, 0);
 
 export const camCopyPosition = writable(new Vector3());
