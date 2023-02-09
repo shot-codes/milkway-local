@@ -1,4 +1,4 @@
-import { Color, PointsMaterial, AdditiveBlending, Float32BufferAttribute, Vector3, BufferGeometry, Points } from "three";
+import { Color, PointsMaterial, AdditiveBlending, MultiplyBlending, Float32BufferAttribute, Vector3, BufferGeometry, Points } from "three";
 import { LayerMaterial, Depth, Displace, Fresnel } from "lamina/vanilla";
 
 export class CustomLayerMaterial extends LayerMaterial {
@@ -61,25 +61,34 @@ export const sunMaterial = () => {
   
   let sizes = [];
   let shift = [];
-  let pushShift = () => {
-    shift.push(
-      Math.random() * Math.PI, 
-      Math.random() * Math.PI * 2, 
-      (Math.random() * 0.9 + 0.1) * Math.PI * 0.1,
-      Math.random() * 0.9 + 0.1
-    );
+  let pushShift = (bigger: Boolean) => {
+    if (bigger) {
+      shift.push(
+        Math.random() * Math.PI, 
+        Math.random() * Math.PI * 20, 
+        (Math.random() * 0.9 + 0.1) * Math.PI * 0.1,
+        Math.random() * 0.9 + 1
+      );
+    } else {
+      shift.push(
+        Math.random() * Math.PI, 
+        Math.random() * Math.PI * 2, 
+        (Math.random() * 0.9 + 0.1) * Math.PI * 0.1,
+        Math.random() * 0.9 + 0.1
+      );
+    }
   }
 
   // THE SUN
-  let pts = new Array(100000).fill().map(p => {
+  let pts = new Array(15000).fill().map(p => {
     sizes.push(Math.random() + 0.1);
-    pushShift();
+    pushShift(true);
     return new Vector3().randomDirection().multiplyScalar(Math.random() * 0.5 + 2);
   })
 
   // THE PARTICLES
-  for(let i = 0; i < 10000; i++){
-    let r = 10, R = 50;
+  for(let i = 0; i < 2000; i++){
+    let r = 12, R = 40;
     let rand = Math.pow(Math.random(), 1.5);
     let radius = Math.sqrt(R * R * rand + (1 - rand) * r * r);
     pts.push(new Vector3().setFromCylindricalCoords(radius, Math.random() * 2 * Math.PI, (Math.random() - 0.5) * 2 ));
@@ -93,7 +102,7 @@ export const sunMaterial = () => {
 
   const material = new PointsMaterial({
     size: 0.125,
-    transparent: false,
+    transparent: true,
     depthTest: true,
     blending: AdditiveBlending,
     onBeforeCompile: shader => {

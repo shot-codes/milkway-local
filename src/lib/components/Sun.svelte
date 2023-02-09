@@ -33,7 +33,7 @@
 <!-- SUN -->
 <T.Group {position}>
     <T.Mesh material="{material}">
-        <T.Points geometry="{g}" material="{material}" let:ref></T.Points>
+        <T.Points geometry="{g}" material="{material}"></T.Points>
     </T.Mesh>
 </T.Group>
   
