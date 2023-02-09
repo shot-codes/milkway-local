@@ -61,8 +61,8 @@ export const sunMaterial = () => {
   
   let sizes = [];
   let shift = [];
-  let pushShift = (bigger: Boolean) => {
-    if (bigger) {
+  let pushShift = (isSun: Boolean) => {
+    if (isSun) {
       shift.push(
         Math.random() * Math.PI, 
         Math.random() * Math.PI * 20, 
@@ -87,11 +87,11 @@ export const sunMaterial = () => {
   })
 
   // THE PARTICLES
-  for(let i = 0; i < 2000; i++){
-    let r = 12, R = 40;
+  for(let i = 0; i < 20000; i++){
+    let r = 15, R = 400;
     let rand = Math.pow(Math.random(), 1.5);
     let radius = Math.sqrt(R * R * rand + (1 - rand) * r * r);
-    pts.push(new Vector3().setFromCylindricalCoords(radius, Math.random() * 2 * Math.PI, (Math.random() - 0.5) * 2 ));
+    pts.push(new Vector3().setFromCylindricalCoords(radius, Math.random() * 2 * Math.PI, (Math.random() - 0.5) * 4 ));
     sizes.push(Math.random() * 1.5 + 0.5);
     pushShift();
   }
