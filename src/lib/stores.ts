@@ -8,6 +8,7 @@ export const tweenedOptions = {
   easing: sineInOut,
 };
 
+export const floatSpeed = writable(0.5);
 export const zoomedIn = writable(false);
 
 export const cameraClone = writable(new Camera());

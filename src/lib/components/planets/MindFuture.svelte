@@ -5,6 +5,7 @@
   import { spring } from "svelte/motion";
   import { Float } from "@threlte/extras";
   import { mindfutureMaterials } from "$lib/materials";
+  import { floatSpeed } from "$lib/stores";
 
   export let position: [number, number, number];
 
@@ -29,13 +30,16 @@
 </script>
 
 <!-- Planet -->
-<Float floatIntensity={0.3}>
+<Float speed="{$floatSpeed}">
   <T.Group {position}>
     <T.Mesh let:ref {material}>
       <InteractiveObject
         object={ref}
         interactive
-        on:click={() => zoomIn(position)}
+        on:click={() => {
+          zoomIn(position);
+          $floatSpeed = 0;
+        }}
         on:pointerenter={() => {
           $scale = 0.5;
         }}
