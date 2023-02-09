@@ -7,7 +7,6 @@ import {
   camCopyPosition,
   cameraClone,
   zoomedIn,
-  floatSpeed,
 } from "$lib/stores";
 
 // TODO: The zoom in and zoom out levels are defined relatively by multiplying the position vector of the
@@ -27,5 +26,4 @@ export const zoomOut = () => {
   cameraPosition.set(get(camCopyPosition)); // Now return back to the same spot as before clicking the "Move camera" button
   targetPosition.set(ogTargetPosition);
   zoomedIn.set(false);
-  floatSpeed.set(0.5);
 };
