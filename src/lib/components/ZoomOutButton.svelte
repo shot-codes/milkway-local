@@ -5,7 +5,7 @@
 
 {#if $zoomedIn}
   <button
-    class="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-6 rounded-full p-2 ring-1 ring-white ring-opacity-50"
+    class="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-6 rounded-full p-2 ring-1 ring-white ring-opacity-50 z-30"
     on:click={zoomOut}
   >
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32"

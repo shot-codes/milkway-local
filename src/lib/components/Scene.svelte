@@ -5,9 +5,10 @@
   import { degToRad } from "three/src/math/MathUtils";
   import { cameraClone, cameraPosition, targetPosition } from "$lib/stores";
   import MindFuture from "$lib/components/planets/MindFuture.svelte";
-    import Sun from "./Sun.svelte";
+  import Sun from "./Sun.svelte";
 
   const orbitRadius = 25;
+  const randomYFactor = 2;
 
   const { camera } = useThrelte();
   $: cameraClone.set($camera);
@@ -25,74 +26,74 @@
     maxPolarAngle={degToRad(100)}
     minPolarAngle={degToRad(20)}
     enableDamping
-    enablePan={false}
+    enablePan={true}
     enableZoom={true}
     target={$targetPosition}
   />
 </PerspectiveCamera>
 
-<Sun position={[0, 0, 0]}></Sun>
+<Sun position={[0, 0, 0]} />
 
 <MindFuture
   position={[
     orbitRadius * Math.cos((1 * 2 * Math.PI) / 9),
-    0,
+    (Math.random() - 0.5) * randomYFactor,
     orbitRadius * Math.sin((1 * 2 * Math.PI) / 9),
   ]}
 />
 <MindFuture
   position={[
     orbitRadius * Math.cos((2 * 2 * Math.PI) / 9),
-    0,
+    (Math.random() - 0.5) * randomYFactor,
     orbitRadius * Math.sin((2 * 2 * Math.PI) / 9),
   ]}
 />
 <MindFuture
   position={[
     orbitRadius * Math.cos((3 * 2 * Math.PI) / 9),
-    0,
+    (Math.random() - 0.5) * randomYFactor,
     orbitRadius * Math.sin((3 * 2 * Math.PI) / 9),
   ]}
 />
 <MindFuture
   position={[
     orbitRadius * Math.cos((4 * 2 * Math.PI) / 9),
-    0,
+    (Math.random() - 0.5) * randomYFactor,
     orbitRadius * Math.sin((4 * 2 * Math.PI) / 9),
   ]}
 />
 <MindFuture
   position={[
     orbitRadius * Math.cos((5 * 2 * Math.PI) / 9),
-    0,
+    (Math.random() - 0.5) * randomYFactor,
     orbitRadius * Math.sin((5 * 2 * Math.PI) / 9),
   ]}
 />
 <MindFuture
   position={[
     orbitRadius * Math.cos((6 * 2 * Math.PI) / 9),
-    0,
+    (Math.random() - 0.5) * randomYFactor,
     orbitRadius * Math.sin((6 * 2 * Math.PI) / 9),
   ]}
 />
 <MindFuture
   position={[
     orbitRadius * Math.cos((7 * 2 * Math.PI) / 9),
-    0,
+    (Math.random() - 0.5) * randomYFactor,
     orbitRadius * Math.sin((7 * 2 * Math.PI) / 9),
   ]}
 />
 <MindFuture
   position={[
     orbitRadius * Math.cos((8 * 2 * Math.PI) / 9),
-    0,
+    (Math.random() - 0.5) * randomYFactor,
     orbitRadius * Math.sin((8 * 2 * Math.PI) / 9),
   ]}
 />
 <MindFuture
   position={[
     orbitRadius * Math.cos((9 * 2 * Math.PI) / 9),
-    0,
+    (Math.random() - 0.5) * randomYFactor,
     orbitRadius * Math.sin((9 * 2 * Math.PI) / 9),
   ]}
 />
