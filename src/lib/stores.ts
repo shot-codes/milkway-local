@@ -1,5 +1,5 @@
 import { tweened } from "svelte/motion";
-import { derived, writable } from "svelte/store";
+import { writable } from "svelte/store";
 import { sineInOut } from "svelte/easing";
 import { Camera, Vector3 } from "three";
 

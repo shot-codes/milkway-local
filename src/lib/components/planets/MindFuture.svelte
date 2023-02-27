@@ -14,6 +14,7 @@
   let textRotation = { x: 0, y: 0, z: 0 };
   const { material, displace } = mindfutureMaterials();
   const scale = spring(0, { stiffness: 0.05 });
+  let orbitAnimation = 0;
 
   const textOpacity = tweened(0, { delay: 500, duration: 2000 });
 
@@ -29,6 +30,7 @@
   useFrame(() => {
     // TODO: This should be possible without useFrame, in a reactive statement. It was running when $camera was update though...
     textRotation = $camera.rotation;
+    orbitAnimation += 0.01;
 
     if ($scale > 0) {
       // @ts-expect-error - this property is present when running, not sure why ts doesn't pick up on it.
@@ -65,5 +67,23 @@
       }}
     />
     <T.SphereGeometry args={[2, 256, 256]} />
+  </T.Mesh>
+</T.Group>
+
+<!-- Orbit -->
+<T.Group {position} rotation.y={orbitAnimation}>
+  <T.Mesh let:ref {material} position={[3.5, 0, 0]}>
+    <InteractiveObject
+      object={ref}
+      interactive
+      on:click={() => zoomIn(position)}
+      on:pointerenter={() => {
+        $scale = 0.5;
+      }}
+      on:pointerleave={() => {
+        $scale = 0;
+      }}
+    />
+    <T.SphereGeometry args={[0.6, 256, 256]} />
   </T.Mesh>
 </T.Group>

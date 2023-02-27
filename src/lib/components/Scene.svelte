@@ -5,7 +5,6 @@
   import { degToRad } from "three/src/math/MathUtils";
   import { cameraClone, cameraPosition, targetPosition } from "$lib/stores";
   import MindFuture from "$lib/components/planets/MindFuture.svelte";
-  import Sun from "./Sun.svelte";
 
   const orbitRadius = 25;
   const randomYFactor = 2;
@@ -31,8 +30,6 @@
     target={$targetPosition}
   />
 </PerspectiveCamera>
-
-<Sun position={[0, 0, 0]} />
 
 <MindFuture
   position={[
