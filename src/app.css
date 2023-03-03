@@ -4,10 +4,9 @@
 
 html,
 body {
-  @apply font-space;
-  background-color: black;
-  height: 100vh;
-  width: 100vw;
+  @apply font-space h-screen w-screen;
+  background: rgb(37,29,75);
+  background: linear-gradient(45deg, rgba(37,29,75,1) 0%, rgba(13,12,15,1) 30%, rgba(13,12,15,1) 85%, rgba(85,37,28,1) 100%);
 }
 
 /* space-grotesk-regular - latin */

@@ -7,7 +7,7 @@
   import Scene from "$lib/components/Scene.svelte";
   import ZoomOutButton from "$lib/components/ZoomOutButton.svelte";
   import { zoomedIn, pageContent } from "$lib/stores";
-  import Grain from "$lib/components/Grain.svelte";
+  // import Grain from "$lib/components/Grain.svelte";
 
   const { progress } = useProgress();
 
@@ -65,9 +65,9 @@
 
 <ZoomOutButton />
 
-<div class="z-50">
+<!-- <div class="z-50">
   <Grain />
-</div>
+</div> -->
 
 <style>
   @keyframes spinner {
