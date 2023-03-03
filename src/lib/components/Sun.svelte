@@ -1,37 +1,20 @@
 <script lang="ts">
-  import { T } from "@threlte/core";
-  import { WebGLRenderer, Clock } from "three";
-  import { onDestroy } from "svelte";
+  import { T, useFrame } from "@threlte/core";
   import { sunMaterial } from "$lib/materials";
+  import { PointLight } from "three";
 
-  export let position: [number, number, number];
+  const { material, displace } = sunMaterial();
 
-  const { material, g, gu } = sunMaterial();
-
-  let renderer = new WebGLRenderer();
-  renderer.setSize(innerWidth, innerHeight);
-
-  document.body.appendChild(renderer.domElement);
-
-  window.addEventListener("resize", () => {
-    renderer.setSize(innerWidth, innerHeight);
-  });
-
-  let clock = new Clock();
-
-  renderer.setAnimationLoop(() => {
-    let t = clock.getElapsedTime() * 0.5;
-    gu.time.value = t * Math.PI;
-  });
-
-  onDestroy(() => {
-    material.dispose();
+  useFrame(() => {
+    // @ts-expect-error
+    displace.offset[0] += 0.01;
+    // @ts-expect-error
+    displace.offset[1] += 0.01;
+    // @ts-expect-error
+    displace.offset[2] += 0.01;
   });
 </script>
 
-<!-- SUN -->
-<T.Group {position}>
-  <T.Mesh {material}>
-    <T.Points geometry={g} {material} />
-  </T.Mesh>
-</T.Group>
+<T.Mesh {material}>
+  <T.SphereGeometry args={[6, 256]} />
+</T.Mesh>

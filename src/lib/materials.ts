@@ -1,33 +1,25 @@
-import {
-  Color,
-  PointsMaterial,
-  AdditiveBlending,
-  Float32BufferAttribute,
-  Vector3,
-  BufferGeometry,
-  Points,
-} from "three";
-import { LayerMaterial, Depth, Displace, Fresnel } from "lamina/vanilla";
+import { Color } from "three";
+import { LayerMaterial, Depth, Displace, Fresnel, Noise } from "lamina/vanilla";
 
 export class CustomLayerMaterial extends LayerMaterial {
   constructor(layers: Array<Depth | Displace | Fresnel>) {
     super({
       lighting: "physical",
-      roughness: 0.2,
-      transmission: 0.5,
-      reflectivity: 1,
+      roughness: 0,
+      transmission: 0.99,
+      reflectivity: 0.75,
       // @ts-expect-error - https://github.com/pmndrs/lamina/issues/25
-      thickness: 0.4,
+      thickness: 2,
       layers,
     });
   }
 }
 
 // Mindfuture
-export const mindfutureMaterials = () => {
+export const sunMaterial = () => {
   const displace = new Displace({
-    strength: 0,
-    scale: 3,
+    strength: 12,
+    scale: 0.1,
     type: "perlin",
     offset: [0.09189000000357626, 0, 0],
     mode: "normal",
@@ -36,8 +28,8 @@ export const mindfutureMaterials = () => {
   const material = new CustomLayerMaterial([
     displace,
     new Depth({
-      colorA: new Color("#fc8eb2"),
-      colorB: new Color("#007afc"),
+      colorA: new Color("#000000"),
+      colorB: new Color("#000000"),
       alpha: 0.5,
       near: 0.4854,
       far: 0.7661999999999932,
@@ -62,114 +54,336 @@ export const mindfutureMaterials = () => {
   };
 };
 
-export const sunMaterial = () => {
-  let gu = {
-    time: { value: 0 },
-  };
-
-  let sizes: Array<number> = [];
-  let shift: Array<number> = [];
-  let pushShift = (isSun: Boolean) => {
-    if (isSun) {
-      shift.push(
-        Math.random() * Math.PI,
-        Math.random() * Math.PI * 20,
-        (Math.random() * 0.9 + 0.1) * Math.PI * 0.1,
-        Math.random() * 0.9 + 1
-      );
-    } else {
-      shift.push(
-        Math.random() * Math.PI,
-        Math.random() * Math.PI * 2,
-        (Math.random() * 0.9 + 0.1) * Math.PI * 0.1,
-        Math.random() * 0.9 + 0.1
-      );
-    }
-  };
-
-  // THE SUN
-  let pts = new Array(15000).fill(0).map((p) => {
-    sizes.push(Math.random() + 0.1);
-    pushShift(true);
-    return new Vector3().randomDirection().multiplyScalar(Math.random() * 0.5 + 2);
+export const material1 = () => {
+  const noise = new Noise({
+    colorA: new Color("#ffffff"),
+    colorB: new Color("#883366"),
+    colorC: new Color("#33ff55"),
+    colorD: new Color("#0000ff"),
+    alpha: 0.1,
+    scale: 3,
+    type: "curl",
+    offset: [0, 0, 0],
+    mapping: "local",
+    mode: "normal",
+    visible: true,
   });
-
-  // THE PARTICLES
-  for (let i = 0; i < 20000; i++) {
-    let r = 7,
-      R = 100;
-    let rand = Math.pow(Math.random(), 1.5);
-    let radius = Math.sqrt(R * R * rand + (1 - rand) * r * r);
-    pts.push(
-      new Vector3().setFromCylindricalCoords(
-        radius,
-        Math.random() * 2 * Math.PI,
-        (Math.random() - 0.5) * 4
-      )
-    );
-    sizes.push(Math.random() * 1.5 + 0.5);
-    pushShift(false);
-  }
-
-  let g = new BufferGeometry().setFromPoints(pts);
-  g.setAttribute("sizes", new Float32BufferAttribute(sizes, 1));
-  g.setAttribute("shift", new Float32BufferAttribute(shift, 4));
-
-  const material = new PointsMaterial({
-    size: 0.125,
-    transparent: true,
-    depthTest: true,
-    blending: AdditiveBlending,
+  const material = new LayerMaterial({
+    color: "#FF2327",
+    lighting: "physical",
+    layers: [
+      noise,
+      new Fresnel({
+        color: new Color("#ff00ff"),
+        alpha: 1,
+        power: 1.55,
+        intensity: 1.1,
+        bias: 0,
+        mode: "screen",
+        visible: true,
+      }),
+    ],
   });
-  material.onBeforeCompile = (shader) => {
-    shader.uniforms.time = gu.time;
-    shader.vertexShader = `
-      uniform float time;
-      attribute float sizes;
-      attribute vec4 shift;
-      varying vec3 vColor;
-      ${shader.vertexShader}
-    `
-      .replace(`gl_PointSize = size;`, `gl_PointSize = size * sizes;`)
-      .replace(
-        `#include <color_vertex>`,
-        `#include <color_vertex>
-        float d = length(abs(position) / vec3(40., 10., 40));
-        d = clamp(d, 0., 1.);
-        vColor = mix(vec3(227., 155., 0.), vec3(100., 50., 255.), d) / 255.;
-      `
-      )
-      .replace(
-        `#include <begin_vertex>`,
-        `#include <begin_vertex>
-        float t = time;
-        float moveT = mod(shift.x + shift.z * t, PI2);
-        float moveS = mod(shift.y + shift.z * t, PI2);
-        transformed += vec3(cos(moveS) * sin(moveT), cos(moveT), sin(moveS) * sin(moveT)) * shift.w;
-      `
-      );
-    //console.log(shader.vertexShader);
-    shader.fragmentShader = `
-      varying vec3 vColor;
-      ${shader.fragmentShader}
-    `
-      .replace(
-        `#include <clipping_planes_fragment>`,
-        `#include <clipping_planes_fragment>
-        float d = length(gl_PointCoord.xy - 0.5);
-        //if (d > 0.5) discard;
-      `
-      )
-      .replace(
-        `vec4 diffuseColor = vec4( diffuse, opacity );`,
-        `vec4 diffuseColor = vec4( vColor, smoothstep(0.5, 0.1, d)/* * 0.5 + 0.5*/ );`
-      );
-    //console.log(shader.fragmentShader);
-  };
-
   return {
     material,
-    g,
-    gu,
+    noise,
+  };
+};
+
+export const material2 = () => {
+  const noise = new Noise({
+    colorA: new Color("#1720a8"),
+    colorB: new Color("#9428a9"),
+    colorC: new Color("#f2feeb"),
+    colorD: new Color("#f0fef4"),
+    alpha: 0.1,
+    scale: 3,
+    type: "curl",
+    offset: [0, 0, 0],
+    mapping: "local",
+    mode: "normal",
+    visible: true,
+  });
+  const material = new LayerMaterial({
+    color: "#5ea1fd",
+    lighting: "physical",
+    layers: [
+      noise,
+      new Fresnel({
+        color: new Color("#fc0000"),
+        alpha: 1,
+        power: 1.55,
+        intensity: 1.1,
+        bias: 0,
+        mode: "screen",
+        visible: true,
+      }),
+    ],
+  });
+  return {
+    material,
+    noise,
+  };
+};
+
+export const material3 = () => {
+  const noise = new Noise({
+    colorA: new Color("#0000ff"),
+    colorB: new Color("#fff000"),
+    colorC: new Color("#0000ff"),
+    colorD: new Color("#0000ff"),
+    alpha: 0.1,
+    scale: 3,
+    type: "curl",
+    offset: [0, 0, 0],
+    mapping: "local",
+    mode: "normal",
+    visible: true,
+  });
+  const material = new LayerMaterial({
+    color: "#00ff00",
+    lighting: "physical",
+    layers: [
+      noise,
+      new Fresnel({
+        color: new Color("#ffff00"),
+        alpha: 1,
+        power: 1.55,
+        intensity: 1.1,
+        bias: 0,
+        mode: "screen",
+        visible: true,
+      }),
+    ],
+  });
+  return {
+    material,
+    noise,
+  };
+};
+
+export const material4 = () => {
+  const noise = new Noise({
+    colorA: new Color("#d23923"),
+    colorB: new Color("#442211"),
+    colorC: new Color("#00ff00"),
+    colorD: new Color("#0000ff"),
+    alpha: 0.1,
+    scale: 3,
+    type: "curl",
+    offset: [0, 0, 0],
+    mapping: "local",
+    mode: "normal",
+    visible: true,
+  });
+  const material = new LayerMaterial({
+    color: "#dd9922",
+    lighting: "physical",
+    layers: [
+      noise,
+      new Fresnel({
+        color: new Color("#ffffff"),
+        alpha: 0.3,
+        power: 1.55,
+        intensity: 1.1,
+        bias: 0,
+        mode: "screen",
+        visible: true,
+      }),
+    ],
+  });
+  return {
+    material,
+    noise,
+  };
+};
+
+export const material5 = () => {
+  const noise = new Noise({
+    colorA: new Color("#ffffff"),
+    colorB: new Color("#ffffff"),
+    colorC: new Color("#ff00ff"),
+    colorD: new Color("#ff00ff"),
+    alpha: 0.1,
+    scale: 3,
+    type: "curl",
+    offset: [0, 0, 0],
+    mapping: "local",
+    mode: "normal",
+    visible: true,
+  });
+  const material = new LayerMaterial({
+    color: "#3388ff",
+    lighting: "physical",
+    layers: [
+      noise,
+      new Fresnel({
+        color: new Color("#00ffff"),
+        alpha: 1,
+        power: 1.55,
+        intensity: 1.1,
+        bias: 0,
+        mode: "screen",
+        visible: true,
+      }),
+    ],
+  });
+  return {
+    material,
+    noise,
+  };
+};
+
+export const material6 = () => {
+  const noise = new Noise({
+    colorA: new Color("#000000"),
+    colorB: new Color("#000000"),
+    colorC: new Color("#dcdd10"),
+    colorD: new Color("#dcdd10"),
+    alpha: 0.1,
+    scale: 3,
+    type: "curl",
+    offset: [0, 0, 0],
+    mapping: "local",
+    mode: "normal",
+    visible: true,
+  });
+  const material = new LayerMaterial({
+    color: "#00ffff",
+    lighting: "physical",
+    layers: [
+      noise,
+      new Fresnel({
+        color: new Color("#ff00ff"),
+        alpha: 1,
+        power: 1.55,
+        intensity: 1.1,
+        bias: 0,
+        mode: "screen",
+        visible: true,
+      }),
+    ],
+  });
+  return {
+    material,
+    noise,
+  };
+};
+
+export const material7 = () => {
+  const noise = new Noise({
+    colorA: new Color("#ff00ff"),
+    colorB: new Color("#000000"),
+    colorC: new Color("#ffffff"),
+    colorD: new Color("#ffffff"),
+    alpha: 0.1,
+    scale: 3,
+    type: "curl",
+    offset: [0, 0, 0],
+    mapping: "local",
+    mode: "normal",
+    visible: true,
+  });
+  const material = new LayerMaterial({
+    color: "#ffe910",
+    lighting: "physical",
+    layers: [
+      noise,
+      new Fresnel({
+        color: new Color("#ffff00"),
+        alpha: 1,
+        power: 1.55,
+        intensity: 1.1,
+        bias: 0,
+        mode: "screen",
+        visible: true,
+      }),
+    ],
+  });
+  return {
+    material,
+    noise,
+  };
+};
+
+export const material8 = () => {
+  const noise = new Noise({
+    colorA: new Color("#0000ff"),
+    colorB: new Color("#0000ff"),
+    colorC: new Color("#dcdd10"),
+    colorD: new Color("#dcdd10"),
+    alpha: 0.1,
+    scale: 3,
+    type: "curl",
+    offset: [0, 0, 0],
+    mapping: "local",
+    mode: "normal",
+    visible: true,
+  });
+  const material = new LayerMaterial({
+    color: "#6000bb",
+    lighting: "physical",
+    layers: [
+      noise,
+      new Fresnel({
+        color: new Color("#ff00ff"),
+        alpha: 1,
+        power: 1.55,
+        intensity: 1.1,
+        bias: 0,
+        mode: "screen",
+        visible: true,
+      }),
+    ],
+  });
+  return {
+    material,
+    noise,
+  };
+};
+
+export const material9 = () => {
+  const displace = new Displace({
+    strength: 1.1,
+    scale: 0.4,
+    type: "perlin",
+    offset: [-100, 200, -100],
+    mode: "normal",
+    visible: true,
+  });
+  const noise = new Noise({
+    colorA: new Color("#aaaaaa"),
+    colorB: new Color("#aaaaaa"),
+    colorC: new Color("#000000"),
+    colorD: new Color("#000000"),
+    alpha: 0.1,
+    scale: 3,
+    type: "curl",
+    offset: [0, 0, 0],
+    mapping: "local",
+    mode: "normal",
+    visible: true,
+  });
+  const material = new LayerMaterial({
+    color: "#000000",
+    lighting: "physical",
+    layers: [
+      displace,
+      noise,
+      new Fresnel({
+        color: new Color("#bbbbbb"),
+        alpha: 1,
+        power: 2,
+        intensity: 1.1,
+        bias: 0,
+        mode: "screen",
+        visible: true,
+      }),
+    ],
+  });
+  return {
+    material,
+    displace,
+    noise,
   };
 };

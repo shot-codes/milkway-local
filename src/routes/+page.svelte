@@ -7,6 +7,7 @@
   import Scene from "$lib/components/Scene.svelte";
   import ZoomOutButton from "$lib/components/ZoomOutButton.svelte";
   import { zoomedIn, pageContent } from "$lib/stores";
+  import Grain from "$lib/components/Grain.svelte";
 
   const { progress } = useProgress();
 
@@ -43,12 +44,13 @@
 {/if}
 
 <!-- Loading page -->
-{#if $tweenedProgress < 1 && !dev}
+<!-- tweened progress never reaches 1 -->
+{#if $tweenedProgress < 1 && false}
   <div
     transition:fade={{
       duration: 2000,
     }}
-    class="bg-black pointer-events-none flex absolute z-50 text-white justify-center items-center text-xl h-full w-full"
+    class="bg-black pointer-events-none flex absolute z-40 text-white justify-center items-center text-xl h-full w-full"
   >
     {#if $tweenedProgress < 1}
       <div
@@ -62,6 +64,10 @@
 {/if}
 
 <ZoomOutButton />
+
+<div class="z-50">
+  <Grain />
+</div>
 
 <style>
   @keyframes spinner {
