@@ -128,7 +128,7 @@
   });
   let clock = new Clock();
   renderer.setAnimationLoop(() => {
-    let t = clock.getElapsedTime() * 0.5;
+    let t = clock.getElapsedTime() * 1;
     gu.time.value = t * Math.PI;
   });
   onDestroy(() => {

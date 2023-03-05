@@ -21,12 +21,10 @@ export const camCopyPosition = writable(new Vector3());
 export const cameraPosition = tweened(ogCameraPosition, tweenedOptions);
 export const targetPosition = tweened(ogTargetPosition, tweenedOptions);
 
-const contentString = `
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque sit amet porttitor eget. Erat velit scelerisque in dictum non consectetur a erat. In nulla posuere sollicitudin aliquam ultrices sagittis. Ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue. Elementum tempus egestas sed sed risus pretium quam vulputate. Duis ultricies lacus sed turpis tincidunt id aliquet risus. Viverra vitae congue eu consequat ac felis donec et odio. In tellus integer feugiat scelerisque varius morbi enim nunc. Molestie nunc non blandit massa enim nec dui nunc mattis. Sit amet nisl suscipit adipiscing bibendum est. Enim lobortis scelerisque fermentum dui faucibus in. Nullam vehicula ipsum a arcu cursus vitae congue mauris. Feugiat nisl pretium fusce id 
-`;
+const contentString = `Lorem ipsum dolor sit amet`;
 
-export const pageContent = writable({
-  title: "MindFuture",
-  content: contentString,
-  link: "hyperlink",
-});
+// export const pageContent = writable({
+//   title: "MindFuture",
+//   content: contentString,
+//   link: "hyperlink",
+// });

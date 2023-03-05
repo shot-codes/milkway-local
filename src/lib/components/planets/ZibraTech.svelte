@@ -8,13 +8,17 @@
   import { zoomedIn, activePlanet } from "$lib/stores";
 
   export let position: [number, number, number];
+  export let isStatic: Boolean = false;
+  
+  const planetName = 'ZibraTech';
+  const planetSize = isStatic ? 2 : 2.6;
 
   const { material, displace, noise } = material9();
   const scale = spring(1, { stiffness: 0.05 });
   const textOpacity = tweened(0, { delay: 500, duration: 2000 });
 
   $: {
-    if ($zoomedIn && $activePlanet == "ZibraTech") textOpacity.set(1);
+    if ($zoomedIn && $activePlanet == planetName) textOpacity.set(1);
     else textOpacity.set(0);
   }
 
@@ -22,7 +26,7 @@
   $: displace.strength = $scale - 1;
 
   useFrame(() => {
-    if ($activePlanet == "ZibraTech") {
+    if ($activePlanet == planetName || isStatic) {
       // @ts-expect-error
       displace.offset[0] += 0.005;
       // @ts-expect-error
@@ -41,30 +45,33 @@
 
 <!-- Planet -->
 <T.Group {position} rotation.y={Math.atan2(position[0], position[2])}>
-  <Text
-    text={"ZibraTech"}
+  <!-- <Text
+    text={planetName}
     anchorX="center"
     scale={15}
     position={{ x: -0.4, y: 3.2, z: -2 }}
     fillOpacity={$textOpacity}
     font={"fonts/space.woff"}
-  />
+  /> -->
 
   <T.Mesh let:ref {material} scale={$scale} position.x={2}>
     <InteractiveObject
       object={ref}
       interactive
       on:click={() => {
-        activePlanet.set("ZibraTech");
+        if (isStatic) return;
+        activePlanet.set(planetName);
         zoomIn(position);
       }}
       on:pointerenter={() => {
+        if (isStatic) return;
         $scale = 1.5;
       }}
       on:pointerleave={() => {
+        if (isStatic) return;
         $scale = 1;
       }}
     />
-    <T.SphereGeometry args={[2.6, 256, 256]} />
+    <T.SphereGeometry args={[planetSize, 256, 256]} />
   </T.Mesh>
 </T.Group>
