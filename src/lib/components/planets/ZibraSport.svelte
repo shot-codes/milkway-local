@@ -13,6 +13,7 @@
 
   const planetName = "ZibraSport";
   const planetSize = isStatic ? 2 : 3.5;
+  let showDetails = false;
 
   const { material, noise } = material8();
   const scale = spring(1, { stiffness: 0.05 });
@@ -51,7 +52,7 @@
   /> -->
 
   <T.Group position.x={2}>
-    <Label radius={planetSize} text="ZibraSport" />
+    <Label radius={planetSize} text="ZibraSport" {showDetails} />
 
     <T.Mesh let:ref {material} scale={$scale}>
       <InteractiveObject
@@ -64,11 +65,13 @@
         }}
         on:pointerenter={() => {
           if (isStatic) return;
-          $scale = 1.5;
+          showDetails = true;
+          $scale = 1.2;
         }}
         on:pointerleave={() => {
-          $scale = 1;
           if (isStatic) return;
+          $scale = 1;
+          showDetails = false;
         }}
       />
       <T.SphereGeometry args={[planetSize, 256, 256]} />

@@ -13,6 +13,7 @@
 
   const planetName = "Pleo";
   const planetSize = isStatic ? 2 : 2;
+  let showDetails = false;
 
   const { material, noise } = material7();
   const scale = spring(1, { stiffness: 0.05 });
@@ -51,7 +52,7 @@
   /> -->
 
   <T.Group position.x={2}>
-    <Label radius={planetSize} text="Pleo" />
+    <Label radius={planetSize} text="Pleo" {showDetails} />
     <T.Mesh let:ref {material} scale={$scale}>
       <InteractiveObject
         object={ref}
@@ -63,10 +64,12 @@
         }}
         on:pointerenter={() => {
           if (isStatic) return;
-          $scale = 1.5;
+          showDetails = true;
+          $scale = 1.2;
         }}
         on:pointerleave={() => {
           if (isStatic) return;
+          showDetails = false;
           $scale = 1;
         }}
       />
