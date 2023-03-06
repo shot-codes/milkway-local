@@ -6,11 +6,12 @@
   import { Text } from "@threlte/extras";
   import { material8 } from "$lib/materials";
   import { zoomedIn, activePlanet } from "$lib/stores";
+  import Label from "../Label.svelte";
 
   export let position: [number, number, number];
   export let isStatic: Boolean = false;
 
-  const planetName = 'ZibraSport';
+  const planetName = "ZibraSport";
   const planetSize = isStatic ? 2 : 3.5;
 
   const { material, noise } = material8();
@@ -22,16 +23,16 @@
     else textOpacity.set(0);
   }
 
-  useFrame(() => {
-    if ($activePlanet == planetName || isStatic) {
-      // @ts-expect-error
-      noise.offset[0] += 0.001;
-      // @ts-expect-error
-      noise.offset[1] += 0.001;
-      // @ts-expect-error
-      noise.offset[2] += 0.001;
-    }
-  });
+  // useFrame(() => {
+  //   if ($activePlanet == planetName || isStatic) {
+  //     // @ts-expect-error
+  //     noise.offset[0] += 0.001;
+  //     // @ts-expect-error
+  //     noise.offset[1] += 0.001;
+  //     // @ts-expect-error
+  //     noise.offset[2] += 0.001;
+  //   }
+  // });
 
   onDestroy(() => {
     material.dispose();
@@ -49,24 +50,28 @@
     font={"fonts/space.woff"}
   /> -->
 
-  <T.Mesh let:ref {material} scale={$scale} position.x={2}>
-    <InteractiveObject
-      object={ref}
-      interactive
-      on:click={() => {
-        if (isStatic) return;
-        activePlanet.set(planetName);
-        zoomIn(position);
-      }}
-      on:pointerenter={() => {
-        if (isStatic) return;
-        $scale = 1.5;
-      }}
-      on:pointerleave={() => {
-        $scale = 1;
-        if (isStatic) return;
-      }}
-    />
-    <T.SphereGeometry args={[planetSize, 256, 256]} />
-  </T.Mesh>
+  <T.Group position.x={2}>
+    <Label radius={planetSize} text="ZibraSport" />
+
+    <T.Mesh let:ref {material} scale={$scale}>
+      <InteractiveObject
+        object={ref}
+        interactive
+        on:click={() => {
+          if (isStatic) return;
+          activePlanet.set(planetName);
+          zoomIn(position);
+        }}
+        on:pointerenter={() => {
+          if (isStatic) return;
+          $scale = 1.5;
+        }}
+        on:pointerleave={() => {
+          $scale = 1;
+          if (isStatic) return;
+        }}
+      />
+      <T.SphereGeometry args={[planetSize, 256, 256]} />
+    </T.Mesh>
+  </T.Group>
 </T.Group>

@@ -37,7 +37,8 @@
 <!-- Planet content -->
 {#if $zoomedIn}
   <div class="fixed w-screen h-screen flex">
-    <div class="h-screen w-screen text-white overflow-scroll relative gradient-bg"
+    <div
+      class="h-screen w-screen text-white overflow-scroll relative gradient-bg"
       in:fade={{
         duration: 1000,
         delay: 800,
@@ -53,24 +54,24 @@
 
           <T.DirectionalLight castShadow position={[3, 10, 10]} />
           <T.DirectionalLight position={[-3, 10, -10]} intensity={0.2} />
-          
-          {#if $activePlanet == 'BlueLobster'}
+
+          {#if $activePlanet == "BlueLobster"}
             <BlueLobster position={[0, 0, 0]} isStatic={true} />
-          {:else if $activePlanet == 'BornFiber'}
+          {:else if $activePlanet == "BornFiber"}
             <BornFiber position={[0, 0, 0]} isStatic={true} />
-          {:else if $activePlanet == 'MindFuture'}
+          {:else if $activePlanet == "MindFuture"}
             <MindFuture position={[0, 0, 0]} isStatic={true} />
-          {:else if $activePlanet == 'Morpheus'}
+          {:else if $activePlanet == "Morpheus"}
             <Morpheus position={[0, 0, 0]} isStatic={true} />
-          {:else if $activePlanet == 'Ocrevus'}
+          {:else if $activePlanet == "Ocrevus"}
             <Ocrevus position={[0, 0, 0]} isStatic={true} />
-          {:else if $activePlanet == 'Paladin'}
+          {:else if $activePlanet == "Paladin"}
             <Paladin position={[0, 0, 0]} isStatic={true} />
-          {:else if $activePlanet == 'Pleo'}
+          {:else if $activePlanet == "Pleo"}
             <Pleo position={[0, 0, 0]} isStatic={true} />
-          {:else if $activePlanet == 'ZibraSport'}
+          {:else if $activePlanet == "ZibraSport"}
             <ZibraSport position={[0, 0, 0]} isStatic={true} />
-          {:else if $activePlanet == 'ZibraTech'}
+          {:else if $activePlanet == "ZibraTech"}
             <ZibraTech position={[0, 0, 0]} isStatic={true} />
           {/if}
         </Canvas>
@@ -104,7 +105,6 @@
 <!-- <div class="z-50">
   <Grain />
 </div> -->
-
 <style>
   @keyframes spinner {
     to {
