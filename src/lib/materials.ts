@@ -7,7 +7,7 @@ export class CustomLayerMaterial extends LayerMaterial {
       lighting: "physical",
       roughness: 0,
       transmission: 0.99,
-      reflectivity: 0.75,
+      reflectivity: 0.15,
       // @ts-expect-error - https://github.com/pmndrs/lamina/issues/25
       thickness: 2,
       layers,

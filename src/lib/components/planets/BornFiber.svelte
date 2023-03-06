@@ -6,32 +6,34 @@
   import { Text } from "@threlte/extras";
   import { material2 } from "$lib/materials";
   import { zoomedIn, activePlanet } from "$lib/stores";
+  import Label from "../Label.svelte";
 
   export let position: [number, number, number];
   export let isStatic: Boolean = false;
 
-  const planetName = 'BornFiber';
+  const planetName = "BornFiber";
   const planetSize = isStatic ? 2 : 2;
+  let showDetails = false;
 
   const { material, noise } = material2();
   const scale = spring(1, { stiffness: 0.05 });
   const textOpacity = tweened(0, { delay: 500, duration: 2000 });
 
-  $: {
-    if ($zoomedIn && $activePlanet == planetName) textOpacity.set(1);
-    else textOpacity.set(0);
-  }
+  // $: {
+  //   if ($zoomedIn && $activePlanet == planetName) textOpacity.set(1);
+  //   else textOpacity.set(0);
+  // }
 
-  useFrame(() => {
-    if ($activePlanet == planetName || isStatic) {
-      // @ts-expect-error
-      noise.offset[0] += 0.001;
-      // @ts-expect-error
-      noise.offset[1] += 0.001;
-      // @ts-expect-error
-      noise.offset[2] += 0.001;
-    }
-  });
+  // useFrame(() => {
+  //   if ($activePlanet == planetName || isStatic) {
+  //     // @ts-expect-error
+  //     noise.offset[0] += 0.001;
+  //     // @ts-expect-error
+  //     noise.offset[1] += 0.001;
+  //     // @ts-expect-error
+  //     noise.offset[2] += 0.001;
+  //   }
+  // });
 
   onDestroy(() => {
     material.dispose();
@@ -49,24 +51,30 @@
     font={"fonts/space.woff"}
   /> -->
 
-  <T.Mesh let:ref {material} scale={$scale} position.x={2}>
-    <InteractiveObject
-      object={ref}
-      interactive
-      on:click={() => {
-        if (isStatic) return;
-        activePlanet.set(planetName);
-        zoomIn(position);
-      }}
-      on:pointerenter={() => {
-        if (isStatic) return;
-        $scale = 1.5;
-      }}
-      on:pointerleave={() => {
-        if (isStatic) return;
-        $scale = 1;
-      }}
-    />
-    <T.SphereGeometry args={[planetSize, 256, 256]} />
-  </T.Mesh>
+  <T.Group position.x={2}>
+    <Label radius={planetSize} text="BornFiber" {showDetails} />
+
+    <T.Mesh let:ref {material} scale={$scale}>
+      <InteractiveObject
+        object={ref}
+        interactive
+        on:click={() => {
+          if (isStatic) return;
+          activePlanet.set(planetName);
+          zoomIn(position);
+        }}
+        on:pointerenter={() => {
+          if (isStatic) return;
+          showDetails = true;
+          $scale = 1.2;
+        }}
+        on:pointerleave={() => {
+          if (isStatic) return;
+          showDetails = false;
+          $scale = 1;
+        }}
+      />
+      <T.SphereGeometry args={[planetSize, 256, 256]} />
+    </T.Mesh>
+  </T.Group>
 </T.Group>
