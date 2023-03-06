@@ -36,9 +36,7 @@
 
 <!-- Planet content -->
 {#if $zoomedIn}
-  <div class="fixed w-screen h-screen flex">
-    <div
-      class="h-screen w-screen text-white overflow-scroll relative gradient-bg"
+    <div class="fixed h-screen w-screen text-white gradient-bg"
       in:fade={{
         duration: 1000,
         delay: 800,
@@ -47,37 +45,39 @@
         duration: 1000,
       }}
     >
-      <h1 class="font-bold text-[230px] absolute opacity-20 right-20">{$activePlanet}</h1>
-      <div class="absolute -top-48 -right-32 z-10 w-[2000px] h-[2000px]">
-        <Canvas>
-          <!-- <PerspectiveCamera position={ogCameraPosition} fov={50} /> -->
+      <div class="relative">
+        <h1 class="font-bold text-[230px] absolute opacity-20 right-20">{$activePlanet}</h1>
+        <div class="absolute -top-48 -right-32 z-10 w-[2000px] h-[2000px]">
+          <Canvas>
+            <!-- <PerspectiveCamera position={ogCameraPosition} fov={50} /> -->
+  
+            <T.DirectionalLight castShadow position={[3, 10, 10]} />
+            <T.DirectionalLight position={[-3, 10, -10]} intensity={0.2} />
+            
+            {#if $activePlanet == 'BlueLobster'}
+              <BlueLobster position={[0, 0, 0]} isStatic={true} />
+            {:else if $activePlanet == 'BornFiber'}
+              <BornFiber position={[0, 0, 0]} isStatic={true} />
+            {:else if $activePlanet == 'MindFuture'}
+              <MindFuture position={[0, 0, 0]} isStatic={true} />
+            {:else if $activePlanet == 'Morpheus'}
+              <Morpheus position={[0, 0, 0]} isStatic={true} />
+            {:else if $activePlanet == 'Ocrevus'}
+              <Ocrevus position={[0, 0, 0]} isStatic={true} />
+            {:else if $activePlanet == 'Paladin'}
+              <Paladin position={[0, 0, 0]} isStatic={true} />
+            {:else if $activePlanet == 'Pleo'}
+              <Pleo position={[0, 0, 0]} isStatic={true} />
+            {:else if $activePlanet == 'ZibraSport'}
+              <ZibraSport position={[0, 0, 0]} isStatic={true} />
+            {:else if $activePlanet == 'ZibraTech'}
+              <ZibraTech position={[0, 0, 0]} isStatic={true} />
+            {/if}
+          </Canvas>
+        </div>
 
-          <T.DirectionalLight castShadow position={[3, 10, 10]} />
-          <T.DirectionalLight position={[-3, 10, -10]} intensity={0.2} />
-
-          {#if $activePlanet == "BlueLobster"}
-            <BlueLobster position={[0, 0, 0]} isStatic={true} />
-          {:else if $activePlanet == "BornFiber"}
-            <BornFiber position={[0, 0, 0]} isStatic={true} />
-          {:else if $activePlanet == "MindFuture"}
-            <MindFuture position={[0, 0, 0]} isStatic={true} />
-          {:else if $activePlanet == "Morpheus"}
-            <Morpheus position={[0, 0, 0]} isStatic={true} />
-          {:else if $activePlanet == "Ocrevus"}
-            <Ocrevus position={[0, 0, 0]} isStatic={true} />
-          {:else if $activePlanet == "Paladin"}
-            <Paladin position={[0, 0, 0]} isStatic={true} />
-          {:else if $activePlanet == "Pleo"}
-            <Pleo position={[0, 0, 0]} isStatic={true} />
-          {:else if $activePlanet == "ZibraSport"}
-            <ZibraSport position={[0, 0, 0]} isStatic={true} />
-          {:else if $activePlanet == "ZibraTech"}
-            <ZibraTech position={[0, 0, 0]} isStatic={true} />
-          {/if}
-        </Canvas>
       </div>
     </div>
-  </div>
 {/if}
 
 <!-- Loading page -->
