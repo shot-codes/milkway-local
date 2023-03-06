@@ -10,6 +10,9 @@
   export let position: [number, number, number];
   export let isStatic: Boolean = false;
 
+  console.log(position);
+  
+
   const planetName = 'BlueLobster';
   const planetSize = isStatic ? 2 : 4;
 

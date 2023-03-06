@@ -70,7 +70,6 @@ export const material1 = () => {
   });
   const material = new LayerMaterial({
     color: "#FF2327",
-    lighting: "physical",
     layers: [
       noise,
       new Fresnel({
