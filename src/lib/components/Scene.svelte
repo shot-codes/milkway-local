@@ -1,36 +1,61 @@
-<script>
+<script lang="ts">
   import { dev } from "$app/environment";
   import { PerspectiveCamera, OrbitControls, useThrelte, T } from "@threlte/core";
   import { Environment } from "@threlte/extras";
   import { degToRad } from "three/src/math/MathUtils";
-  import { cameraClone, cameraPosition, targetPosition } from "$lib/stores";
+  import { cameraClone, cameraPosition, targetPosition, zoomedIn } from "$lib/stores";
   import Planet from "$lib/components/Planet.svelte";
   import Particles from "./Particles.svelte";
   import { Brand } from "$lib/utils";
   import Sun from "./Sun.svelte";
+  import { onMount } from "svelte";
+  import { Vector3 } from "three";
 
   const orbitRadius = 25;
+  let canvas: HTMLCanvasElement;
 
   const { camera } = useThrelte();
   $: cameraClone.set($camera);
+
+  onMount(() => {
+    canvas = document.getElementsByTagName("canvas")[0];
+    canvas.addEventListener("wheel", (e: WheelEvent) => {
+      if ($zoomedIn) {
+        try {
+          $cameraPosition = $cameraPosition.add(new Vector3(0, -e.deltaY / 20, 0));
+          $targetPosition = $targetPosition.add(new Vector3(0, -e.deltaY / 20, 0));
+        } catch (e) {
+          // Since zoomedIn is set upon clicking a planet, this event listener fires
+          // if you scroll _while_ the camera is flying into position.
+          // I was prepared to have to block scrolling _until_ the camera is in position
+          // but cameraPosition happens to fail here... Convenient.
+          // We will need to test this across devices/browsers.
+        }
+      }
+    });
+  });
 </script>
 
-<Environment
+<!-- <Environment
   path="/"
   files={dev ? "env_map_lowres.hdr" : "env_map.hdr"}
   isBackground={true}
   format="ldr"
-/>
+/> -->
 
 <PerspectiveCamera position={$cameraPosition} fov={50}>
-  <OrbitControls
-    maxPolarAngle={degToRad(100)}
-    minPolarAngle={degToRad(20)}
-    enableDamping
-    enablePan={true}
-    enableZoom={true}
-    target={$targetPosition}
-  />
+  {#if zoomedIn}
+    <OrbitControls enableDamping enablePan={false} enableZoom={false} target={$targetPosition} />
+  {:else}
+    <OrbitControls
+      maxPolarAngle={degToRad(100)}
+      minPolarAngle={degToRad(20)}
+      enableDamping
+      enablePan={false}
+      enableZoom={false}
+      target={$targetPosition}
+    />
+  {/if}
 </PerspectiveCamera>
 
 <T.DirectionalLight castShadow position={[3, 10, 10]} />
@@ -62,9 +87,13 @@
   ]}
   planetSize={3}
   planetOffsetXY={[-2, -1]}
-  titleOffsetXY={[-1.5, 5]}
+  titleOffsetXY={[-0.5, 4]}
   materialIndex={1}
-/>
+>
+  <div class="bg-neutral-800 rounded-lg opacity-50 p-6 text-white">
+    <p>How fuckin sweet is this eh?</p>
+  </div>
+</Planet>
 
 <Planet
   brand={Brand.MindFuture}

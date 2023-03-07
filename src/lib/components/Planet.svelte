@@ -1,9 +1,9 @@
 <script lang="ts">
   import { T, InteractiveObject } from "@threlte/core";
+  import { Text, HTML } from "@threlte/extras";
   import { zoomIn, Brand } from "$lib/utils";
   import { onDestroy } from "svelte";
   import { spring, tweened } from "svelte/motion";
-  import { Text } from "@threlte/extras";
   import { materials } from "$lib/materials";
   import { zoomedIn, activePlanet } from "$lib/stores";
   import Label from "./Label.svelte";
@@ -76,4 +76,10 @@
       <T.SphereGeometry args={[planetSize, 16, 16]} />
     </T.Mesh>
   </T.Group>
+
+  {#if $zoomedIn && $activePlanet == brand}
+    <HTML transform position={{ y: -5 }}>
+      <slot />
+    </HTML>
+  {/if}
 </T.Group>

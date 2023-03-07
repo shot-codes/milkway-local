@@ -20,11 +20,3 @@ export const camCopyPosition = writable(new Vector3());
 
 export const cameraPosition = tweened(ogCameraPosition, tweenedOptions);
 export const targetPosition = tweened(ogTargetPosition, tweenedOptions);
-
-const contentString = `Lorem ipsum dolor sit amet`;
-
-export const pageContent = writable({
-  title: "MindFuture",
-  content: contentString,
-  link: "hyperlink",
-});

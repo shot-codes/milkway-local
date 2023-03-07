@@ -14,7 +14,7 @@
 <div class="w-full h-full absolute">
   <Canvas>
     <T.PerspectiveCamera makeDefault position={[0, 0, 40]} fov={24}>
-      <OrbitControls target={{}} />
+      <OrbitControls target={{}} enableDamping enableZoom={false} />
     </T.PerspectiveCamera>
 
     <T.DirectionalLight castShadow position={[3, 10, 10]} />

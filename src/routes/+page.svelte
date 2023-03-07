@@ -3,10 +3,9 @@
   import { Canvas } from "@threlte/core";
   import { useProgress } from "@threlte/extras";
   import { tweened } from "svelte/motion";
-  import { fade, slide } from "svelte/transition";
+  import { fade } from "svelte/transition";
   import Scene from "$lib/components/Scene.svelte";
   import ZoomOutButton from "$lib/components/ZoomOutButton.svelte";
-  import { zoomedIn, pageContent } from "$lib/stores";
   // import Grain from "$lib/components/Grain.svelte";
 
   const { progress } = useProgress();
@@ -43,25 +42,6 @@
     <Scene />
   </Canvas>
 </div>
-
-<!-- Planet content -->
-{#if $zoomedIn}
-  <div class="fixed top-0 w-full h-full overflow-scroll flex flex-col-reverse">
-    <div
-      class="m-10 bg-black p-6 text-white rounded-lg bg-opacity-20 backdrop-blur-md"
-      in:slide={{
-        duration: 1000,
-        delay: 2000,
-      }}
-      out:slide={{
-        duration: 1000,
-      }}
-    >
-      <h1 class="font-bold text-lg">{$pageContent.title}</h1>
-      {$pageContent.content}
-    </div>
-  </div>
-{/if}
 
 <ZoomOutButton />
 
