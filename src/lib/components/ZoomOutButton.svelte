@@ -4,12 +4,9 @@
 </script>
 
 {#if $zoomedIn}
-  <button
-    class="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-6 rounded-full p-2 ring-1 ring-white ring-opacity-50 z-30"
-    on:click={zoomOut}
-  >
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32"
-      ><path fill="white" d="M16 22L6 12l1.4-1.4l8.6 8.6l8.6-8.6L26 12z" /></svg
-    >
+  <button class="cursor-pointer" on:click={zoomOut}>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+    </svg>  
   </button>
 {/if}
