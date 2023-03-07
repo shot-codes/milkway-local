@@ -1,12 +1,10 @@
 <script lang="ts">
   import {
-    Color,
     PointsMaterial,
     AdditiveBlending,
     Float32BufferAttribute,
     Vector3,
     BufferGeometry,
-    Points,
   } from "three";
   import { T } from "@threlte/core";
   import { WebGLRenderer, Clock } from "three";
@@ -20,7 +18,7 @@
 
     let sizes: Array<number> = [];
     let shift: Array<number> = [];
-    let pushShift = (isSun: Boolean) => {
+    let pushShift = (isSun: boolean) => {
       if (isSun) {
         shift.push(
           Math.random() * Math.PI,

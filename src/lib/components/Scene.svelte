@@ -4,31 +4,23 @@
   import { Environment } from "@threlte/extras";
   import { degToRad } from "three/src/math/MathUtils";
   import { cameraClone, cameraPosition, targetPosition } from "$lib/stores";
-  import MindFuture from "$lib/components/planets/MindFuture.svelte";
-  import BornFiber from "./planets/BornFiber.svelte";
-  import BlueLobster from "./planets/BlueLobster.svelte";
-  import Morpheus from "./planets/Morpheus.svelte";
-  import Ocrevus from "./planets/Ocrevus.svelte";
-  import Paladin from "./planets/Paladin.svelte";
-  import Pleo from "./planets/Pleo.svelte";
-  import ZibraSport from "./planets/ZibraSport.svelte";
-  import ZibraTech from "./planets/ZibraTech.svelte";
+  import Planet from "$lib/components/Planet.svelte";
   import Particles from "./Particles.svelte";
+  import { Brand } from "$lib/utils";
   import Sun from "./Sun.svelte";
 
   const orbitRadius = 25;
-  const randomYFactor = 2;
 
   const { camera } = useThrelte();
   $: cameraClone.set($camera);
 </script>
 
-<!-- <Environment
+<Environment
   path="/"
   files={dev ? "env_map_lowres.hdr" : "env_map.hdr"}
   isBackground={true}
   format="ldr"
-/> -->
+/>
 
 <PerspectiveCamera position={$cameraPosition} fov={50}>
   <OrbitControls
@@ -48,66 +40,119 @@
 
 <Sun />
 
-<MindFuture
+<Planet
+  brand={Brand.BlueLobster}
   position={[
     orbitRadius * Math.cos((1 * 2 * Math.PI) / 9),
-    (Math.random() - 0.5) * randomYFactor,
+    1,
     orbitRadius * Math.sin((1 * 2 * Math.PI) / 9),
   ]}
+  planetSize={2}
+  planetOffsetXY={[-2, -1]}
+  titleOffsetXY={[0, 3.8]}
+  materialIndex={0}
 />
-<BornFiber
+
+<Planet
+  brand={Brand.BornFiber}
   position={[
     orbitRadius * Math.cos((2 * 2 * Math.PI) / 9),
-    (Math.random() - 0.5) * randomYFactor,
+    0,
     orbitRadius * Math.sin((2 * 2 * Math.PI) / 9),
   ]}
+  planetSize={3}
+  planetOffsetXY={[-2, -1]}
+  titleOffsetXY={[-1.5, 5]}
+  materialIndex={1}
 />
-<BlueLobster
+
+<Planet
+  brand={Brand.MindFuture}
   position={[
     orbitRadius * Math.cos((3 * 2 * Math.PI) / 9),
-    (Math.random() - 0.5) * randomYFactor,
+    1,
     orbitRadius * Math.sin((3 * 2 * Math.PI) / 9),
   ]}
+  planetSize={2}
+  planetOffsetXY={[-2, -1]}
+  titleOffsetXY={[0, 3.8]}
+  materialIndex={2}
 />
-<Morpheus
+
+<Planet
+  brand={Brand.Morpheus}
   position={[
     orbitRadius * Math.cos((4 * 2 * Math.PI) / 9),
-    (Math.random() - 0.5) * randomYFactor,
+    1,
     orbitRadius * Math.sin((4 * 2 * Math.PI) / 9),
   ]}
+  planetSize={2}
+  planetOffsetXY={[-2, -1]}
+  titleOffsetXY={[0, 3.8]}
+  materialIndex={3}
 />
-<Ocrevus
+
+<Planet
+  brand={Brand.Ocreveus}
   position={[
     orbitRadius * Math.cos((5 * 2 * Math.PI) / 9),
-    (Math.random() - 0.5) * randomYFactor,
+    1,
     orbitRadius * Math.sin((5 * 2 * Math.PI) / 9),
   ]}
+  planetSize={2}
+  planetOffsetXY={[-2, -1]}
+  titleOffsetXY={[0, 3.8]}
+  materialIndex={4}
 />
-<Paladin
+
+<Planet
+  brand={Brand.Paladin}
   position={[
     orbitRadius * Math.cos((6 * 2 * Math.PI) / 9),
-    (Math.random() - 0.5) * randomYFactor,
+    1,
     orbitRadius * Math.sin((6 * 2 * Math.PI) / 9),
   ]}
+  planetSize={2}
+  planetOffsetXY={[-2, -1]}
+  titleOffsetXY={[0, 3.8]}
+  materialIndex={5}
 />
-<Pleo
+
+<Planet
+  brand={Brand.Pleo}
   position={[
     orbitRadius * Math.cos((7 * 2 * Math.PI) / 9),
-    (Math.random() - 0.5) * randomYFactor,
+    1,
     orbitRadius * Math.sin((7 * 2 * Math.PI) / 9),
   ]}
+  planetSize={2}
+  planetOffsetXY={[-2, -1]}
+  titleOffsetXY={[0, 3.8]}
+  materialIndex={6}
 />
-<ZibraSport
+
+<Planet
+  brand={Brand.ZibraSport}
   position={[
     orbitRadius * Math.cos((8 * 2 * Math.PI) / 9),
-    (Math.random() - 0.5) * randomYFactor,
+    1,
     orbitRadius * Math.sin((8 * 2 * Math.PI) / 9),
   ]}
+  planetSize={2}
+  planetOffsetXY={[-2, -1]}
+  titleOffsetXY={[0, 3.8]}
+  materialIndex={7}
 />
-<ZibraTech
+
+<Planet
+  brand={Brand.ZibraTech}
   position={[
     orbitRadius * Math.cos((9 * 2 * Math.PI) / 9),
-    (Math.random() - 0.5) * randomYFactor,
+    1,
     orbitRadius * Math.sin((9 * 2 * Math.PI) / 9),
   ]}
+  planetSize={2}
+  planetOffsetXY={[-2, -1]}
+  titleOffsetXY={[0, 3.8]}
+  materialIndex={8}
 />

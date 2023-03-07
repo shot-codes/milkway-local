@@ -29,3 +29,15 @@ export const zoomOut = () => {
   zoomedIn.set(false);
   activePlanet.set("");
 };
+
+export enum Brand {
+  BlueLobster = "BlueLobster",
+  BornFiber = "BornFiber",
+  MindFuture = "MindFuture",
+  Morpheus = "Morpheus",
+  Ocreveus = "Ocreveus",
+  Paladin = "Paladin",
+  Pleo = "Pleo",
+  ZibraSport = "ZibraSport",
+  ZibraTech = "ZibraTech",
+}

@@ -1,60 +1,7 @@
 import { Color } from "three";
-import { LayerMaterial, Depth, Displace, Fresnel, Noise } from "lamina/vanilla";
+import { LayerMaterial, Fresnel, Noise } from "lamina/vanilla";
 
-export class CustomLayerMaterial extends LayerMaterial {
-  constructor(layers: Array<Depth | Displace | Fresnel>) {
-    super({
-      lighting: "physical",
-      roughness: 0,
-      transmission: 0.99,
-      reflectivity: 0.15,
-      // @ts-expect-error - https://github.com/pmndrs/lamina/issues/25
-      thickness: 2,
-      layers,
-    });
-  }
-}
-
-// Mindfuture
-export const sunMaterial = () => {
-  const displace = new Displace({
-    strength: 12,
-    scale: 0.1,
-    type: "perlin",
-    offset: [0.09189000000357626, 0, 0],
-    mode: "normal",
-    visible: true,
-  });
-  const material = new CustomLayerMaterial([
-    displace,
-    new Depth({
-      colorA: new Color("#000000"),
-      colorB: new Color("#000000"),
-      alpha: 0.5,
-      near: 0.4854,
-      far: 0.7661999999999932,
-      origin: [-0.4920000000000004, 0.4250000000000003, 0],
-      mapping: "vector",
-      mode: "multiply",
-      visible: true,
-    }),
-    new Fresnel({
-      color: new Color("#fefefe"),
-      alpha: 1,
-      power: 3.3699999999999903,
-      intensity: 3.8999999999999946,
-      bias: -0.3430000000000002,
-      mode: "screen",
-      visible: true,
-    }),
-  ]);
-  return {
-    material,
-    displace,
-  };
-};
-
-export const material1 = () => {
+const material1 = () => {
   const noise = new Noise({
     colorA: new Color("#ffffff"),
     colorB: new Color("#883366"),
@@ -89,8 +36,7 @@ export const material1 = () => {
     noise,
   };
 };
-
-export const material2 = () => {
+const material2 = () => {
   const noise = new Noise({
     colorA: new Color("#1720a8"),
     colorB: new Color("#9428a9"),
@@ -125,8 +71,7 @@ export const material2 = () => {
     noise,
   };
 };
-
-export const material3 = () => {
+const material3 = () => {
   const noise = new Noise({
     colorA: new Color("#0000ff"),
     colorB: new Color("#fff000"),
@@ -161,8 +106,7 @@ export const material3 = () => {
     noise,
   };
 };
-
-export const material4 = () => {
+const material4 = () => {
   const noise = new Noise({
     colorA: new Color("#d23923"),
     colorB: new Color("#442211"),
@@ -197,8 +141,7 @@ export const material4 = () => {
     noise,
   };
 };
-
-export const material5 = () => {
+const material5 = () => {
   const noise = new Noise({
     colorA: new Color("#ffffff"),
     colorB: new Color("#ffffff"),
@@ -233,8 +176,7 @@ export const material5 = () => {
     noise,
   };
 };
-
-export const material6 = () => {
+const material6 = () => {
   const noise = new Noise({
     colorA: new Color("#000000"),
     colorB: new Color("#000000"),
@@ -269,8 +211,7 @@ export const material6 = () => {
     noise,
   };
 };
-
-export const material7 = () => {
+const material7 = () => {
   const noise = new Noise({
     colorA: new Color("#ff00ff"),
     colorB: new Color("#000000"),
@@ -305,8 +246,7 @@ export const material7 = () => {
     noise,
   };
 };
-
-export const material8 = () => {
+const material8 = () => {
   const noise = new Noise({
     colorA: new Color("#0000ff"),
     colorB: new Color("#0000ff"),
@@ -342,15 +282,7 @@ export const material8 = () => {
   };
 };
 
-export const material9 = () => {
-  const displace = new Displace({
-    strength: 1.1,
-    scale: 0.4,
-    type: "perlin",
-    offset: [-100, 200, -100],
-    mode: "normal",
-    visible: true,
-  });
+const material9 = () => {
   const noise = new Noise({
     colorA: new Color("#aaaaaa"),
     colorB: new Color("#aaaaaa"),
@@ -368,7 +300,6 @@ export const material9 = () => {
     color: "#000000",
     lighting: "physical",
     layers: [
-      displace,
       noise,
       new Fresnel({
         color: new Color("#bbbbbb"),
@@ -383,7 +314,18 @@ export const material9 = () => {
   });
   return {
     material,
-    displace,
     noise,
   };
 };
+
+export const materials = [
+  material1,
+  material2,
+  material3,
+  material4,
+  material5,
+  material6,
+  material7,
+  material8,
+  material9,
+];

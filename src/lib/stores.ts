@@ -23,8 +23,8 @@ export const targetPosition = tweened(ogTargetPosition, tweenedOptions);
 
 const contentString = `Lorem ipsum dolor sit amet`;
 
-// export const pageContent = writable({
-//   title: "MindFuture",
-//   content: contentString,
-//   link: "hyperlink",
-// });
+export const pageContent = writable({
+  title: "MindFuture",
+  content: contentString,
+  link: "hyperlink",
+});

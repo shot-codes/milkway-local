@@ -7,7 +7,7 @@ body {
   @apply font-space h-screen w-screen;
 }
 
-.gradient-bg {
+/* .gradient-bg {
   background: rgb(37, 29, 75);
   background: linear-gradient(
     45deg,
@@ -16,7 +16,7 @@ body {
     rgba(13, 12, 15, 1) 80%,
     rgba(85, 37, 28, 1) 100%
   );
-}
+} */
 
 /* space-grotesk-regular - latin */
 @font-face {
