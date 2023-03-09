@@ -38,9 +38,9 @@
 
     let pts = new Array(0);
 
-    for (let i = 0; i < 200; i++) {
-      let r = 7,
-        R = 22;
+    for (let i = 0; i < 5000; i++) {
+      let r = 40,
+        R = 100;
       let rand = Math.pow(Math.random(), 1.5);
       let radius = Math.sqrt(R * R * rand + (1 - rand) * r * r);
       pts.push(

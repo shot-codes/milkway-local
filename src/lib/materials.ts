@@ -18,7 +18,7 @@ export const noise = new Noise({
 export const backgroundMaterial = new LayerMaterial({
   side: BackSide,
   color: "#000000",
-  lighting: "standard",
+  lighting: "basic",
   layers: [
     noise,
     new Gradient({

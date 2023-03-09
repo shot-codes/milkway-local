@@ -76,8 +76,8 @@
   {/if}
 </PerspectiveCamera>
 
-<T.DirectionalLight castShadow position={[3, 10, 10]} />
-<T.DirectionalLight position={[-3, 10, -10]} intensity={0.2} />
+<T.DirectionalLight castShadow position={[3, 4, 10]} />
+<!-- <T.DirectionalLight position={[-3, 10, -10]} intensity={0.2} /> -->
 
 <Particles position={[0, 0, 0]} />
 

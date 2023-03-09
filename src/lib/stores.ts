@@ -13,7 +13,7 @@ export const activePlanet = writable("");
 
 export const cameraClone = writable(new Camera());
 
-export const ogCameraPosition = new Vector3(10, 5, 45);
+export const ogCameraPosition = new Vector3(0, 10, 55);
 export const ogTargetPosition = new Vector3(0, 0, 0);
 
 export const camCopyPosition = writable(new Vector3());
