@@ -1,6 +1,13 @@
 <script lang="ts">
   import { dev } from "$app/environment";
-  import { PerspectiveCamera, OrbitControls, useThrelte, T } from "@threlte/core";
+  import {
+    PerspectiveCamera,
+    OrbitControls,
+    useThrelte,
+    T,
+    Layers,
+    LayerableObject,
+  } from "@threlte/core";
   import { Environment } from "@threlte/extras";
   import { degToRad } from "three/src/math/MathUtils";
   import { cameraClone, cameraPosition, targetPosition, zoomedIn } from "$lib/stores";
@@ -10,7 +17,8 @@
   import Sun from "./Sun.svelte";
   import { onMount } from "svelte";
   import { Vector3 } from "three";
-    import PlanetContent from "./PlanetContent.svelte";
+  import PlanetContent from "./PlanetContent.svelte";
+  import Background from "./Background.svelte";
 
   const orbitRadius = 25;
   let canvas: HTMLCanvasElement;
@@ -23,8 +31,8 @@
     canvas.addEventListener("wheel", (e: WheelEvent) => {
       if ($zoomedIn) {
         try {
-          $cameraPosition = $cameraPosition.add(new Vector3(0, -e.deltaY / 100, 0));
-          $targetPosition = $targetPosition.add(new Vector3(0, -e.deltaY / 100, 0));
+          $cameraPosition = $cameraPosition.add(new Vector3(0, -e.deltaY / 200, 0));
+          $targetPosition = $targetPosition.add(new Vector3(0, -e.deltaY / 200, 0));
         } catch (e) {
           // Since zoomedIn is set upon clicking a planet, this event listener fires
           // if you scroll _while_ the camera is flying into position.
@@ -43,14 +51,24 @@
   isBackground={true}
   format="ldr"
 /> -->
+
+<Background />
+
 <PerspectiveCamera position={$cameraPosition} fov={50}>
   {#if $zoomedIn}
-    <OrbitControls enableDamping enableRotate={false} enablePan={false} enableZoom={false} target={$targetPosition} />
+    <OrbitControls
+      enableDamping
+      enableRotate={false}
+      enablePan={false}
+      enableZoom={false}
+      target={$targetPosition}
+    />
   {:else}
     <OrbitControls
       maxPolarAngle={degToRad(100)}
       minPolarAngle={degToRad(20)}
       enableDamping
+      enableRotate={true}
       enablePan={false}
       enableZoom={true}
       target={$targetPosition}

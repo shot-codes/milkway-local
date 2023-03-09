@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { T, InteractiveObject } from "@threlte/core";
+  import { T, InteractiveObject, Layers, LayerableObject } from "@threlte/core";
   import { Text, HTML } from "@threlte/extras";
   import { zoomIn, Brand } from "$lib/utils";
   import { onDestroy } from "svelte";
@@ -51,9 +51,12 @@
   <T.Group position.x={planetOffsetXY[0]} position.y={planetOffsetXY[1]}>
     <Label radius={planetSize} text={brand} {showDetails} opacity={$labelOpacity} />
 
-    <T.Mesh let:ref {material} scale={$scale}>
-      <T.SphereGeometry args={[planetSize, 64, 64]} />
-    </T.Mesh>
+    <Layers layers={0}>
+      <T.Mesh let:ref {material} scale={$scale}>
+        <LayerableObject object={ref} />
+        <T.SphereGeometry args={[planetSize, 64, 64]} />
+      </T.Mesh>
+    </Layers>
 
     <!-- Seperate, simpler sphere for interaction. Performance reasons -->
     <T.Mesh let:ref scale={$scale - 0.1}>

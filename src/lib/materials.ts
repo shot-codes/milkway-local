@@ -1,5 +1,74 @@
-import { Color } from "three";
-import { LayerMaterial, Fresnel, Noise } from "lamina/vanilla";
+import { Color, BackSide } from "three";
+import { LayerMaterial, Fresnel, Noise, Gradient } from "lamina/vanilla";
+
+export const noise = new Noise({
+  colorA: new Color("#bfabab"),
+  colorB: new Color("#000000"),
+  colorC: new Color("#000000"),
+  colorD: new Color("#030303"),
+  alpha: 0.25,
+  scale: 500,
+  type: "perlin",
+  offset: [0, 0, 0],
+  mapping: "local",
+  mode: "normal",
+  visible: true,
+});
+
+export const backgroundMaterial = new LayerMaterial({
+  side: BackSide,
+  color: "#000000",
+  lighting: "standard",
+  layers: [
+    noise,
+    new Gradient({
+      colorA: new Color("#000000"),
+      colorB: new Color("#b400f5"),
+      alpha: 0.2,
+      contrast: 1,
+      start: 1,
+      end: -5,
+      axes: "x",
+      mapping: "local",
+      visible: true,
+    }),
+    new Gradient({
+      colorA: new Color("#060404"),
+      colorB: new Color("#ff5900"),
+      alpha: 0.1,
+      contrast: 1,
+      start: 1,
+      end: -3,
+      axes: "y",
+      mapping: "local",
+      visible: true,
+    }),
+    new Gradient({
+      colorA: new Color("#030202"),
+      colorB: new Color("#5b14ff"),
+      alpha: 0,
+      contrast: 1,
+      start: 1,
+      end: -1,
+      axes: "z",
+      mapping: "local",
+      visible: true,
+    }),
+    // new Noise({
+    //   colorA: new Color("#bfabab"),
+    //   colorB: new Color("#000000"),
+    //   colorC: new Color("#000000"),
+    //   colorD: new Color("#030303"),
+    //   alpha: 0.25,
+    //   scale: 500,
+    //   type: "perlin",
+    //   offset: [0,0,0],
+    //   mapping: "local",
+    //   mode: "normal",
+    //   visible: true,
+    // }),
+  ],
+});
 
 const material1 = () => {
   const noise = new Noise({
