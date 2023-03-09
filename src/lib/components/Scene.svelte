@@ -10,6 +10,7 @@
   import Sun from "./Sun.svelte";
   import { onMount } from "svelte";
   import { Vector3 } from "three";
+    import PlanetContent from "./PlanetContent.svelte";
 
   const orbitRadius = 25;
   let canvas: HTMLCanvasElement;
@@ -22,8 +23,8 @@
     canvas.addEventListener("wheel", (e: WheelEvent) => {
       if ($zoomedIn) {
         try {
-          $cameraPosition = $cameraPosition.add(new Vector3(0, -e.deltaY / 20, 0));
-          $targetPosition = $targetPosition.add(new Vector3(0, -e.deltaY / 20, 0));
+          $cameraPosition = $cameraPosition.add(new Vector3(0, -e.deltaY / 100, 0));
+          $targetPosition = $targetPosition.add(new Vector3(0, -e.deltaY / 100, 0));
         } catch (e) {
           // Since zoomedIn is set upon clicking a planet, this event listener fires
           // if you scroll _while_ the camera is flying into position.
@@ -42,17 +43,16 @@
   isBackground={true}
   format="ldr"
 /> -->
-
 <PerspectiveCamera position={$cameraPosition} fov={50}>
-  {#if zoomedIn}
-    <OrbitControls enableDamping enablePan={false} enableZoom={false} target={$targetPosition} />
+  {#if $zoomedIn}
+    <OrbitControls enableDamping enableRotate={false} enablePan={false} enableZoom={false} target={$targetPosition} />
   {:else}
     <OrbitControls
       maxPolarAngle={degToRad(100)}
       minPolarAngle={degToRad(20)}
       enableDamping
       enablePan={false}
-      enableZoom={false}
+      enableZoom={true}
       target={$targetPosition}
     />
   {/if}
@@ -90,8 +90,15 @@
   titleOffsetXY={[-0.5, 4]}
   materialIndex={1}
 >
-  <div class="bg-neutral-800 rounded-lg opacity-50 p-6 text-white">
+  <!-- <div slot="content" class="bg-neutral-800 rounded-lg opacity-50 p-6 text-white pointer-events-none">
     <p>How fuckin sweet is this eh?</p>
+  </div> -->
+  <div slot="content">
+    <PlanetContent>
+      <span slot="title">Network &bull; Est. 2005</span>
+      <span slot="description">Yada yada yoda yada</span>
+      <span slot="content">Wooooooooooo here we goooooo!</span>
+    </PlanetContent>
   </div>
 </Planet>
 

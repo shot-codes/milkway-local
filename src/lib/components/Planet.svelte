@@ -78,8 +78,8 @@
   </T.Group>
 
   {#if $zoomedIn && $activePlanet == brand}
-    <HTML transform position={{ y: -5 }}>
-      <slot />
+    <HTML transform position={{ y: -5 }} scale={0.2} pointerEvents="none">
+      <slot name="content" />
     </HTML>
   {/if}
 </T.Group>
