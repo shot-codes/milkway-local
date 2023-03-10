@@ -76,7 +76,7 @@
       enableDamping
       enableRotate={true}
       enablePan={false}
-      enableZoom={false}
+      enableZoom={true}
       target={$targetPosition}
     />
   {/if}
