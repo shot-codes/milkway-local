@@ -16,18 +16,21 @@
   export let brand: Brand;
 
   let showDetails = false;
+  const clonedPlanetSize = spring(planetSize, { stiffness: 0.03, damping: 0.5 });
   const { material } = materials[materialIndex]();
   const scale = spring(1, { stiffness: 0.05 });
-  const textOpacity = tweened(0, { delay: 500, duration: 2000 });
-  const labelOpacity = tweened(1, { duration: 1000 });
+  const textOpacity = tweened(0, { delay: 500, duration: 200 });
+  const labelOpacity = tweened(1, { delay: 500, duration: 100 });
 
   $: {
     if ($zoomedIn && $activePlanet == brand) {
-      textOpacity.set(1);
+      textOpacity.set(0.4);
       labelOpacity.set(0);
+      clonedPlanetSize.set(2);
     } else {
       textOpacity.set(0);
       labelOpacity.set(1);
+      clonedPlanetSize.set(planetSize);
     }
   }
 
@@ -49,14 +52,14 @@
   {/if}
 
   <T.Group position.x={planetOffsetXY[0]} position.y={planetOffsetXY[1]}>
-    <Label radius={planetSize} text={brand} {showDetails} opacity={$labelOpacity} />
+    <Label radius={$clonedPlanetSize} text={brand} {showDetails} opacity={$labelOpacity} />
 
-    <T.Mesh {material} scale={$scale}>
-      <T.SphereGeometry args={[planetSize, 64, 64]} />
+    <T.Mesh {material} scale={1}>
+      <T.SphereGeometry args={[$clonedPlanetSize, 64, 64]} />
     </T.Mesh>
 
     <!-- Seperate, simpler sphere for interaction. Performance reasons -->
-    <T.Mesh let:ref scale={$scale - 0.1}>
+    <T.Mesh let:ref scale={1 - 0.1}>
       <InteractiveObject
         object={ref}
         interactive
@@ -73,7 +76,7 @@
           $scale = 1;
         }}
       />
-      <T.SphereGeometry args={[planetSize, 16, 16]} />
+      <T.SphereGeometry args={[$clonedPlanetSize, 16, 16]} />
     </T.Mesh>
   </T.Group>
 

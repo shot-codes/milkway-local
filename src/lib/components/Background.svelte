@@ -5,9 +5,9 @@
   let x = 0;
 
   useFrame(() => {
-    // x += 0.00002;
+    x += 0.00002;
     // @ts-ingore unknown prop for some reason. Its there at runtime.
-    // noise.offset = [x, -x, x];
+    noise.offset = [x, -x, x];
   });
 </script>
 
@@ -19,5 +19,3 @@
     <T.SphereGeometry />
   </T.Mesh>
 </T.Group>
-
-<T.AmbientLight let:ref intensity={0} />

@@ -7,6 +7,7 @@
     T,
     Layers,
     LayerableObject,
+    useFrame,
   } from "@threlte/core";
   import { Environment } from "@threlte/extras";
   import { degToRad } from "three/src/math/MathUtils";
@@ -21,10 +22,15 @@
   import Background from "./Background.svelte";
 
   const orbitRadius = 25;
+  let rot = 0;
   let canvas: HTMLCanvasElement;
 
   const { camera } = useThrelte();
   $: cameraClone.set($camera);
+
+  useFrame(() => {
+    rot += 0.001;
+  });
 
   onMount(() => {
     canvas = document.getElementsByTagName("canvas")[0];
@@ -70,143 +76,144 @@
       enableDamping
       enableRotate={true}
       enablePan={false}
-      enableZoom={true}
+      enableZoom={false}
       target={$targetPosition}
     />
   {/if}
 </PerspectiveCamera>
 
-<T.DirectionalLight castShadow position={[3, 4, 10]} />
-<!-- <T.DirectionalLight position={[-3, 10, -10]} intensity={0.2} /> -->
+<T.DirectionalLight castShadow position={[10, 10, 10]} />
 
 <Particles position={[0, 0, 0]} />
 
 <Sun />
 
-<Planet
-  brand={Brand.BlueLobster}
-  position={[
-    orbitRadius * Math.cos((1 * 2 * Math.PI) / 9),
-    1,
-    orbitRadius * Math.sin((1 * 2 * Math.PI) / 9),
-  ]}
-  planetSize={2}
-  planetOffsetXY={[-2, -1]}
-  titleOffsetXY={[0, 3.8]}
-  materialIndex={0}
-/>
+<T.Group rotation={[0, 0, 0]}>
+  <Planet
+    brand={Brand.BlueLobster}
+    position={[
+      orbitRadius * Math.cos((1 * 2 * Math.PI) / 9),
+      1,
+      orbitRadius * Math.sin((1 * 2 * Math.PI) / 9),
+    ]}
+    planetSize={2}
+    planetOffsetXY={[-2, -1]}
+    titleOffsetXY={[0, 3.8]}
+    materialIndex={0}
+  />
 
-<Planet
-  brand={Brand.BornFiber}
-  position={[
-    orbitRadius * Math.cos((2 * 2 * Math.PI) / 9),
-    0,
-    orbitRadius * Math.sin((2 * 2 * Math.PI) / 9),
-  ]}
-  planetSize={3}
-  planetOffsetXY={[-2, -1]}
-  titleOffsetXY={[-0.5, 4]}
-  materialIndex={1}
->
-  <!-- <div slot="content" class="bg-neutral-800 rounded-lg opacity-50 p-6 text-white pointer-events-none">
-    <p>How fuckin sweet is this eh?</p>
-  </div> -->
-  <div slot="content">
-    <PlanetContent>
-      <span slot="title">Network &bull; Est. 2005</span>
-      <span slot="description">Yada yada yoda yada</span>
-      <span slot="content">Wooooooooooo here we goooooo!</span>
-    </PlanetContent>
-  </div>
-</Planet>
+  <Planet
+    brand={Brand.BornFiber}
+    position={[
+      orbitRadius * Math.cos((2 * 2 * Math.PI) / 9),
+      0,
+      orbitRadius * Math.sin((2 * 2 * Math.PI) / 9),
+    ]}
+    planetSize={3}
+    planetOffsetXY={[-2, -1]}
+    titleOffsetXY={[-0.5, 4]}
+    materialIndex={1}
+  >
+    <!-- <div slot="content" class="bg-neutral-800 rounded-lg opacity-50 p-6 text-white pointer-events-none">
+      <p>How fuckin sweet is this eh?</p>
+    </div> -->
+    <div slot="content">
+      <PlanetContent>
+        <span slot="title">Network &bull; Est. 2005</span>
+        <span slot="description">Yada yada yoda yada</span>
+        <span slot="content">Wooooooooooo here we goooooo!</span>
+      </PlanetContent>
+    </div>
+  </Planet>
 
-<Planet
-  brand={Brand.MindFuture}
-  position={[
-    orbitRadius * Math.cos((3 * 2 * Math.PI) / 9),
-    1,
-    orbitRadius * Math.sin((3 * 2 * Math.PI) / 9),
-  ]}
-  planetSize={2}
-  planetOffsetXY={[-2, -1]}
-  titleOffsetXY={[0, 3.8]}
-  materialIndex={2}
-/>
+  <Planet
+    brand={Brand.MindFuture}
+    position={[
+      orbitRadius * Math.cos((3 * 2 * Math.PI) / 9),
+      1,
+      orbitRadius * Math.sin((3 * 2 * Math.PI) / 9),
+    ]}
+    planetSize={2}
+    planetOffsetXY={[-2, -1]}
+    titleOffsetXY={[0, 3.8]}
+    materialIndex={2}
+  />
 
-<Planet
-  brand={Brand.Morpheus}
-  position={[
-    orbitRadius * Math.cos((4 * 2 * Math.PI) / 9),
-    1,
-    orbitRadius * Math.sin((4 * 2 * Math.PI) / 9),
-  ]}
-  planetSize={2}
-  planetOffsetXY={[-2, -1]}
-  titleOffsetXY={[0, 3.8]}
-  materialIndex={3}
-/>
+  <Planet
+    brand={Brand.Morpheus}
+    position={[
+      orbitRadius * Math.cos((4 * 2 * Math.PI) / 9),
+      1,
+      orbitRadius * Math.sin((4 * 2 * Math.PI) / 9),
+    ]}
+    planetSize={2}
+    planetOffsetXY={[-2, -1]}
+    titleOffsetXY={[0, 3.8]}
+    materialIndex={3}
+  />
 
-<Planet
-  brand={Brand.Ocreveus}
-  position={[
-    orbitRadius * Math.cos((5 * 2 * Math.PI) / 9),
-    1,
-    orbitRadius * Math.sin((5 * 2 * Math.PI) / 9),
-  ]}
-  planetSize={2}
-  planetOffsetXY={[-2, -1]}
-  titleOffsetXY={[0, 3.8]}
-  materialIndex={4}
-/>
+  <Planet
+    brand={Brand.Ocreveus}
+    position={[
+      orbitRadius * Math.cos((5 * 2 * Math.PI) / 9),
+      1,
+      orbitRadius * Math.sin((5 * 2 * Math.PI) / 9),
+    ]}
+    planetSize={2}
+    planetOffsetXY={[-2, -1]}
+    titleOffsetXY={[0, 3.8]}
+    materialIndex={4}
+  />
 
-<Planet
-  brand={Brand.Paladin}
-  position={[
-    orbitRadius * Math.cos((6 * 2 * Math.PI) / 9),
-    1,
-    orbitRadius * Math.sin((6 * 2 * Math.PI) / 9),
-  ]}
-  planetSize={2}
-  planetOffsetXY={[-2, -1]}
-  titleOffsetXY={[0, 3.8]}
-  materialIndex={5}
-/>
+  <Planet
+    brand={Brand.Paladin}
+    position={[
+      orbitRadius * Math.cos((6 * 2 * Math.PI) / 9),
+      1,
+      orbitRadius * Math.sin((6 * 2 * Math.PI) / 9),
+    ]}
+    planetSize={2}
+    planetOffsetXY={[-2, -1]}
+    titleOffsetXY={[0, 3.8]}
+    materialIndex={5}
+  />
 
-<Planet
-  brand={Brand.Pleo}
-  position={[
-    orbitRadius * Math.cos((7 * 2 * Math.PI) / 9),
-    1,
-    orbitRadius * Math.sin((7 * 2 * Math.PI) / 9),
-  ]}
-  planetSize={2}
-  planetOffsetXY={[-2, -1]}
-  titleOffsetXY={[0, 3.8]}
-  materialIndex={6}
-/>
+  <Planet
+    brand={Brand.Pleo}
+    position={[
+      orbitRadius * Math.cos((7 * 2 * Math.PI) / 9),
+      1,
+      orbitRadius * Math.sin((7 * 2 * Math.PI) / 9),
+    ]}
+    planetSize={2}
+    planetOffsetXY={[-2, -1]}
+    titleOffsetXY={[0, 3.8]}
+    materialIndex={6}
+  />
 
-<Planet
-  brand={Brand.ZibraSport}
-  position={[
-    orbitRadius * Math.cos((8 * 2 * Math.PI) / 9),
-    1,
-    orbitRadius * Math.sin((8 * 2 * Math.PI) / 9),
-  ]}
-  planetSize={2}
-  planetOffsetXY={[-2, -1]}
-  titleOffsetXY={[0, 3.8]}
-  materialIndex={7}
-/>
+  <Planet
+    brand={Brand.ZibraSport}
+    position={[
+      orbitRadius * Math.cos((8 * 2 * Math.PI) / 9),
+      1,
+      orbitRadius * Math.sin((8 * 2 * Math.PI) / 9),
+    ]}
+    planetSize={2}
+    planetOffsetXY={[-2, -1]}
+    titleOffsetXY={[0, 3.8]}
+    materialIndex={7}
+  />
 
-<Planet
-  brand={Brand.ZibraTech}
-  position={[
-    orbitRadius * Math.cos((9 * 2 * Math.PI) / 9),
-    1,
-    orbitRadius * Math.sin((9 * 2 * Math.PI) / 9),
-  ]}
-  planetSize={2}
-  planetOffsetXY={[-2, -1]}
-  titleOffsetXY={[0, 3.8]}
-  materialIndex={8}
-/>
+  <Planet
+    brand={Brand.ZibraTech}
+    position={[
+      orbitRadius * Math.cos((9 * 2 * Math.PI) / 9),
+      1,
+      orbitRadius * Math.sin((9 * 2 * Math.PI) / 9),
+    ]}
+    planetSize={2}
+    planetOffsetXY={[-2, -1]}
+    titleOffsetXY={[0, 3.8]}
+    materialIndex={8}
+  />
+</T.Group>
