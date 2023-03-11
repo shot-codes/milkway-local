@@ -17,6 +17,7 @@ export const noise = new Noise({
 
 export const backgroundMaterial = new LayerMaterial({
   side: BackSide,
+  fog: false,
   color: "#000000",
   lighting: "basic",
   layers: [

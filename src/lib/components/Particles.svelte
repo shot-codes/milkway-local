@@ -60,6 +60,7 @@
 
     const material = new PointsMaterial({
       size: 0.125,
+      fog: false,
       transparent: true,
       depthTest: true,
       blending: AdditiveBlending,

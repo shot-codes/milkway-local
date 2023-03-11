@@ -8,10 +8,17 @@
     Layers,
     LayerableObject,
     useFrame,
+    Fog,
   } from "@threlte/core";
   import { Environment } from "@threlte/extras";
   import { degToRad } from "three/src/math/MathUtils";
-  import { cameraClone, cameraPosition, targetPosition, zoomedIn } from "$lib/stores";
+  import {
+    cameraClone,
+    cameraPosition,
+    targetPosition,
+    cameraPositionScrollMax,
+    zoomedIn,
+  } from "$lib/stores";
   import Planet from "$lib/components/Planet.svelte";
   import Particles from "./Particles.svelte";
   import { Brand } from "$lib/utils";
@@ -20,22 +27,31 @@
   import { Vector3 } from "three";
   import PlanetContent from "./PlanetContent.svelte";
   import Background from "./Background.svelte";
+  import { tweened } from "svelte/motion";
 
   const orbitRadius = 25;
-  let rot = 0;
   let canvas: HTMLCanvasElement;
+
+  const fogOptions = tweened({ near: 45, far: 60 }, { duration: 3000 });
 
   const { camera } = useThrelte();
   $: cameraClone.set($camera);
 
-  useFrame(() => {
-    rot += 0.001;
-  });
+  $: {
+    if ($zoomedIn) {
+      fogOptions.set({ near: 10, far: 15 });
+    }
+    if (!$zoomedIn) {
+      fogOptions.set({ near: 45, far: 60 });
+    }
+  }
 
   onMount(() => {
     canvas = document.getElementsByTagName("canvas")[0];
     canvas.addEventListener("wheel", (e: WheelEvent) => {
       if ($zoomedIn) {
+        if ($camera.position.y >= $cameraPositionScrollMax && e.deltaY < 0) return;
+        if ($camera.position.y <= -6 && e.deltaY > 0) return;
         try {
           $cameraPosition = $cameraPosition.add(new Vector3(0, -e.deltaY / 200, 0));
           $targetPosition = $targetPosition.add(new Vector3(0, -e.deltaY / 200, 0));
@@ -45,18 +61,14 @@
           // I was prepared to have to block scrolling _until_ the camera is in position
           // but cameraPosition happens to fail here... Convenient.
           // We will need to test this across devices/browsers.
+          // Only works while zooming in, not out.
         }
       }
     });
   });
 </script>
 
-<!-- <Environment
-  path="/"
-  files={dev ? "env_map_lowres.hdr" : "env_map.hdr"}
-  isBackground={true}
-  format="ldr"
-/> -->
+<Fog color={"#000000"} near={$fogOptions.near} far={$fogOptions.far} />
 
 <Background />
 

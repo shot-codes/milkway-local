@@ -19,4 +19,5 @@ export const ogTargetPosition = new Vector3(0, 0, 0);
 export const camCopyPosition = writable(new Vector3());
 
 export const cameraPosition = tweened(ogCameraPosition, tweenedOptions);
+export const cameraPositionScrollMax = writable(0);
 export const targetPosition = tweened(ogTargetPosition, tweenedOptions);
