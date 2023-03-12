@@ -3,22 +3,19 @@
   import { DEG2RAD } from "three/src/math/MathUtils";
   import Planet from "$lib/components/Planet.svelte";
   import { Brand } from "$lib/utils";
-  import PlanetContent from "../PlanetContent.svelte";
-  import Moon1Content from "../Moon1Content.svelte";
-  import Moon2Content from "../Moon2Content.svelte";
-  import { orbitRadius } from "$lib/utils";
+  import PlanetContent from "$lib/components/PlanetContent.svelte";
+  import Moon1Content from "$lib/components/Moon1Content.svelte";
+  import Moon2Content from "$lib/components/Moon2Content.svelte";
+
+  export let position: [number, number, number];
 </script>
 
 <Planet
   brand={Brand.BornFiber}
-  position={[
-    orbitRadius * Math.cos((2 * 2 * Math.PI) / 9),
-    0,
-    orbitRadius * Math.sin((2 * 2 * Math.PI) / 9),
-  ]}
+  {position}
   planetSize={3}
-  planetOffsetXY={[-2, -1]}
-  titleOffsetXY={[-0.5, 4]}
+  planetOffsetXY={[3, -1]}
+  titleOffsetXY={[0, 3.8]}
   materialIndex={1}
   moon1={{ material: "#0023bb", position: [4, 0, 0] }}
   moon2={{ material: "#cd3500", position: [-4, 0, 0] }}
@@ -26,8 +23,8 @@
   <HTML
     slot="content"
     transform
-    position={{ y: 0, x: 0 }}
-    rotation={{ y: -5 * DEG2RAD }}
+    position={{ y: 0, x: -5 }}
+    rotation={{ y: 5 * DEG2RAD }}
     scale={0.15}
     pointerEvents="none"
   >
@@ -41,8 +38,8 @@
   <HTML
     slot="moon1Content"
     transform
-    position={{ y: -3.5, x: -4 }}
-    rotation={{ y: 5 * DEG2RAD }}
+    position={{ y: -4.5, x: 0 }}
+    rotation={{ y: -5 * DEG2RAD }}
     scale={0.15}
     pointerEvents="none"
   >
@@ -56,8 +53,8 @@
   <HTML
     slot="moon2Content"
     transform
-    position={{ y: -6.5, x: 0 }}
-    rotation={{ y: -5 * DEG2RAD }}
+    position={{ y: -7.5, x: -5 }}
+    rotation={{ y: 5 * DEG2RAD }}
     scale={0.15}
     pointerEvents="none"
   >

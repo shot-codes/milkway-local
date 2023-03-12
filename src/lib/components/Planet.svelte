@@ -45,7 +45,7 @@
     if ($zoomedIn && $activePlanet == brand) {
       textOpacity.set(1);
       labelOpacity.set(0);
-      clonedPlanetSize.set(2);
+      clonedPlanetSize.set(2.75);
     } else {
       textOpacity.set(0);
       labelOpacity.set(1);
@@ -85,12 +85,12 @@
   <T.Group position.x={planetOffsetXY[0]} position.y={planetOffsetXY[1]}>
     <Label radius={$clonedPlanetSize} text={brand} {showDetails} opacity={$labelOpacity} />
 
-    <T.Mesh {material} scale={1}>
-      <T.SphereGeometry args={[$clonedPlanetSize, 64, 64]} />
+    <T.Mesh {material} scale={$clonedPlanetSize}>
+      <T.SphereGeometry args={[1, 64, 64]} />
     </T.Mesh>
 
     <!-- Seperate, simpler sphere for interaction. For performance reasons -->
-    <T.Mesh let:ref scale={1 - 0.1}>
+    <T.Mesh let:ref scale={$clonedPlanetSize - 0.1}>
       <InteractiveObject
         object={ref}
         interactive
@@ -98,8 +98,8 @@
           activePlanet.set(brand);
           zoomIn(position);
           moonRotation.set($moonRotation - ($moonRotation % (2 * Math.PI)));
-          moon1Position.set([4, -4, 0]);
-          moon2Position.set([0, -7, 0]);
+          moon1Position.set([-5, -5, 0]);
+          moon2Position.set([-1, -8, 0]);
         }}
         on:pointerenter={() => {
           showDetails = true;
@@ -110,7 +110,7 @@
           $scale = 1;
         }}
       />
-      <T.SphereGeometry args={[$clonedPlanetSize, 16, 16]} />
+      <T.SphereGeometry args={[1, 16, 16]} />
     </T.Mesh>
 
     <!-- Moons -->

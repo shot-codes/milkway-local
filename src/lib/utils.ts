@@ -11,10 +11,6 @@ import {
   activePlanet,
 } from "$lib/stores";
 
-// TODO: The zoom in and zoom out levels are defined relatively by multiplying the position vector of the
-// focused planet. This should be changed to absolute values. Probably best to add a fixed vector in the
-// same direction as the position vector.
-
 export const orbitRadius = 25;
 
 export const zoomIn = (position: [number, number, number]) => {
@@ -63,4 +59,14 @@ export enum Brand {
   Pleo = "Pleo",
   ZibraSport = "ZibraSport",
   ZibraTech = "ZibraTech",
+}
+
+export const planetLocations: Array<[number, number, number]> = [];
+const numPlanets = 9;
+for (let i = 0; i < numPlanets; i++) {
+  planetLocations[i] = [
+    orbitRadius * Math.cos(((i + 1) * 2 * Math.PI) / numPlanets),
+    1,
+    orbitRadius * Math.sin(((i + 1) * 2 * Math.PI) / numPlanets),
+  ];
 }

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { T, useThrelte, useFrame } from "@threlte/core";
   import { DEG2RAD } from "three/src/math/MathUtils";
-  import { Text } from "@threlte/extras";
+  import { HTML, Text } from "@threlte/extras";
   import type { Group } from "three";
 
   const { camera } = useThrelte();
@@ -25,33 +25,29 @@
     <T.Group position={[radius + 0.2 * radius, radius + 0.2 * radius, 0]}>
       <Text
         {text}
+        anchorX={"right"}
         scale={5}
         font={"fonts/space.woff"}
-        position={{ x: 0.1, y: 0.6 }}
+        position={{ x: 3.0, y: 0.6 }}
         fillOpacity={opacity}
       />
       {#if showDetails}
-        <Text
-          text={"Some details about the brand\nAwaiting content."}
-          scale={4}
-          font={"fonts/space.woff"}
-          color={"#606060"}
-          position={{ x: 0.1, y: -0.2 }}
-          fillOpacity={opacity}
-        />
+        <HTML scale={4} position={{ x: 0.5, y: -0.2 }}>
+          <div class="bg-white">test</div>
+        </HTML>
       {/if}
       <T.Group rotation.z={-225 * DEG2RAD}>
         <T.Mesh position.y={radius}>
-          <T.CylinderGeometry args={[0.02, 0.02, radius * 2, 32]} />
+          <T.CylinderGeometry args={[0.01, 0.01, radius * 2, 32]} />
           <T.MeshBasicMaterial {opacity} transparent={true} />
         </T.Mesh>
       </T.Group>
-      <!-- <T.Group rotation.z={-90 * DEG2RAD}>
-            <T.Mesh  position.y={0.9}>
-              <T.CylinderGeometry args={[0.02, 0.02, 1.8, 32]}/>
-              <T.MeshBasicMaterial/>
-            </T.Mesh>
-          </T.Group> -->
+      <T.Group rotation.z={-90 * DEG2RAD}>
+        <T.Mesh position.y={1.5}>
+          <T.CylinderGeometry args={[0.01, 0.01, 3, 32]} />
+          <T.MeshBasicMaterial {opacity} transparent={true} />
+        </T.Mesh>
+      </T.Group>
     </T.Group>
   </T.Group>
 </T.Group>
