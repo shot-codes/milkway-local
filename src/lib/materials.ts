@@ -1,5 +1,6 @@
-import { Color, BackSide } from "three";
+import { Color, BackSide, Vector2, RepeatWrapping } from "three";
 import { LayerMaterial, Fresnel, Noise, Gradient } from "lamina/vanilla";
+import { useTexture } from "@threlte/core";
 
 export const noise = new Noise({
   colorA: new Color("#bfabab"),
@@ -399,3 +400,20 @@ export const materials = [
   material8,
   material9,
 ];
+
+const mf1Color = useTexture("/textures/MindFuture/diffuse2.png");
+const mf1Normal = useTexture("/textures/MindFuture/normal2.png");
+const mf1Displace = useTexture("/textures/MindFuture/height2.png");
+
+mf1Color.wrapS = RepeatWrapping;
+mf1Color.wrapT = RepeatWrapping;
+mf1Normal.wrapS = RepeatWrapping;
+mf1Normal.wrapT = RepeatWrapping;
+mf1Displace.wrapS = RepeatWrapping;
+mf1Displace.wrapT = RepeatWrapping;
+
+mf1Color.repeat = new Vector2(2, 2);
+mf1Normal.repeat = new Vector2(2, 2);
+mf1Displace.repeat = new Vector2(2, 2);
+
+export const moonMaterials = [{ color: mf1Color, normal: mf1Normal, displace: mf1Displace }];

@@ -32,8 +32,8 @@
         fillOpacity={opacity}
       />
       {#if showDetails}
-        <HTML scale={4} position={{ x: 0.5, y: -0.2 }}>
-          <div class="bg-white">test</div>
+        <HTML transform scale={4} position={{ x: 0.5, y: -0.2 }}>
+          <div class="absolute text-[5px] bg-neutral-600 rounded-sm p-1">test</div>
         </HTML>
       {/if}
       <T.Group rotation.z={-225 * DEG2RAD}>

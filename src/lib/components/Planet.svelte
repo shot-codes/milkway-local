@@ -4,12 +4,12 @@
   import { zoomIn, Brand } from "$lib/utils";
   import { onDestroy } from "svelte";
   import { spring, tweened, type Tweened } from "svelte/motion";
-  import { materials } from "$lib/materials";
+  import { materials, moonMaterials } from "$lib/materials";
   import { zoomedIn, activePlanet } from "$lib/stores";
   import Label from "./Label.svelte";
 
   interface Moon {
-    material: string;
+    materialIndex: number;
     position: [number, number, number];
   }
 
@@ -116,15 +116,23 @@
     <!-- Moons -->
     <T.Group rotation.y={$moonRotation}>
       {#if moon1}
-        <T.Mesh position={$moon1Position}>
-          <T.SphereGeometry args={[0.5, 16]} />
-          <T.MeshBasicMaterial color={moon1.material} />
+        <T.Mesh position={$moon1Position} scale={0.08}>
+          <T.SphereGeometry args={[6, 64, 64]} />
+          <T.MeshStandardMaterial
+            map={moonMaterials[moon1.materialIndex].color}
+            normalMap={moonMaterials[moon1.materialIndex].normal}
+            displacementMap={moonMaterials[moon1.materialIndex].displace}
+          />
         </T.Mesh>
       {/if}
       {#if moon2}
-        <T.Mesh position={$moon2Position}>
-          <T.SphereGeometry args={[0.5, 16, 16]} />
-          <T.MeshBasicMaterial color={moon2.material} />
+        <T.Mesh position={$moon2Position} scale={0.08}>
+          <T.SphereGeometry args={[6, 64, 64]} />
+          <T.MeshStandardMaterial
+            map={moonMaterials[moon2.materialIndex].color}
+            normalMap={moonMaterials[moon2.materialIndex].normal}
+            displacementMap={moonMaterials[moon2.materialIndex].displace}
+          />
         </T.Mesh>
       {/if}
     </T.Group>
