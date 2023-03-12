@@ -1,9 +1,9 @@
 <script lang="ts">
   import { T, useFrame } from "@threlte/core";
-  import { backgroundMaterial, noise } from "$lib/materials";
+  import { backgroundMaterial } from "$lib/materials";
   import { DEG2RAD } from "three/src/math/MathUtils";
 
-  let x = 0;
+  // let x = 0;
 
   useFrame(() => {
     // x += 0.00002;

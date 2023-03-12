@@ -1,17 +1,5 @@
 <script lang="ts">
-  import { dev } from "$app/environment";
-  import {
-    PerspectiveCamera,
-    OrbitControls,
-    useThrelte,
-    T,
-    Layers,
-    LayerableObject,
-    useFrame,
-    Fog,
-  } from "@threlte/core";
-  import { Environment } from "@threlte/extras";
-  import { degToRad } from "three/src/math/MathUtils";
+  import { PerspectiveCamera, OrbitControls, useThrelte, T, Fog } from "@threlte/core";
   import {
     cameraClone,
     cameraPosition,
@@ -19,22 +7,21 @@
     cameraPositionScrollMax,
     zoomedIn,
   } from "$lib/stores";
-  import Planet from "$lib/components/Planet.svelte";
-  import Particles from "./Particles.svelte";
-  import { Brand } from "$lib/utils";
-  import Sun from "./Sun.svelte";
-  import { onMount } from "svelte";
   import { Vector3 } from "three";
-  import PlanetContent from "./PlanetContent.svelte";
-  import Background from "./Background.svelte";
+  import { DEG2RAD } from "three/src/math/MathUtils";
+  import { onMount } from "svelte";
   import { tweened } from "svelte/motion";
+  import { orbitRadius, Brand } from "$lib/utils";
+  import Background from "$lib/components/Background.svelte";
+  import Particles from "$lib/components/Particles.svelte";
+  import Sun from "$lib/components/Sun.svelte";
+  import Planet from "$lib/components/Planet.svelte";
+  import BornFiber from "$lib/components/planets/BornFiber.svelte";
 
-  const orbitRadius = 25;
   let canvas: HTMLCanvasElement;
-
-  const fogOptions = tweened({ near: 45, far: 60 }, { duration: 3000 });
-
+  const fogOptions = tweened({ near: 35, far: 75 }, { duration: 3000 });
   const { camera } = useThrelte();
+
   $: cameraClone.set($camera);
 
   $: {
@@ -42,7 +29,7 @@
       fogOptions.set({ near: 10, far: 15 });
     }
     if (!$zoomedIn) {
-      fogOptions.set({ near: 45, far: 60 });
+      fogOptions.set({ near: 35, far: 75 });
     }
   }
 
@@ -83,8 +70,8 @@
     />
   {:else}
     <OrbitControls
-      maxPolarAngle={degToRad(100)}
-      minPolarAngle={degToRad(20)}
+      maxPolarAngle={100 * DEG2RAD}
+      minPolarAngle={20 * DEG2RAD}
       enableDamping
       enableRotate={true}
       enablePan={false}
@@ -94,7 +81,8 @@
   {/if}
 </PerspectiveCamera>
 
-<T.DirectionalLight castShadow position={[10, 10, 10]} />
+<T.DirectionalLight castShadow position={[10, 10, -10]} />
+<!-- <T.AmbientLight intensity={0.02} /> -->
 
 <Particles position={[0, 0, 0]} />
 
@@ -114,29 +102,7 @@
     materialIndex={0}
   />
 
-  <Planet
-    brand={Brand.BornFiber}
-    position={[
-      orbitRadius * Math.cos((2 * 2 * Math.PI) / 9),
-      0,
-      orbitRadius * Math.sin((2 * 2 * Math.PI) / 9),
-    ]}
-    planetSize={3}
-    planetOffsetXY={[-2, -1]}
-    titleOffsetXY={[-0.5, 4]}
-    materialIndex={1}
-  >
-    <!-- <div slot="content" class="bg-neutral-800 rounded-lg opacity-50 p-6 text-white pointer-events-none">
-      <p>How fuckin sweet is this eh?</p>
-    </div> -->
-    <div slot="content">
-      <PlanetContent>
-        <span slot="title">Network &bull; Est. 2005</span>
-        <span slot="description">Yada yada yoda yada</span>
-        <span slot="content">Wooooooooooo here we goooooo!</span>
-      </PlanetContent>
-    </div>
-  </Planet>
+  <BornFiber />
 
   <Planet
     brand={Brand.MindFuture}

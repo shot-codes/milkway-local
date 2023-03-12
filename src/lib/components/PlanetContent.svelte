@@ -1,6 +1,4 @@
-<script lang="ts"></script>
-
-<div class="space-y-48 flex flex-col items-center">
+<div class="space-y-48 absolute w-[1200px] flex flex-col items-center">
   <div class="text-center space-y-8">
     <div class="text-sm">
       <slot name="title" />
