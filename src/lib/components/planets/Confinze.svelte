@@ -19,6 +19,7 @@
   materialIndex={1}
   moon1={{ materialIndex: 0, position: [4, 0, 0] }}
   moon2={{ materialIndex: 0, position: [-4, 0, 0] }}
+  content="Confinze er en finance-as-a-service provider"
 >
   <HTML
     slot="content"
@@ -29,8 +30,7 @@
     pointerEvents="none"
   >
     <PlanetContent>
-      <span slot="title">Network &bull; Est. 2005</span>
-      <span slot="description">Yada yada yoda yada</span>
+      <span slot="description">Confinze er en finance-as-a-service provider</span>
       <span slot="content">Wooooooooooo here we goooooo!</span>
     </PlanetContent>
   </HTML>

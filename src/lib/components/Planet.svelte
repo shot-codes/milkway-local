@@ -3,10 +3,12 @@
   import { Text } from "@threlte/extras";
   import { zoomIn, Brand } from "$lib/utils";
   import { onDestroy } from "svelte";
+  import { DEG2RAD } from "three/src/math/MathUtils";
   import { spring, tweened, type Tweened } from "svelte/motion";
   import { materials, moonMaterials } from "$lib/materials";
   import { zoomedIn, activePlanet } from "$lib/stores";
   import Label from "./Label.svelte";
+    import { Group } from "three";
 
   interface Moon {
     materialIndex: number;
@@ -14,11 +16,14 @@
   }
 
   export let position: [number, number, number];
+  export let content = "";
   export let planetSize = 1;
   export let materialIndex = 0;
   export let planetOffsetXY: [number, number];
   export let titleOffsetXY: [number, number];
   export let brand: Brand;
+  export let radius = 1;
+  export let opacity = 1;
   export let moon1: Moon | undefined = undefined;
   export let moon2: Moon | undefined = undefined;
 
@@ -83,7 +88,7 @@
   {/if}
 
   <T.Group position.x={planetOffsetXY[0]} position.y={planetOffsetXY[1]}>
-    <Label radius={$clonedPlanetSize} text={brand} {showDetails} opacity={$labelOpacity} />
+    <Label radius={$clonedPlanetSize} text={brand} content={content} {showDetails} opacity={$labelOpacity} />
 
     <T.Mesh {material} scale={$clonedPlanetSize}>
       <T.SphereGeometry args={[1, 64, 64]} />
@@ -116,14 +121,30 @@
     <!-- Moons -->
     <T.Group rotation.y={$moonRotation}>
       {#if moon1}
-        <T.Mesh position={$moon1Position} scale={0.05}>
-          <T.SphereGeometry args={[12, 64, 64]} />
-          <T.MeshStandardMaterial
-            map={moonMaterials[moon1.materialIndex].color}
-            normalMap={moonMaterials[moon1.materialIndex].normal}
-            displacementMap={moonMaterials[moon1.materialIndex].displace}
-          />
-        </T.Mesh>
+        <T.Group>
+          <T.Mesh position={$moon1Position} scale={0.05}>
+            <T.SphereGeometry args={[12, 64, 64]} />
+            <T.MeshStandardMaterial
+              map={moonMaterials[moon1.materialIndex].color}
+              normalMap={moonMaterials[moon1.materialIndex].normal}
+              displacementMap={moonMaterials[moon1.materialIndex].displace}
+            />
+          </T.Mesh>
+          <T.Group position={$moon1Position}>
+            <T.Group rotation.z={-225 * DEG2RAD}>
+              <T.Mesh position.y={$moon1Position[0]}>
+                <T.CylinderGeometry args={[0.01, 0.01, $moon1Position[0], 32]} />
+                <T.MeshBasicMaterial {opacity} transparent={false} />
+              </T.Mesh>
+            </T.Group>
+            <T.Group rotation.z={-90 * DEG2RAD}>
+              <T.Mesh position.y={1.5}>
+                <T.CylinderGeometry args={[0.01, 0.01, 3, 32]} />
+                <T.MeshBasicMaterial {opacity} transparent={false} />
+              </T.Mesh>
+            </T.Group>
+          </T.Group>
+        </T.Group>
       {/if}
       {#if moon2}
         <T.Mesh position={$moon2Position} scale={0.05}>

@@ -69,7 +69,6 @@
       enableZoom={false}
       target={$targetPosition}
     />
-    <T.PointLight castShadow={true} position={[-90, 60, 60]} distance={350} intensity={1}></T.PointLight>
   {:else}
     <OrbitControls
       maxPolarAngle={100 * DEG2RAD}

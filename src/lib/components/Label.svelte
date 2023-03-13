@@ -7,6 +7,7 @@
   const { camera } = useThrelte();
   export let radius = 1;
   export let text = "";
+  export let content = "";
   export let showDetails = false;
   export let opacity = 1;
   let group: Group;
@@ -32,8 +33,8 @@
         fillOpacity={opacity}
       />
       {#if showDetails}
-        <HTML transform scale={4} position={{ x: 0.5, y: -0.2 }}>
-          <div class="absolute text-[5px] bg-neutral-600 rounded-sm p-1">test</div>
+        <HTML transform scale={0.8} position={{ x: 0, y: -0.2 }}>
+          <div class="absolute text-sm bg-neutral-900/80 rounded-sm p-1 px-3 w-48">{content}</div>
         </HTML>
       {/if}
       <T.Group rotation.z={-225 * DEG2RAD}>
