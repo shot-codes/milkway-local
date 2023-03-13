@@ -22,8 +22,6 @@
   export let planetOffsetXY: [number, number];
   export let titleOffsetXY: [number, number];
   export let brand: Brand;
-  export let radius = 1;
-  export let opacity = 1;
   export let moon1: Moon | undefined = undefined;
   export let moon2: Moon | undefined = undefined;
 
@@ -103,8 +101,8 @@
           activePlanet.set(brand);
           zoomIn(position);
           moonRotation.set($moonRotation - ($moonRotation % (2 * Math.PI)));
-          moon1Position.set([-5, -5.8, 0]);
-          moon2Position.set([-1, -8.8, 0]);
+          moon1Position.set([-5, -4.8, 0]);
+          moon2Position.set([-1, -7.8, 0]);
         }}
         on:pointerenter={() => {
           showDetails = true;
@@ -121,30 +119,14 @@
     <!-- Moons -->
     <T.Group rotation.y={$moonRotation}>
       {#if moon1}
-        <T.Group>
-          <T.Mesh position={$moon1Position} scale={0.05}>
-            <T.SphereGeometry args={[12, 64, 64]} />
-            <T.MeshStandardMaterial
-              map={moonMaterials[moon1.materialIndex].color}
-              normalMap={moonMaterials[moon1.materialIndex].normal}
-              displacementMap={moonMaterials[moon1.materialIndex].displace}
-            />
-          </T.Mesh>
-          <T.Group position={$moon1Position}>
-            <T.Group rotation.z={-225 * DEG2RAD}>
-              <T.Mesh position.y={$moon1Position[0]}>
-                <T.CylinderGeometry args={[0.01, 0.01, $moon1Position[0], 32]} />
-                <T.MeshBasicMaterial {opacity} transparent={false} />
-              </T.Mesh>
-            </T.Group>
-            <T.Group rotation.z={-90 * DEG2RAD}>
-              <T.Mesh position.y={1.5}>
-                <T.CylinderGeometry args={[0.01, 0.01, 3, 32]} />
-                <T.MeshBasicMaterial {opacity} transparent={false} />
-              </T.Mesh>
-            </T.Group>
-          </T.Group>
-        </T.Group>
+        <T.Mesh position={$moon1Position} scale={0.05}>
+          <T.SphereGeometry args={[12, 64, 64]} />
+          <T.MeshStandardMaterial
+            map={moonMaterials[moon1.materialIndex].color}
+            normalMap={moonMaterials[moon1.materialIndex].normal}
+            displacementMap={moonMaterials[moon1.materialIndex].displace}
+          />
+        </T.Mesh>
       {/if}
       {#if moon2}
         <T.Mesh position={$moon2Position} scale={0.05}>

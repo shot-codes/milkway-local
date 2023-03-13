@@ -38,7 +38,7 @@
   <HTML
     slot="moon1Content"
     transform
-    position={{ y: -5.5, x: 0.5 }}
+    position={{ y: -5.5, x: -0.5 }}
     rotation={{ y: -5 * DEG2RAD }}
     scale={0.20}
     pointerEvents="none"
@@ -51,7 +51,7 @@
   <HTML
     slot="moon2Content"
     transform
-    position={{ y: -8.5, x: -4.5 }}
+    position={{ y: -8.5, x: -2.5 }}
     rotation={{ y: 5 * DEG2RAD }}
     scale={0.20}
     pointerEvents="none"
