@@ -50,10 +50,10 @@ export const zoomOut = () => {
 };
 
 export enum Brand {
-  BlueLobster = "BlueLobster",
-  BornFiber = "BornFiber",
+  ZibraHolding = "ZibraHolding",
+  Confinze = "Confinze",
+  ZibraFinans = "ZibraFinans",
   MindFuture = "MindFuture",
-  Morpheus = "Morpheus",
   Ocreveus = "Ocreveus",
   Paladin = "Paladin",
   Pleo = "Pleo",

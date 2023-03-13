@@ -11,7 +11,7 @@
 </script>
 
 <Planet
-  brand={Brand.BornFiber}
+  brand={Brand.Confinze}
   {position}
   planetSize={3}
   planetOffsetXY={[3, -1]}
@@ -23,9 +23,9 @@
   <HTML
     slot="content"
     transform
-    position={{ y: 0, x: -2 }}
+    position={{ y: 0, x: -2.5 }}
     rotation={{ y: 5 * DEG2RAD }}
-    scale={0.15}
+    scale={0.20}
     pointerEvents="none"
   >
     <PlanetContent>
@@ -38,9 +38,9 @@
   <HTML
     slot="moon1Content"
     transform
-    position={{ y: -4.5, x: 0 }}
+    position={{ y: -5.5, x: -0.5 }}
     rotation={{ y: -5 * DEG2RAD }}
-    scale={0.15}
+    scale={0.20}
     pointerEvents="none"
   >
     <Moon1Content>
@@ -51,9 +51,9 @@
   <HTML
     slot="moon2Content"
     transform
-    position={{ y: -7.5, x: 0 }}
+    position={{ y: -8.5, x: -4.5 }}
     rotation={{ y: 5 * DEG2RAD }}
-    scale={0.15}
+    scale={0.20}
     pointerEvents="none"
   >
     <Moon2Content>

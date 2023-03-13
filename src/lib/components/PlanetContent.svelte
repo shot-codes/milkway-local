@@ -1,4 +1,4 @@
-<div class="space-y-48 absolute w-[1000px] flex flex-col items-center">
+<div class="space-y-32 absolute w-[800px] lg:w-[1200px] flex flex-col items-center">
   <div class="text-center space-y-8">
     <div class="text-sm">
       <slot name="title" />

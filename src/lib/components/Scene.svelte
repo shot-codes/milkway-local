@@ -15,8 +15,8 @@
   import Background from "$lib/components/Background.svelte";
   import Particles from "$lib/components/Particles.svelte";
   import Sun from "$lib/components/Sun.svelte";
-  import BornFiber from "$lib/components/planets/BornFiber.svelte";
-  import BlueLobster from "$lib/components/planets/BlueLobster.svelte";
+  import Confinze from "$lib/components/planets/Confinze.svelte";
+  import ZibraHolding from "$lib/components/planets/ZibraHolding.svelte";
   import MindFuture from "$lib/components/planets/MindFuture.svelte";
   import Morpheus from "$lib/components/planets/Morpheus.svelte";
   import Ocreveus from "$lib/components/planets/Ocreveus.svelte";
@@ -69,6 +69,7 @@
       enableZoom={false}
       target={$targetPosition}
     />
+    <T.PointLight castShadow={true} position={[-90, 60, 60]} distance={350} intensity={1}></T.PointLight>
   {:else}
     <OrbitControls
       maxPolarAngle={100 * DEG2RAD}
@@ -88,8 +89,8 @@
 <Background />
 <Particles position={[0, 0, 0]} />
 <Sun />
-<BlueLobster position={planetLocations[0]} />
-<BornFiber position={planetLocations[1]} />
+<ZibraHolding position={planetLocations[0]} />
+<Confinze position={planetLocations[1]} />
 <MindFuture position={planetLocations[2]} />
 <Morpheus position={planetLocations[3]} />
 <Ocreveus position={planetLocations[4]} />

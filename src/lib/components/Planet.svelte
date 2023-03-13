@@ -98,8 +98,8 @@
           activePlanet.set(brand);
           zoomIn(position);
           moonRotation.set($moonRotation - ($moonRotation % (2 * Math.PI)));
-          moon1Position.set([-5, -5, 0]);
-          moon2Position.set([-1, -8, 0]);
+          moon1Position.set([-5, -5.8, 0]);
+          moon2Position.set([-1, -8.8, 0]);
         }}
         on:pointerenter={() => {
           showDetails = true;
@@ -127,7 +127,7 @@
       {/if}
       {#if moon2}
         <T.Mesh position={$moon2Position} scale={0.05}>
-          <T.SphereGeometry args={[6, 64, 64]} />
+          <T.SphereGeometry args={[12, 64, 64]} />
           <T.MeshStandardMaterial
             map={moonMaterials[moon2.materialIndex].color}
             normalMap={moonMaterials[moon2.materialIndex].normal}
