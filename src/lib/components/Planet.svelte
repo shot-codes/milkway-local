@@ -116,8 +116,8 @@
     <!-- Moons -->
     <T.Group rotation.y={$moonRotation}>
       {#if moon1}
-        <T.Mesh position={$moon1Position} scale={0.08}>
-          <T.SphereGeometry args={[6, 64, 64]} />
+        <T.Mesh position={$moon1Position} scale={0.05}>
+          <T.SphereGeometry args={[12, 64, 64]} />
           <T.MeshStandardMaterial
             map={moonMaterials[moon1.materialIndex].color}
             normalMap={moonMaterials[moon1.materialIndex].normal}
@@ -126,7 +126,7 @@
         </T.Mesh>
       {/if}
       {#if moon2}
-        <T.Mesh position={$moon2Position} scale={0.08}>
+        <T.Mesh position={$moon2Position} scale={0.05}>
           <T.SphereGeometry args={[6, 64, 64]} />
           <T.MeshStandardMaterial
             map={moonMaterials[moon2.materialIndex].color}

@@ -23,7 +23,7 @@
   <HTML
     slot="content"
     transform
-    position={{ y: 0, x: -5 }}
+    position={{ y: 0, x: -2 }}
     rotation={{ y: 5 * DEG2RAD }}
     scale={0.15}
     pointerEvents="none"
@@ -44,8 +44,6 @@
     pointerEvents="none"
   >
     <Moon1Content>
-      <span slot="title">Network &bull; Est. 2005</span>
-      <span slot="description">Yada yada yoda yada</span>
       <span slot="content">Wooooooooooo here we goooooo!</span>
     </Moon1Content>
   </HTML>
@@ -53,14 +51,12 @@
   <HTML
     slot="moon2Content"
     transform
-    position={{ y: -7.5, x: -5 }}
+    position={{ y: -7.5, x: 0 }}
     rotation={{ y: 5 * DEG2RAD }}
     scale={0.15}
     pointerEvents="none"
   >
     <Moon2Content>
-      <span slot="title">Network &bull; Est. 2005</span>
-      <span slot="description">Yada yada yoda yada</span>
       <span slot="content">Wooooooooooo here we goooooo!</span>
     </Moon2Content>
   </HTML>
