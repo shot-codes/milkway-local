@@ -32,7 +32,7 @@
         position={{ x: 3.0, y: 0.6 }}
         fillOpacity={opacity}
       />
-      {#if showDetails}
+      {#if showDetails && content}
         <HTML transform scale={0.8} position={{ x: 0, y: -0.2 }}>
           <div class="absolute text-sm bg-neutral-900/80 rounded-sm p-1 px-3 w-48">{content}</div>
         </HTML>

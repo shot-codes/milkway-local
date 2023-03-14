@@ -4,8 +4,6 @@
   import { Brand } from "$lib/utils";
   import Planet from "$lib/components/Planet.svelte";
   import PlanetContent from "$lib/components/PlanetContent.svelte";
-  import Moon1Content from "$lib/components/Moon1Content.svelte";
-  import Moon2Content from "$lib/components/Moon2Content.svelte";
 
   export let position: [number, number, number];
 </script>
@@ -17,11 +15,9 @@
   planetOffsetXY={[3, -1]}
   titleOffsetXY={[0, 3.8]}
   materialIndex={1}
-  moon1={{ materialIndex: 0, position: [4, 0, 0] }}
-  moon2={{ materialIndex: 0, position: [-4, 0, 0] }}
   content="Confinze er en finance-as-a-service provider"
 >
-  <HTML
+<HTML
     slot="content"
     transform
     position={{ y: 0, x: -2.5 }}
@@ -29,35 +25,12 @@
     scale={0.20}
     pointerEvents="none"
   >
-    <PlanetContent>
-      <span slot="description">Confinze er en finance-as-a-service provider</span>
-      <span slot="content">Wooooooooooo here we goooooo!</span>
+    <PlanetContent link="https://www.confinze.io/">
+      <span slot="image">
+        <img src="/mindfuture.jpeg" alt="" class="w-80" />
+      </span>
+      <span slot="description">Finance-as-a-service provider</span>
+      <span slot="content"><p>Confinze er en finance-as-a-service provider specifikt målrettet start-up og scale-up selskaber.</p><p> Med vores forretningsmodelstilpasset platform- og service koncept, skaber vi gennemsigtighed i den finansielle performance også kaldet Business Intelligence hvilket giver vores kunder mulighed for bedre strategiske og mere værdiskabende beslutninger.</p></span>
     </PlanetContent>
-  </HTML>
-
-  <HTML
-    slot="moon1Content"
-    transform
-    position={{ y: -5.5, x: -0.5 }}
-    rotation={{ y: -5 * DEG2RAD }}
-    scale={0.20}
-    pointerEvents="none"
-  >
-    <Moon1Content>
-      <span slot="content">Wooooooooooo here we goooooo!</span>
-    </Moon1Content>
-  </HTML>
-
-  <HTML
-    slot="moon2Content"
-    transform
-    position={{ y: -8.5, x: -2.5 }}
-    rotation={{ y: 5 * DEG2RAD }}
-    scale={0.20}
-    pointerEvents="none"
-  >
-    <Moon2Content>
-      <span slot="content">Wooooooooooo here we goooooo!</span>
-    </Moon2Content>
   </HTML>
 </Planet>

@@ -54,11 +54,11 @@ export enum Brand {
   Confinze = "Confinze",
   ZibraFinans = "ZibraFinans",
   MindFuture = "MindFuture",
-  Ocreveus = "Ocreveus",
-  Paladin = "Paladin",
-  Pleo = "Pleo",
+  Zybersafe = "Zybersafe",
+  PeopleVentures = "PeopleVentures",
+  Motus = "Motus",
   ZibraSport = "ZibraSport",
-  ZibraTech = "ZibraTech",
+  Cortrium = "Cortrium",
 }
 
 export const planetLocations: Array<[number, number, number]> = [];

@@ -18,12 +18,12 @@
   import Confinze from "$lib/components/planets/Confinze.svelte";
   import ZibraHolding from "$lib/components/planets/ZibraHolding.svelte";
   import MindFuture from "$lib/components/planets/MindFuture.svelte";
-  import Morpheus from "$lib/components/planets/Morpheus.svelte";
-  import Ocreveus from "$lib/components/planets/Ocreveus.svelte";
-  import Paladin from "$lib/components/planets/Paladin.svelte";
-  import Pleo from "$lib/components/planets/Pleo.svelte";
+  import ZibraFinans from "$lib/components/planets/ZibraFinans.svelte";
+  import Zybersafe from "$lib/components/planets/Zybersafe.svelte";
+  import PeopleVentures from "$lib/components/planets/PeopleVentures.svelte";
+  import Motus from "$lib/components/planets/Motus.svelte";
   import ZibraSport from "$lib/components/planets/ZibraSport.svelte";
-  import ZibraTech from "$lib/components/planets/ZibraTech.svelte";
+  import Cortrium from "$lib/components/planets/Cortrium.svelte";
 
   let canvas: HTMLCanvasElement;
   const fogOptions = tweened({ near: 35, far: 75 }, { duration: 3000 });
@@ -91,9 +91,9 @@
 <ZibraHolding position={planetLocations[0]} />
 <Confinze position={planetLocations[1]} />
 <MindFuture position={planetLocations[2]} />
-<Morpheus position={planetLocations[3]} />
-<Ocreveus position={planetLocations[4]} />
-<Paladin position={planetLocations[5]} />
-<Pleo position={planetLocations[6]} />
+<ZibraFinans position={planetLocations[3]} />
+<Zybersafe position={planetLocations[4]} />
+<PeopleVentures position={planetLocations[5]} />
+<Motus position={planetLocations[6]} />
 <ZibraSport position={planetLocations[7]} />
-<ZibraTech position={planetLocations[8]} />
+<Cortrium position={planetLocations[8]} />
