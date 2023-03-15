@@ -26,6 +26,9 @@
   pointerEvents="none"
   >
     <PlanetContent link="https://www.cortrium.com/">
+      <span slot="image">
+        <img src="/Cortrium.jpg" alt="" class="w-80" />
+      </span>
       <span slot="description">Cortrium is a Danish med-tech company</span>
       <span slot="content">Cortrium is a Danish med-tech company, producing state of the art medically certified ambulatory ECG monitors. We deliver open and easily accessible devices integrating with both stand alone and cloud-based analysis software.</span>
     </PlanetContent>

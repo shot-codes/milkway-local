@@ -26,6 +26,9 @@
     pointerEvents="none"
   >
     <PlanetContent link="https://zybersafe.dk">
+      <span slot="image">
+        <img src="/Zybersafe.jpg" alt="" class="w-80" />
+      </span>
       <span slot="description">ZyberSafe sikrer en sikker kommunikation</span>
       <span slot="content">ZyberSafe opstod I forbindelse med en stor international politisk debat om sikkerhed i fiberbaserede telekommunikationsnet og produkterne adresserer denne udfordring. ZyberSafe er dansk udviklet og produceret, og sikrer at kommunikation kan foregå uden frygt for data indbrud via teleselskaber eller anden ekstern infrastruktur.</span>
     </PlanetContent>

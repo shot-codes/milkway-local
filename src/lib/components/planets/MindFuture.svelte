@@ -31,7 +31,7 @@
   >
     <PlanetContent link="https://mindfuture.com">
       <span slot="image">
-        <img src="/mindfuture.jpeg" alt="" class="w-80" />
+        <img src="/Mindfuture.jpg" alt="" class="w-80" />
       </span>
       <span slot="description">Fra idé til prototype til færdigt produkt</span>
       <span slot="content"><p>I MindFuture støtter vi den innovative idé fra tidlig start til bæredygtig virksomhed med baggrund i et stærkt tech Community, som vi gerne deler ud af.</p> <p>Vi vil være dem, der får ideer og projekter til at lykkes og skaber meningsfulde, positive forskelle for mennesker og samfund.</p></span>
