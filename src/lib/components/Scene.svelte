@@ -27,7 +27,14 @@
 
   let canvas: HTMLCanvasElement;
   const fogOptions = tweened({ near: 35, far: 75 }, { duration: 3000 });
-  const { camera } = useThrelte();
+  const { camera, renderer  } = useThrelte();
+  
+  $: { 
+    if(renderer) {
+      renderer.debug.checkShaderErrors = false;
+      console.log("disabled shader check");
+    }
+  }
 
   $: cameraClone.set($camera);
 
