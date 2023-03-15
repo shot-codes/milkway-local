@@ -27,7 +27,7 @@
   >
     <PlanetContent link="https://www.confinze.io/">
       <span slot="image">
-        <img src="/Confinze.jpg" alt="" class="w-80" />
+        <img src="/Confinze.jpg" alt="" class="w-80 rounded-lg" />
       </span>
       <span slot="description">Finance-as-a-service provider</span>
       <span slot="content"><p>Confinze er en finance-as-a-service provider specifikt målrettet start-up og scale-up selskaber.</p><p> Med vores forretningsmodelstilpasset platform- og service koncept, skaber vi gennemsigtighed i den finansielle performance også kaldet Business Intelligence hvilket giver vores kunder mulighed for bedre strategiske og mere værdiskabende beslutninger.</p></span>

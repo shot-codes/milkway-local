@@ -27,7 +27,7 @@
   >
     <PlanetContent link="https://people.ventures/">
       <span slot="image">
-        <img src="/PeopleVentures.jpg" alt="" class="w-80" />
+        <img src="/PeopleVentures.jpg" alt="" class="w-80 rounded-lg" />
       </span>
       <span slot="description">From pre-seed to venture to expansive growth</span>
       <span slot="content">We back start-ups and founder teams when our operational skillset, experience, and network will bring an original vision to life. From pre-seed to venture to expansive growth with best-in-class founders at every stage of the journey.</span>

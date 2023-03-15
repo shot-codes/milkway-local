@@ -27,7 +27,7 @@
   >
     <PlanetContent link="https://motus.dk">
       <span slot="image">
-        <img src="/Motus.jpg" alt="" class="w-80" />
+        <img src="/Motus.jpg" alt="" class="w-80 rounded-lg" />
       </span>
       <span slot="description">Motus er specialister i backup</span>
       <span slot="content">Motus er specialister i backup, storage, arkivering og genetablering af IT systemer. Vi hjælper med at fremtidssikre data via rådgivning, løsninger og services, så I til en hver tid har adgang til jeres data, og kan træffe jeres egne beslutninger.</span>
