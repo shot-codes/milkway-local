@@ -25,7 +25,7 @@
     scale={0.20}
     pointerEvents="none"
   >
-    <PlanetContent link="https://zybersafe.dk">
+    <PlanetContent link="https://zybersafe.com">
       <span slot="image">
         <img src="/Zybersafe.jpg" alt="" class="w-80 rounded-lg" />
       </span>
