@@ -77,6 +77,8 @@
       enableRotate={true}
       enablePan={false}
       enableZoom={false}
+      autoRotate={true}
+      autoRotateSpeed={0.15}
       target={$targetPosition}
     />
   {/if}
