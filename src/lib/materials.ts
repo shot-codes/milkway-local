@@ -1,5 +1,5 @@
 import { Color, BackSide, Vector2, RepeatWrapping } from "three";
-import { LayerMaterial, Fresnel, Noise, Gradient } from "lamina/vanilla";
+import { LayerMaterial, Fresnel, Noise, Gradient, Displace, Depth } from "lamina/vanilla";
 import { useTexture } from "@threlte/core";
 
 export const noise = new Noise({
@@ -15,6 +15,99 @@ export const noise = new Noise({
   mode: "normal",
   visible: true,
 });
+
+export class CustomLayerMaterial extends LayerMaterial {
+  constructor(layers: Array<Depth | Displace | Fresnel>) {
+    super({
+      lighting: "toon",
+      roughness: 0,
+      transmission: 1,
+      reflectivity: 1,
+      // @ts-expect-error - https://github.com/pmndrs/lamina/issues/25
+      thickness: 2,
+      layers,
+    });
+  }
+}
+
+export const sunMaterial = () => {
+  const displace = new Displace({
+    strength: 6,
+    scale: 0.1,
+    type: "perlin",
+    offset: [0.09189000000357626, 0, 0],
+    mode: "normal",
+    visible: true,
+  });
+  const noise = new Noise({
+    colorA: new Color("#ffffff"),
+    colorB: new Color("#883366"),
+    colorC: new Color("#33ff55"),
+    colorD: new Color("#0000ff"),
+    alpha: 0.1,
+    scale: 3,
+    type: "cell",
+    offset: [0, 0, 0],
+    mapping: "local",
+    mode: "normal",
+    visible: true,
+  });
+  const material = new LayerMaterial({
+    color: "#ea580c",
+    lighting: "toon",
+    layers: [
+      displace,
+      noise,
+      new Gradient({
+        colorA: new Color("#ea580c"),
+        colorB: new Color("#ff0000"),
+        alpha: 0.2,
+        contrast: 1,
+        start: 1,
+        end: -5,
+        axes: "x",
+        mapping: "local",
+        visible: true,
+      }),
+      new Fresnel({
+        color: new Color("#ff0000"),
+        alpha: 1,
+        power: 1.55,
+        intensity: 1.1,
+        bias: 0,
+        mode: "screen",
+        visible: true,
+      }),
+    ],
+  });
+  // const material = new CustomLayerMaterial([
+  //   displace,
+  //   new Depth({
+  //     colorA: new Color("#ff0000"),
+  //     colorB: new Color("#eab308"),
+  //     alpha: 1,
+  //     near: 2.4854,
+  //     far: 0.7661999999999932,
+  //     origin: [-0.4920000000000004, 0.4250000000000003, 0],
+  //     mapping: "vector",
+  //     mode: "reflect",
+  //     visible: true,
+  //   }),
+  //   new Fresnel({
+  //     color: new Color("#eab308"),
+  //     alpha: 1,
+  //     power: 3.3699999999999903,
+  //     intensity: 3.8999999999999946,
+  //     bias: 2.3430000000000002,
+  //     mode: "reflect",
+  //     visible: true,
+  //   }),
+  // ]);
+  return {
+    material,
+    displace,
+  };
+};
 
 export const backgroundMaterial = new LayerMaterial({
   side: BackSide,
@@ -88,7 +181,7 @@ const material1 = () => {
   });
   const material = new LayerMaterial({
     color: "#FF2327",
-    lighting: "physical",
+    lighting: "toon",
     layers: [
       noise,
       new Fresnel({
@@ -123,7 +216,7 @@ const material2 = () => {
   });
   const material = new LayerMaterial({
     color: "#5ea1fd",
-    lighting: "physical",
+    lighting: "toon",
     layers: [
       noise,
       new Fresnel({
@@ -158,7 +251,7 @@ const material3 = () => {
   });
   const material = new LayerMaterial({
     color: "#00ff00",
-    lighting: "physical",
+    lighting: "toon",
     layers: [
       noise,
       new Fresnel({
@@ -193,7 +286,7 @@ const material4 = () => {
   });
   const material = new LayerMaterial({
     color: "#dd9922",
-    lighting: "physical",
+    lighting: "toon",
     layers: [
       noise,
       new Fresnel({
@@ -228,7 +321,7 @@ const material5 = () => {
   });
   const material = new LayerMaterial({
     color: "#3388ff",
-    lighting: "physical",
+    lighting: "toon",
     layers: [
       noise,
       new Fresnel({
@@ -263,7 +356,7 @@ const material6 = () => {
   });
   const material = new LayerMaterial({
     color: "#00ffff",
-    lighting: "physical",
+    lighting: "toon",
     layers: [
       noise,
       new Fresnel({
@@ -298,7 +391,7 @@ const material7 = () => {
   });
   const material = new LayerMaterial({
     color: "#ffe910",
-    lighting: "physical",
+    lighting: "toon",
     layers: [
       noise,
       new Fresnel({
@@ -333,7 +426,7 @@ const material8 = () => {
   });
   const material = new LayerMaterial({
     color: "#6000bb",
-    lighting: "physical",
+    lighting: "toon",
     layers: [
       noise,
       new Fresnel({
@@ -369,7 +462,7 @@ const material9 = () => {
   });
   const material = new LayerMaterial({
     color: "#000000",
-    lighting: "physical",
+    lighting: "toon",
     layers: [
       noise,
       new Fresnel({
