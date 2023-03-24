@@ -22,7 +22,7 @@
     transform
     position={{ y: 0, x: -2.5 }}
     rotation={{ y: 5 * DEG2RAD }}
-    scale={0.20}
+    scale={0.24}
     pointerEvents="none"
   >
     <PlanetContent link="https://www.confinze.io/">

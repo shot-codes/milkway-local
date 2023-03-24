@@ -19,10 +19,9 @@ export const noise = new Noise({
 export class CustomLayerMaterial extends LayerMaterial {
   constructor(layers: Array<Depth | Displace | Fresnel>) {
     super({
-      lighting: "toon",
-      roughness: 0,
+      lighting: "physical",
+      roughness: 0.1,
       transmission: 1,
-      reflectivity: 1,
       // @ts-expect-error - https://github.com/pmndrs/lamina/issues/25
       thickness: 2,
       layers,
@@ -40,38 +39,39 @@ export const sunMaterial = () => {
     visible: true,
   });
   const noise = new Noise({
-    colorA: new Color("#ffffff"),
-    colorB: new Color("#883366"),
-    colorC: new Color("#33ff55"),
-    colorD: new Color("#0000ff"),
-    alpha: 0.1,
-    scale: 3,
-    type: "cell",
+    colorA: new Color("#b91c1c"),
+    colorB: new Color("#d97706"),
+    colorC: new Color("#b91c1c"),
+    colorD: new Color("#ef4444"),
+    alpha: .6,
+    scale: 20,
+    type: "curl",
     offset: [0, 0, 0],
     mapping: "local",
     mode: "normal",
     visible: true,
   });
   const material = new LayerMaterial({
-    color: "#ea580c",
-    lighting: "toon",
+    color: "#ef4444",
+    lighting: "physical",
+    alpha: 1,
     layers: [
       displace,
       noise,
       new Gradient({
         colorA: new Color("#ea580c"),
         colorB: new Color("#ff0000"),
-        alpha: 0.2,
+        alpha: .4,
         contrast: 1,
         start: 1,
         end: -5,
         axes: "x",
-        mapping: "local",
+        mapping: "world",
         visible: true,
       }),
       new Fresnel({
         color: new Color("#ff0000"),
-        alpha: 1,
+        alpha: 0.2,
         power: 1.55,
         intensity: 1.1,
         bias: 0,
@@ -80,29 +80,6 @@ export const sunMaterial = () => {
       }),
     ],
   });
-  // const material = new CustomLayerMaterial([
-  //   displace,
-  //   new Depth({
-  //     colorA: new Color("#ff0000"),
-  //     colorB: new Color("#eab308"),
-  //     alpha: 1,
-  //     near: 2.4854,
-  //     far: 0.7661999999999932,
-  //     origin: [-0.4920000000000004, 0.4250000000000003, 0],
-  //     mapping: "vector",
-  //     mode: "reflect",
-  //     visible: true,
-  //   }),
-  //   new Fresnel({
-  //     color: new Color("#eab308"),
-  //     alpha: 1,
-  //     power: 3.3699999999999903,
-  //     intensity: 3.8999999999999946,
-  //     bias: 2.3430000000000002,
-  //     mode: "reflect",
-  //     visible: true,
-  //   }),
-  // ]);
   return {
     material,
     displace,
@@ -149,30 +126,17 @@ export const backgroundMaterial = new LayerMaterial({
       mapping: "local",
       visible: true,
     }),
-    // new Noise({
-    //   colorA: new Color("#bfabab"),
-    //   colorB: new Color("#000000"),
-    //   colorC: new Color("#000000"),
-    //   colorD: new Color("#030303"),
-    //   alpha: 0.25,
-    //   scale: 500,
-    //   type: "perlin",
-    //   offset: [0,0,0],
-    //   mapping: "local",
-    //   mode: "normal",
-    //   visible: true,
-    // }),
   ],
 });
 
 const material1 = () => {
   const noise = new Noise({
-    colorA: new Color("#ffffff"),
-    colorB: new Color("#883366"),
-    colorC: new Color("#33ff55"),
-    colorD: new Color("#0000ff"),
+    colorA: new Color("#aaaaaa"),
+    colorB: new Color("#aaaaaa"),
+    colorC: new Color("#000000"),
+    colorD: new Color("#000000"),
     alpha: 0.1,
-    scale: 3,
+    scale: 30,
     type: "curl",
     offset: [0, 0, 0],
     mapping: "local",
@@ -180,13 +144,13 @@ const material1 = () => {
     visible: true,
   });
   const material = new LayerMaterial({
-    color: "#FF2327",
-    lighting: "toon",
+    color: "#910404",
+    lighting: "physical",
     layers: [
       noise,
       new Fresnel({
-        color: new Color("#ff00ff"),
-        alpha: 1,
+        color: new Color("#000000"),
+        alpha: 0.4,
         power: 1.55,
         intensity: 1.1,
         bias: 0,
@@ -202,12 +166,12 @@ const material1 = () => {
 };
 const material2 = () => {
   const noise = new Noise({
-    colorA: new Color("#1720a8"),
-    colorB: new Color("#9428a9"),
-    colorC: new Color("#f2feeb"),
-    colorD: new Color("#f0fef4"),
+    colorA: new Color("#aaaaaa"),
+    colorB: new Color("#aaaaaa"),
+    colorC: new Color("#000000"),
+    colorD: new Color("#000000"),
     alpha: 0.1,
-    scale: 3,
+    scale: 30,
     type: "curl",
     offset: [0, 0, 0],
     mapping: "local",
@@ -215,13 +179,13 @@ const material2 = () => {
     visible: true,
   });
   const material = new LayerMaterial({
-    color: "#5ea1fd",
-    lighting: "toon",
+    color: "#8a0f59",
+    lighting: "physical",
     layers: [
       noise,
       new Fresnel({
-        color: new Color("#fc0000"),
-        alpha: 1,
+        color: new Color("#000000"),
+        alpha: 0.4,
         power: 1.55,
         intensity: 1.1,
         bias: 0,
@@ -237,12 +201,12 @@ const material2 = () => {
 };
 const material3 = () => {
   const noise = new Noise({
-    colorA: new Color("#0000ff"),
-    colorB: new Color("#fff000"),
-    colorC: new Color("#0000ff"),
-    colorD: new Color("#0000ff"),
+    colorA: new Color("#aaaaaa"),
+    colorB: new Color("#aaaaaa"),
+    colorC: new Color("#000000"),
+    colorD: new Color("#000000"),
     alpha: 0.1,
-    scale: 3,
+    scale: 30,
     type: "curl",
     offset: [0, 0, 0],
     mapping: "local",
@@ -250,13 +214,13 @@ const material3 = () => {
     visible: true,
   });
   const material = new LayerMaterial({
-    color: "#00ff00",
-    lighting: "toon",
+    color: "#0e899c",
+    lighting: "physical",
     layers: [
       noise,
       new Fresnel({
-        color: new Color("#ffff00"),
-        alpha: 1,
+        color: new Color("#000000"),
+        alpha: 0.5,
         power: 1.55,
         intensity: 1.1,
         bias: 0,
@@ -272,12 +236,12 @@ const material3 = () => {
 };
 const material4 = () => {
   const noise = new Noise({
-    colorA: new Color("#d23923"),
-    colorB: new Color("#442211"),
-    colorC: new Color("#00ff00"),
-    colorD: new Color("#0000ff"),
+    colorA: new Color("#aaaaaa"),
+    colorB: new Color("#aaaaaa"),
+    colorC: new Color("#000000"),
+    colorD: new Color("#000000"),
     alpha: 0.1,
-    scale: 3,
+    scale: 30,
     type: "curl",
     offset: [0, 0, 0],
     mapping: "local",
@@ -285,12 +249,12 @@ const material4 = () => {
     visible: true,
   });
   const material = new LayerMaterial({
-    color: "#dd9922",
-    lighting: "toon",
+    color: "#a16e16",
+    lighting: "physical",
     layers: [
       noise,
       new Fresnel({
-        color: new Color("#ffffff"),
+        color: new Color("#000000"),
         alpha: 0.3,
         power: 1.55,
         intensity: 1.1,
@@ -307,12 +271,12 @@ const material4 = () => {
 };
 const material5 = () => {
   const noise = new Noise({
-    colorA: new Color("#ffffff"),
-    colorB: new Color("#ffffff"),
-    colorC: new Color("#ff00ff"),
-    colorD: new Color("#ff00ff"),
+    colorA: new Color("#aaaaaa"),
+    colorB: new Color("#aaaaaa"),
+    colorC: new Color("#000000"),
+    colorD: new Color("#000000"),
     alpha: 0.1,
-    scale: 3,
+    scale: 30,
     type: "curl",
     offset: [0, 0, 0],
     mapping: "local",
@@ -320,13 +284,13 @@ const material5 = () => {
     visible: true,
   });
   const material = new LayerMaterial({
-    color: "#3388ff",
-    lighting: "toon",
+    color: "#184d96",
+    lighting: "physical",
     layers: [
       noise,
       new Fresnel({
-        color: new Color("#00ffff"),
-        alpha: 1,
+        color: new Color("#000000"),
+        alpha: 0.8,
         power: 1.55,
         intensity: 1.1,
         bias: 0,
@@ -342,12 +306,12 @@ const material5 = () => {
 };
 const material6 = () => {
   const noise = new Noise({
-    colorA: new Color("#000000"),
-    colorB: new Color("#000000"),
-    colorC: new Color("#dcdd10"),
-    colorD: new Color("#dcdd10"),
+    colorA: new Color("#aaaaaa"),
+    colorB: new Color("#aaaaaa"),
+    colorC: new Color("#000000"),
+    colorD: new Color("#000000"),
     alpha: 0.1,
-    scale: 3,
+    scale: 30,
     type: "curl",
     offset: [0, 0, 0],
     mapping: "local",
@@ -355,13 +319,13 @@ const material6 = () => {
     visible: true,
   });
   const material = new LayerMaterial({
-    color: "#00ffff",
-    lighting: "toon",
+    color: "#007878",
+    lighting: "physical",
     layers: [
       noise,
       new Fresnel({
-        color: new Color("#ff00ff"),
-        alpha: 1,
+        color: new Color("#000000"),
+        alpha: 0.4,
         power: 1.55,
         intensity: 1.1,
         bias: 0,
@@ -377,12 +341,12 @@ const material6 = () => {
 };
 const material7 = () => {
   const noise = new Noise({
-    colorA: new Color("#ff00ff"),
-    colorB: new Color("#000000"),
-    colorC: new Color("#ffffff"),
-    colorD: new Color("#ffffff"),
+    colorA: new Color("#aaaaaa"),
+    colorB: new Color("#aaaaaa"),
+    colorC: new Color("#000000"),
+    colorD: new Color("#000000"),
     alpha: 0.1,
-    scale: 3,
+    scale: 30,
     type: "curl",
     offset: [0, 0, 0],
     mapping: "local",
@@ -390,13 +354,13 @@ const material7 = () => {
     visible: true,
   });
   const material = new LayerMaterial({
-    color: "#ffe910",
-    lighting: "toon",
+    color: "#2b2705",
+    lighting: "physical",
     layers: [
       noise,
       new Fresnel({
-        color: new Color("#ffff00"),
-        alpha: 1,
+        color: new Color("#000000"),
+        alpha: 0.4,
         power: 1.55,
         intensity: 1.1,
         bias: 0,
@@ -412,12 +376,12 @@ const material7 = () => {
 };
 const material8 = () => {
   const noise = new Noise({
-    colorA: new Color("#0000ff"),
-    colorB: new Color("#0000ff"),
-    colorC: new Color("#dcdd10"),
-    colorD: new Color("#dcdd10"),
+    colorA: new Color("#aaaaaa"),
+    colorB: new Color("#aaaaaa"),
+    colorC: new Color("#000000"),
+    colorD: new Color("#000000"),
     alpha: 0.1,
-    scale: 3,
+    scale: 30,
     type: "curl",
     offset: [0, 0, 0],
     mapping: "local",
@@ -425,14 +389,14 @@ const material8 = () => {
     visible: true,
   });
   const material = new LayerMaterial({
-    color: "#6000bb",
-    lighting: "toon",
+    color: "#2c0f47",
+    lighting: "physical",
     layers: [
       noise,
       new Fresnel({
-        color: new Color("#ff00ff"),
-        alpha: 1,
-        power: 1.55,
+        color: new Color("#000000"),
+        alpha: 0.4,
+        power: 2,
         intensity: 1.1,
         bias: 0,
         mode: "screen",
@@ -453,7 +417,7 @@ const material9 = () => {
     colorC: new Color("#000000"),
     colorD: new Color("#000000"),
     alpha: 0.1,
-    scale: 3,
+    scale: 30,
     type: "curl",
     offset: [0, 0, 0],
     mapping: "local",
@@ -461,13 +425,13 @@ const material9 = () => {
     visible: true,
   });
   const material = new LayerMaterial({
-    color: "#000000",
-    lighting: "toon",
+    color: "#1c1917",
+    lighting: "physical",
     layers: [
       noise,
       new Fresnel({
-        color: new Color("#bbbbbb"),
-        alpha: 1,
+        color: new Color("#666666"),
+        alpha: 0.4,
         power: 2,
         intensity: 1.1,
         bias: 0,
@@ -494,9 +458,9 @@ export const materials = [
   material9,
 ];
 
-const mf1Color = useTexture("/textures/MindFuture/diffuse2.png");
-const mf1Normal = useTexture("/textures/MindFuture/normal2.png");
-const mf1Displace = useTexture("/textures/MindFuture/height2.png");
+const mf1Color = useTexture("/textures/Moons/snow-diffuse.png");
+const mf1Normal = useTexture("/textures/Moons/snow-normal.png");
+const mf1Displace = useTexture("/textures/Moons/snow-height.png");
 
 mf1Color.wrapS = RepeatWrapping;
 mf1Color.wrapT = RepeatWrapping;

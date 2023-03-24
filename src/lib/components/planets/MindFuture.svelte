@@ -26,7 +26,7 @@
     transform
     position={{ y: 0, x: -2.5 }}
     rotation={{ y: 5 * DEG2RAD }}
-    scale={0.20}
+    scale={0.24}
     pointerEvents="none"
   >
     <PlanetContent link="https://mindfuture.com">
@@ -43,7 +43,7 @@
     transform
     position={{ y: -5, x: -0.5 }}
     rotation={{ y: -5 * DEG2RAD }}
-    scale={0.20}
+    scale={0.24}
     pointerEvents="none"
   >
     <Moon1Content link="https://m2call.com/">
@@ -57,7 +57,7 @@
     transform
     position={{ y: -8, x: -2.5 }}
     rotation={{ y: 5 * DEG2RAD }}
-    scale={0.20}
+    scale={0.24}
     pointerEvents="none"
   >
     <Moon2Content link="https://lifewithartificials.com/">

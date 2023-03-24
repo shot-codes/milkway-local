@@ -84,7 +84,7 @@
   {/if}
 </PerspectiveCamera>
 
-<T.DirectionalLight castShadow position={[10, 10, -10]} />
+<T.DirectionalLight castShadow position={[8, 8, -8]} />
 <Fog color={"#000000"} near={$fogOptions.near} far={$fogOptions.far} />
 
 <Background />
