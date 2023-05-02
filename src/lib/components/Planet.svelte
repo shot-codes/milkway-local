@@ -16,6 +16,7 @@
   }
 
   export let position: [number, number, number];
+  export let moonAmount: [number];
   export let content = "";
   export let planetSize = 1;
   export let materialIndex = 0;
@@ -24,9 +25,16 @@
   export let brand: Brand;
   export let moon1: Moon | undefined = undefined;
   export let moon2: Moon | undefined = undefined;
+  export let moon3: Moon | undefined = undefined;
+  export let moon4: Moon | undefined = undefined;
+  export let moon5: Moon | undefined = undefined;
 
   const moon1Position: Tweened<[number, number, number]> = tweened([0, 0, 0], { duration: 1000 });
   const moon2Position: Tweened<[number, number, number]> = tweened([0, 0, 0], { duration: 1000 });
+  const moon3Position: Tweened<[number, number, number]> = tweened([0, 0, 0], { duration: 1000 });
+  const moon4Position: Tweened<[number, number, number]> = tweened([0, 0, 0], { duration: 1000 });
+  const moon5Position: Tweened<[number, number, number]> = tweened([0, 0, 0], { duration: 1000 });
+
   const clonedPlanetSize = spring(planetSize, { stiffness: 0.03, damping: 0.5 });
   const { material } = materials[materialIndex]();
   const scale = spring(1, { stiffness: 0.05 });
@@ -41,6 +49,15 @@
     }
     if (moon2) {
       $moon2Position = moon2.position;
+    }
+    if (moon3) {
+      $moon3Position = moon3.position;
+    }
+    if (moon4) {
+      $moon4Position = moon4.position;
+    }
+    if (moon5) {
+      $moon5Position = moon5.position;
     }
   }
 
@@ -58,6 +75,15 @@
       }
       if (moon2) {
         $moon2Position = moon2?.position;
+      }
+      if (moon3) {
+        $moon3Position = moon3?.position;
+      }
+      if (moon4) {
+        $moon4Position = moon4?.position;
+      }
+      if (moon5) {
+        $moon5Position = moon5?.position;
       }
     }
   }
@@ -99,10 +125,13 @@
         interactive
         on:click={() => {
           activePlanet.set(brand);
-          zoomIn(position);
+          zoomIn(position, moonAmount);
           moonRotation.set($moonRotation - ($moonRotation % (2 * Math.PI)));
-          moon1Position.set([-5, -4.8, 0]);
-          moon2Position.set([-1, -7.8, 0]);
+          moon1Position.set([-5, -5.3, 0]);
+          moon2Position.set([-1.6, -8.3, 0]);
+          moon3Position.set([-5, -11.3, 0]);
+          moon4Position.set([-1.6, -14.3, 0]);
+          moon5Position.set([-5, -17.3, 0]);
         }}
         on:pointerenter={() => {
           showDetails = true;
@@ -138,6 +167,36 @@
           />
         </T.Mesh>
       {/if}
+      {#if moon3}
+        <T.Mesh position={$moon3Position} scale={0.05}>
+          <T.SphereGeometry args={[12, 64, 64]} />
+          <T.MeshStandardMaterial
+            map={moonMaterials[moon3.materialIndex].color}
+            normalMap={moonMaterials[moon3.materialIndex].normal}
+            displacementMap={moonMaterials[moon3.materialIndex].displace}
+          />
+        </T.Mesh>
+      {/if}
+      {#if moon4}
+        <T.Mesh position={$moon4Position} scale={0.05}>
+          <T.SphereGeometry args={[12, 64, 64]} />
+          <T.MeshStandardMaterial
+            map={moonMaterials[moon4.materialIndex].color}
+            normalMap={moonMaterials[moon4.materialIndex].normal}
+            displacementMap={moonMaterials[moon4.materialIndex].displace}
+          />
+        </T.Mesh>
+      {/if}
+      {#if moon5}
+        <T.Mesh position={$moon5Position} scale={0.05}>
+          <T.SphereGeometry args={[12, 64, 64]} />
+          <T.MeshStandardMaterial
+            map={moonMaterials[moon5.materialIndex].color}
+            normalMap={moonMaterials[moon5.materialIndex].normal}
+            displacementMap={moonMaterials[moon5.materialIndex].displace}
+          />
+        </T.Mesh>
+      {/if}
     </T.Group>
   </T.Group>
 
@@ -145,5 +204,8 @@
     <slot name="content" />
     <slot name="moon1Content" />
     <slot name="moon2Content" />
+    <slot name="moon3Content" />
+    <slot name="moon4Content" />
+    <slot name="moon5Content" />
   {/if}
 </T.Group>

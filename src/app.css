@@ -4,7 +4,7 @@
 
 html,
 body {
-  @apply font-space h-screen w-screen text-white font-light;
+  @apply font-space h-screen w-screen text-white font-light text-lg;
 }
 
 /* .gradient-bg {

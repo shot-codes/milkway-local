@@ -9,25 +9,26 @@
 </script>
 
 <Planet
-  brand={Brand.ZibraFinans}
+  brand={Brand.ZibraPartner}
   {position}
   planetSize={3.5}
   planetOffsetXY={[3, -1]}
   titleOffsetXY={[0, 3.8]}
   materialIndex={3}
   content="Få styr på finanserne i små virksomheder"
+  moonAmount={[1]}
 >
   <HTML
     slot="content"
     transform
-    position={{ y: 0, x: -2.5 }}
+    position={{ y: 0, x: -5.5 }}
     rotation={{ y: 5 * DEG2RAD }}
-    scale={0.24}
+    scale={0.34}
     pointerEvents="none"
   >
     <PlanetContent link="https://zibrapartner.com">
       <span slot="image">
-        <img src="/ZibraFinans.jpg" alt="" class="w-80 rounded-lg" />
+        <img src="/ZibraPartner.jpg" alt="" class="w-80 rounded-lg" />
       </span>
       <span slot="description">Få styr på finanserne i små virksomheder</span>
       <span slot="content">Et spin-off af servicebehovet i de mange selskaber har været en finansfuktion, der kan hjælpe med at få styr på finanserne i små virksomheder. Det er blevet til Confinze.</span>

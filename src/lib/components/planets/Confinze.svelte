@@ -16,11 +16,12 @@
   titleOffsetXY={[0, 3.8]}
   materialIndex={1}
   content="Confinze er en finance-as-a-service provider"
+  moonAmount={[1]}
 >
 <HTML
     slot="content"
     transform
-    position={{ y: 0, x: -2.5 }}
+    position={{ y: 0, x: -5.5 }}
     rotation={{ y: 5 * DEG2RAD }}
     scale={0.24}
     pointerEvents="none"

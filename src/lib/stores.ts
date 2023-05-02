@@ -10,6 +10,7 @@ export const tweenedOptions = {
 
 export const zoomedIn = writable(false);
 export const activePlanet = writable("");
+export const contentMax = writable(0);
 
 export const cameraClone = writable(new Camera());
 
