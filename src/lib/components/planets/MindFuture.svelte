@@ -82,8 +82,8 @@
     pointerEvents="none"
   >
     <Moon3Content link="https://lifewithartificials.com/">
-      <span slot="title">Not for profit Life with Artificials</span>
-      <span slot="content">Foreningen Life with Artificials blander kunst og tech og starter debatter omkring mulighederne og dilemmaerne ved nye og kommende teknologier. Vores mission er at debattere en sikker, etisk, bæredygtig og brugbar integration af AI for det enkelte meneske ved at introducere det 18. verdensmål – Life with Artificials.</span>
+      <span slot="title">Mindfuture Hub / Food Lab</span>
+      <span slot="content">In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident nulla ea.</span>
     </Moon3Content>
   </HTML>
   
@@ -96,8 +96,8 @@
     pointerEvents="none"
   >
     <Moon4Content link="https://lifewithartificials.com/">
-      <span slot="title">Not for profit Life with Artificials</span>
-      <span slot="content">Foreningen Life with Artificials blander kunst og tech og starter debatter omkring mulighederne og dilemmaerne ved nye og kommende teknologier. Vores mission er at debattere en sikker, etisk, bæredygtig og brugbar integration af AI for det enkelte meneske ved at introducere det 18. verdensmål – Life with Artificials.</span>
+      <span slot="title">MindVision</span>
+      <span slot="content">In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident nulla ea.</span>
     </Moon4Content>
   </HTML>
   
@@ -110,8 +110,8 @@
     pointerEvents="none"
   >
     <Moon5Content link="https://lifewithartificials.com/">
-      <span slot="title">Not for profit Life with Artificials</span>
-      <span slot="content">Foreningen Life with Artificials blander kunst og tech og starter debatter omkring mulighederne og dilemmaerne ved nye og kommende teknologier. Vores mission er at debattere en sikker, etisk, bæredygtig og brugbar integration af AI for det enkelte meneske ved at introducere det 18. verdensmål – Life with Artificials.</span>
+      <span slot="title">Book of Mindsets</span>
+      <span slot="content">In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident nulla ea.</span>
     </Moon5Content>
   </HTML>
 </Planet>

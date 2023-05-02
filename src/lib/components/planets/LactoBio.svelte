@@ -15,7 +15,7 @@
   planetOffsetXY={[3, -1]}
   titleOffsetXY={[0, 3.8]}
   materialIndex={4}
-  content="LactoBio sikrer en sikker kommunikation"
+  content="LactoBio info"
   moonAmount={[1]}
 >
   <HTML
@@ -30,8 +30,8 @@
       <span slot="image">
         <img src="/LactoBio.jpg" alt="" class="w-80 rounded-lg" />
       </span>
-      <span slot="description">ZyberSafe sikrer en sikker kommunikation</span>
-      <span slot="content">ZyberSafe opstod I forbindelse med en stor international politisk debat om sikkerhed i fiberbaserede telekommunikationsnet og produkterne adresserer denne udfordring. ZyberSafe er dansk udviklet og produceret, og sikrer at kommunikation kan foregå uden frygt for data indbrud via teleselskaber eller anden ekstern infrastruktur.</span>
+      <span slot="description">LactoBio info</span>
+      <span slot="content">In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident nulla ea.</span>
     </PlanetContent>
   </HTML>
 </Planet>

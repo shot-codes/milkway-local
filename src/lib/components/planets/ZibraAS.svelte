@@ -50,8 +50,8 @@
     pointerEvents="none"
   >
     <Moon1Content>
-      <span slot="title">Zibra A/S</span>
-      <span slot="content">Zibra Group (Zibra Holding) er en ejerledet koncern, som består af en række helejede og delvist ejede selskaber inden for en bred vifte af brancher, dog med fokus på IT – og teknologisektoren. Hos Zibra Group udgør et aktivt familieejerskab nøglen til at udvikle vækst-virksomheder med innovative løsninger og en målsætning om at skabe langsigtet værdi og en positiv samfundspåvirkning. Det hele med målet om at skabe danske virksomheder, der kan skabe eksport og derved være hjørnesten i et dansk velfærdssamfund.</span>
+      <span slot="title">Mutos</span>
+      <span slot="content">In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident nulla ea.</span>
     </Moon1Content>
   </HTML>
 
@@ -64,8 +64,8 @@
     pointerEvents="none"
   >
     <Moon2Content>
-      <span slot="title">Zibra A/S</span>
-      <span slot="content">Zibra Group (Zibra Holding) er en ejerledet koncern, som består af en række helejede og delvist ejede selskaber inden for en bred vifte af brancher, dog med fokus på IT – og teknologisektoren. Hos Zibra Group udgør et aktivt familieejerskab nøglen til at udvikle vækst-virksomheder med innovative løsninger og en målsætning om at skabe langsigtet værdi og en positiv samfundspåvirkning. Det hele med målet om at skabe danske virksomheder, der kan skabe eksport og derved være hjørnesten i et dansk velfærdssamfund.</span>
+      <span slot="title">ZibraSport</span>
+      <span slot="content">In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident nulla ea.</span>
     </Moon2Content>
   </HTML>
   
@@ -78,8 +78,8 @@
     pointerEvents="none"
   >
     <Moon3Content>
-      <span slot="title">Zibra A/S</span>
-      <span slot="content">Zibra Group (Zibra Holding) er en ejerledet koncern, som består af en række helejede og delvist ejede selskaber inden for en bred vifte af brancher, dog med fokus på IT – og teknologisektoren. Hos Zibra Group udgør et aktivt familieejerskab nøglen til at udvikle vækst-virksomheder med innovative løsninger og en målsætning om at skabe langsigtet værdi og en positiv samfundspåvirkning. Det hele med målet om at skabe danske virksomheder, der kan skabe eksport og derved være hjørnesten i et dansk velfærdssamfund.</span>
+      <span slot="title">ZyberSafe</span>
+      <span slot="content">In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident nulla ea.</span>
     </Moon3Content>
   </HTML>
 </Planet>

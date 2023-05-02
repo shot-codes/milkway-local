@@ -50,8 +50,8 @@
     pointerEvents="none"
   >
     <Moon1Content>
-      <span slot="title">People Ventures</span>
-      <span slot="content">We back start-ups and founder teams when our operational skillset, experience, and network will bring an original vision to life. From pre-seed to venture to expansive growth with best-in-class founders at every stage of the journey.</span>
+      <span slot="title">InQvation</span>
+      <span slot="content">In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident nulla ea.</span>
     </Moon1Content>
   </HTML>
 
@@ -64,8 +64,8 @@
     pointerEvents="none"
   >
     <Moon2Content>
-      <span slot="title">People Ventures</span>
-      <span slot="content">We back start-ups and founder teams when our operational skillset, experience, and network will bring an original vision to life. From pre-seed to venture to expansive growth with best-in-class founders at every stage of the journey.</span>
+      <span slot="title">People Ventures Fond</span>
+      <span slot="content">In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident nulla ea.</span>
     </Moon2Content>
   </HTML>
   
@@ -78,8 +78,8 @@
     pointerEvents="none"
   >
     <Moon3Content>
-      <span slot="title">People Ventures</span>
-      <span slot="content">We back start-ups and founder teams when our operational skillset, experience, and network will bring an original vision to life. From pre-seed to venture to expansive growth with best-in-class founders at every stage of the journey.</span>
+      <span slot="title">Cortrium</span>
+      <span slot="content">In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident nulla ea.</span>
     </Moon3Content>
   </HTML>
 </Planet>
