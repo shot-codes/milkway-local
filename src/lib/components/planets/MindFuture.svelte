@@ -32,7 +32,7 @@
     slot="content"
     transform
     position={{ y: 0, x: -5.5 }}
-    rotation={{ y: 5 * DEG2RAD }}
+    rotation={{ y: 0 }}
     scale={0.24}
     pointerEvents="none"
   >
@@ -49,7 +49,7 @@
     slot="moon1Content"
     transform
     position={{ y: -5, x: -.5 }}
-    rotation={{ y: -5 * DEG2RAD }}
+    rotation={{ y: 0 }}
     scale={0.24}
     pointerEvents="none"
   >
@@ -63,7 +63,7 @@
     slot="moon2Content"
     transform
     position={{ y: -8, x: -5 }}
-    rotation={{ y: 5 * DEG2RAD }}
+    rotation={{ y: 0 }}
     scale={0.24}
     pointerEvents="none"
   >
@@ -77,7 +77,7 @@
     slot="moon3Content"
     transform
     position={{ y: -11, x: -.5 }}
-    rotation={{ y: 5 * DEG2RAD }}
+    rotation={{ y: 0 }}
     scale={0.24}
     pointerEvents="none"
   >
@@ -91,7 +91,7 @@
     slot="moon4Content"
     transform
     position={{ y: -14, x: -5 }}
-    rotation={{ y: 5 * DEG2RAD }}
+    rotation={{ y: 0 }}
     scale={0.24}
     pointerEvents="none"
   >
@@ -105,7 +105,7 @@
     slot="moon5Content"
     transform
     position={{ y: -17, x: -.5 }}
-    rotation={{ y: 5 * DEG2RAD }}
+    rotation={{ y: 0 }}
     scale={0.24}
     pointerEvents="none"
   >

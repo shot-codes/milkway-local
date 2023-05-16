@@ -22,7 +22,7 @@
     slot="content"
     transform
     position={{ y: 0, x: -5.5 }}
-    rotation={{ y: 5 * DEG2RAD }}
+    rotation={{ y: 0 }}
     scale={0.34}
     pointerEvents="none"
   >
