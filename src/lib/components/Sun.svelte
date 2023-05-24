@@ -52,11 +52,11 @@
 
   useFrame(() => {
     // @ts-expect-error
-    displace.offset[0] += 0.01;
+    displace.offset[0] += 0.1;
     // @ts-expect-error
-    displace.offset[1] += 0.01;
+    displace.offset[1] += 0.1;
     // @ts-expect-error
-    displace.offset[2] += 0.01;
+    displace.offset[2] += 0.1;
   });
 </script>
 
