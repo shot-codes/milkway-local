@@ -25,7 +25,7 @@
     scale={0.34}
     pointerEvents="none"
   >
-    <PlanetContent link="https://zibrapartner.com">
+    <PlanetContent link="https://zibrapartner.com" brand={Brand.ZibraPartner}>
       <span slot="image">
         <img src="/ZibraPartner.jpg" alt="" class="w-80 rounded-lg" />
       </span>

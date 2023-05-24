@@ -29,7 +29,7 @@
     scale={0.24}
     pointerEvents="none"
   >
-    <PlanetContent link="https://people.ventures/">
+    <PlanetContent link="https://people.ventures/" brand={Brand.PeopleVentures}>
       <span slot="image">
         <img src="/PeopleVentures.jpg" alt="" class="w-80 rounded-lg" />
       </span>
@@ -50,7 +50,7 @@
     scale={0.24}
     pointerEvents="none"
   >
-    <MoonContent>
+    <MoonContent brand={Brand.PeopleVentures}>
       <span slot="title">InQvation</span>
       <span slot="content"
         >In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident
@@ -67,7 +67,7 @@
     scale={0.24}
     pointerEvents="none"
   >
-    <MoonContent>
+    <MoonContent brand={Brand.PeopleVentures}>
       <span slot="title">People Ventures Fond</span>
       <span slot="content"
         >In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident
@@ -84,7 +84,7 @@
     scale={0.24}
     pointerEvents="none"
   >
-    <MoonContent>
+    <MoonContent brand={Brand.PeopleVentures}>
       <span slot="title">Cortrium</span>
       <span slot="content"
         >In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident

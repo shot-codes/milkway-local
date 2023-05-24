@@ -31,7 +31,7 @@
     scale={0.24}
     pointerEvents="none"
   >
-    <PlanetContent link="https://mindfuture.com">
+    <PlanetContent link="https://mindfuture.com" brand={Brand.MindFuture}>
       <span slot="image">
         <img src="/Mindfuture.jpg" alt="" class="w-80 rounded-lg" />
       </span>
@@ -57,7 +57,7 @@
     scale={0.24}
     pointerEvents="none"
   >
-    <MoonContent link="https://m2call.com/">
+    <MoonContent link="https://m2call.com/" brand={Brand.MindFuture}>
       <span slot="title">M2Call</span>
       <span slot="content"
         >M2Call utilizes artificial intelligence to create new solutions for the healthcare industry
@@ -75,7 +75,7 @@
     scale={0.24}
     pointerEvents="none"
   >
-    <MoonContent link="https://lifewithartificials.com/">
+    <MoonContent link="https://lifewithartificials.com/" brand={Brand.MindFuture}>
       <span slot="title">Not for profit Life with Artificials</span>
       <span slot="content"
         >Foreningen Life with Artificials blander kunst og tech og starter debatter omkring
@@ -94,7 +94,7 @@
     scale={0.24}
     pointerEvents="none"
   >
-    <MoonContent link="https://lifewithartificials.com/">
+    <MoonContent link="https://lifewithartificials.com/" brand={Brand.MindFuture}>
       <span slot="title">Mindfuture Hub / Food Lab</span>
       <span slot="content"
         >In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident
@@ -111,7 +111,7 @@
     scale={0.24}
     pointerEvents="none"
   >
-    <MoonContent link="https://lifewithartificials.com/">
+    <MoonContent link="https://lifewithartificials.com/" brand={Brand.MindFuture}>
       <span slot="title">MindVision</span>
       <span slot="content"
         >In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident
@@ -128,7 +128,7 @@
     scale={0.24}
     pointerEvents="none"
   >
-    <MoonContent link="https://lifewithartificials.com/">
+    <MoonContent link="https://lifewithartificials.com/" brand={Brand.MindFuture}>
       <span slot="title">Book of Mindsets</span>
       <span slot="content"
         >In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident

@@ -29,7 +29,7 @@
     scale={0.24}
     pointerEvents="none"
   >
-    <PlanetContent>
+    <PlanetContent brand={Brand.ZibraAS}>
       <span slot="image">
         <img src="/ZibraAS.jpg" alt="" class="w-80 rounded-lg" />
       </span>
@@ -53,7 +53,7 @@
     scale={0.24}
     pointerEvents="none"
   >
-    <MoonContent>
+    <MoonContent brand={Brand.ZibraAS}>
       <span slot="title">Mutos</span>
       <span slot="content"
         >In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident
@@ -70,7 +70,7 @@
     scale={0.24}
     pointerEvents="none"
   >
-    <MoonContent>
+    <MoonContent brand={Brand.ZibraAS}>
       <span slot="title">ZibraSport</span>
       <span slot="content"
         >In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident
@@ -87,7 +87,7 @@
     scale={0.24}
     pointerEvents="none"
   >
-    <MoonContent>
+    <MoonContent brand={Brand.ZibraAS}>
       <span slot="title">ZyberSafe</span>
       <span slot="content"
         >In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident

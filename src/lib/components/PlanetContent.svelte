@@ -1,8 +1,34 @@
 <script lang="ts">
+  import { tweened } from "svelte/motion";
+  import { activePlanet, zoomedIn } from "$lib/stores";
+  import type { Brand } from "$lib/utils";
+
   export let link = "";
+  export let brand: Brand;
+
+  const opacity = tweened(0, { duration: 2000 });
+
+  const setOpacity = (newValue: number, delay: number) => {
+    setTimeout(() => {
+      opacity.set(newValue);
+    }, delay);
+  };
+
+  $: {
+    if ($activePlanet == brand) {
+      setOpacity(1, 1500);
+    }
+    if (!$zoomedIn) {
+      setOpacity(0, 0);
+    }
+  }
 </script>
 
-<div class="space-y-32 absolute w-[800px] lg:w-[1200px] flex flex-col items-center">
+<div
+  id="root"
+  style:--opacity={$opacity}
+  class="space-y-32 absolute w-[800px] lg:w-[1200px] flex flex-col items-center"
+>
   <div class="text-center space-y-8">
     <div class="text-sm">
       <slot name="title" />
@@ -44,3 +70,9 @@
     </div>
   </div>
 </div>
+
+<style>
+  #root {
+    opacity: var(--opacity);
+  }
+</style>

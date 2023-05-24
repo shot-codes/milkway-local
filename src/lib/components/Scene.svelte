@@ -22,9 +22,6 @@
   import ZibraPartner from "$lib/components/planets/ZibraPartner.svelte";
   import LactoBio from "$lib/components/planets/LactoBio.svelte";
   import PeopleVentures from "$lib/components/planets/PeopleVentures.svelte";
-  // import Motus from "$lib/components/planets/Motus.svelte";
-  // import ZibraSport from "$lib/components/planets/ZibraSport.svelte";
-  // import Cortrium from "$lib/components/planets/Cortrium.svelte";
 
   let canvas: HTMLCanvasElement;
   let innerHeight: number;
@@ -35,7 +32,7 @@
   let planetRotationY = tweened(0, { duration: 3000 });
   let planetRotationZ = tweened(0, { duration: 3000 });
 
-  const fogOptions = tweened({ near: 35, far: 75 }, { duration: 3000 });
+  const fogOptions = tweened({ near: 35, far: 75 }, { duration: 1000 });
   const { camera } = useThrelte();
 
   $: cameraClone.set($camera);
@@ -124,6 +121,3 @@
 <ZibraPartner position={planetLocations[3]} />
 <LactoBio position={planetLocations[4]} />
 <PeopleVentures position={planetLocations[5]} />
-<!-- <Motus position={planetLocations[6]} />
-<ZibraSport position={planetLocations[7]} />
-<Cortrium position={planetLocations[8]} /> -->

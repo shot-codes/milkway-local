@@ -25,7 +25,7 @@
     scale={0.24}
     pointerEvents="none"
   >
-    <PlanetContent link="https://www.confinze.io/">
+    <PlanetContent link="https://www.confinze.io/" brand={Brand.Confinze}>
       <span slot="image">
         <img src="/Confinze.jpg" alt="" class="w-80 rounded-lg" />
       </span>

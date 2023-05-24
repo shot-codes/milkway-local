@@ -39,7 +39,6 @@
   const textOpacity = tweened(0, { delay: 500, duration: 200 });
   const labelOpacity = tweened(0, { duration: 100 });
   let moonRotation = tweened(0, { duration: 3000 });
-  let showDetails = false;
 
   $: {
     if (moon1) {
@@ -115,13 +114,7 @@
   {/if}
 
   <T.Group position.x={planetOffsetXY[0]} position.y={planetOffsetXY[1]}>
-    <Label
-      radius={$clonedPlanetSize}
-      text={brand}
-      {content}
-      {showDetails}
-      opacity={$labelOpacity}
-    />
+    <Label radius={$clonedPlanetSize} text={brand} {content} opacity={$labelOpacity} />
 
     <T.Mesh {material} scale={$clonedPlanetSize}>
       <T.PointLight intensity={$lightIntensity} />
@@ -145,7 +138,6 @@
         }}
         on:pointerenter={() => {
           if (!$zoomedIn) {
-            showDetails = true;
             labelOpacity.set(1);
             lightIntensity.set(5);
             $clonedPlanetSize = planetSize + 1;
@@ -154,7 +146,6 @@
         on:pointerleave={() => {
           if (!$zoomedIn) {
             labelOpacity.set(0);
-            showDetails = false;
             lightIntensity.set(0);
             $clonedPlanetSize = planetSize;
           }
@@ -218,12 +209,10 @@
     </T.Group>
   </T.Group>
 
-  {#if $zoomedIn && $activePlanet == brand}
-    <slot name="content" />
-    <slot name="moon1Content" />
-    <slot name="moon2Content" />
-    <slot name="moon3Content" />
-    <slot name="moon4Content" />
-    <slot name="moon5Content" />
-  {/if}
+  <slot name="content" />
+  <slot name="moon1Content" />
+  <slot name="moon2Content" />
+  <slot name="moon3Content" />
+  <slot name="moon4Content" />
+  <slot name="moon5Content" />
 </T.Group>
