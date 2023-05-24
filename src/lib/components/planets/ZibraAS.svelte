@@ -17,9 +17,9 @@
   materialIndex={0}
   content="Med fokus på IT – og teknologisektoren"
   moonAmount={3}
-  moon1={{ materialIndex: 0, position: moonLocations(3)[0] }}
-  moon2={{ materialIndex: 0, position: moonLocations(3)[1] }}
-  moon3={{ materialIndex: 0, position: moonLocations(3)[2] }}
+  moon1={{ materialIndex: 0, position: moonLocations(3)[0], label: "Mutos" }}
+  moon2={{ materialIndex: 0, position: moonLocations(3)[1], label: "ZibraSport" }}
+  moon3={{ materialIndex: 0, position: moonLocations(3)[2], label: "ZyberSafe" }}
 >
   <HTML
     slot="content"

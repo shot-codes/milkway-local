@@ -7,10 +7,12 @@
   import { materials, moonMaterials } from "$lib/materials";
   import { zoomedIn, activePlanet } from "$lib/stores";
   import Label from "./Label.svelte";
+  import MoonLabel from "./MoonLabel.svelte";
 
   interface Moon {
     materialIndex: number;
     position: [number, number, number];
+    label: string;
   }
 
   export let position: [number, number, number];
@@ -157,6 +159,7 @@
     <!-- Moons -->
     <T.Group rotation.y={$moonRotation}>
       {#if moon1}
+        <MoonLabel position={$moon1Position} opacity={$labelOpacity} text={moon1.label} />
         <T.Mesh position={$moon1Position} scale={0.05}>
           <T.SphereGeometry args={[12, 64, 64]} />
           <T.MeshStandardMaterial
@@ -167,6 +170,7 @@
         </T.Mesh>
       {/if}
       {#if moon2}
+        <MoonLabel position={$moon2Position} opacity={$labelOpacity} text={moon2.label} />
         <T.Mesh position={$moon2Position} scale={0.05}>
           <T.SphereGeometry args={[12, 64, 64]} />
           <T.MeshStandardMaterial
@@ -177,6 +181,7 @@
         </T.Mesh>
       {/if}
       {#if moon3}
+        <MoonLabel position={$moon3Position} opacity={$labelOpacity} text={moon3.label} />
         <T.Mesh position={$moon3Position} scale={0.05}>
           <T.SphereGeometry args={[12, 64, 64]} />
           <T.MeshStandardMaterial
@@ -187,6 +192,7 @@
         </T.Mesh>
       {/if}
       {#if moon4}
+        <MoonLabel position={$moon4Position} opacity={$labelOpacity} text={moon4.label} />
         <T.Mesh position={$moon4Position} scale={0.05}>
           <T.SphereGeometry args={[12, 64, 64]} />
           <T.MeshStandardMaterial
@@ -197,6 +203,7 @@
         </T.Mesh>
       {/if}
       {#if moon5}
+        <MoonLabel position={$moon5Position} opacity={$labelOpacity} text={moon5.label} />
         <T.Mesh position={$moon5Position} scale={0.05}>
           <T.SphereGeometry args={[12, 64, 64]} />
           <T.MeshStandardMaterial
