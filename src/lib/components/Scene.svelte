@@ -92,7 +92,7 @@
       enablePan={false}
       enableZoom={true}
       autoRotate={true}
-      autoRotateSpeed={.15}
+      autoRotateSpeed={0.15}
       target={$targetPosition}
     />
   {/if}

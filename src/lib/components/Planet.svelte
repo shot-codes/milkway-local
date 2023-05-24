@@ -8,7 +8,7 @@
   import { materials, moonMaterials } from "$lib/materials";
   import { zoomedIn, activePlanet } from "$lib/stores";
   import Label from "./Label.svelte";
-    import { Group } from "three";
+  import { Group } from "three";
 
   interface Moon {
     materialIndex: number;
@@ -112,7 +112,13 @@
   {/if}
 
   <T.Group position.x={planetOffsetXY[0]} position.y={planetOffsetXY[1]}>
-    <Label radius={$clonedPlanetSize} text={brand} content={content} {showDetails} opacity={$labelOpacity} />
+    <Label
+      radius={$clonedPlanetSize}
+      text={brand}
+      {content}
+      {showDetails}
+      opacity={$labelOpacity}
+    />
 
     <T.Mesh {material} scale={$clonedPlanetSize}>
       <T.SphereGeometry args={[1, 64, 64]} />

@@ -18,19 +18,23 @@
   content="Cortrium is a Danish med-tech company"
 >
   <HTML
-  slot="content"
-  transform
-  position={{ y: 0, x: -2.5 }}
-  rotation={{ y: 0 }}
-  scale={0.24}
-  pointerEvents="none"
+    slot="content"
+    transform
+    position={{ y: 0, x: -2.5 }}
+    rotation={{ y: 0 }}
+    scale={0.24}
+    pointerEvents="none"
   >
     <PlanetContent link="https://www.cortrium.com/">
       <span slot="image">
         <img src="/Cortrium.jpg" alt="" class="w-80 rounded-lg" />
       </span>
       <span slot="description">Cortrium is a Danish med-tech company</span>
-      <span slot="content">Cortrium is a Danish med-tech company, producing state of the art medically certified ambulatory ECG monitors. We deliver open and easily accessible devices integrating with both stand alone and cloud-based analysis software.</span>
+      <span slot="content"
+        >Cortrium is a Danish med-tech company, producing state of the art medically certified
+        ambulatory ECG monitors. We deliver open and easily accessible devices integrating with both
+        stand alone and cloud-based analysis software.</span
+      >
     </PlanetContent>
   </HTML>
 </Planet>
