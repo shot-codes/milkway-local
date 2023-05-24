@@ -1,14 +1,9 @@
 <script lang="ts">
   import { HTML } from "@threlte/extras";
-  import { DEG2RAD } from "three/src/math/MathUtils";
   import { Brand, moonLocations } from "$lib/utils";
   import Planet from "$lib/components/Planet.svelte";
   import PlanetContent from "$lib/components/PlanetContent.svelte";
-  import Moon1Content from "$lib/components/Moon1Content.svelte";
-  import Moon2Content from "$lib/components/Moon2Content.svelte";
-  import Moon3Content from "$lib/components/Moon3Content.svelte";
-  import Moon4Content from "$lib/components/Moon4Content.svelte";
-  import Moon5Content from "$lib/components/Moon5Content.svelte";
+  import MoonContent from "$lib/components/MoonContent.svelte";
 
   export let position: [number, number, number];
 </script>
@@ -20,12 +15,12 @@
   planetOffsetXY={[3, -1]}
   titleOffsetXY={[0, 3.8]}
   materialIndex={2}
-  moonAmount={[5]}
-  moon1={{ materialIndex: 0, position: moonLocations([5])[0] }}
-  moon2={{ materialIndex: 0, position: moonLocations([5])[1] }}
-  moon3={{ materialIndex: 0, position: moonLocations([5])[2] }}
-  moon4={{ materialIndex: 0, position: moonLocations([5])[3] }}
-  moon5={{ materialIndex: 0, position: moonLocations([5])[4] }}
+  moonAmount={5}
+  moon1={{ materialIndex: 0, position: moonLocations(5)[0] }}
+  moon2={{ materialIndex: 0, position: moonLocations(5)[1] }}
+  moon3={{ materialIndex: 0, position: moonLocations(5)[2] }}
+  moon4={{ materialIndex: 0, position: moonLocations(5)[3] }}
+  moon5={{ materialIndex: 0, position: moonLocations(5)[4] }}
   content="Fra idé til prototype til færdigt produkt"
 >
   <HTML
@@ -62,14 +57,14 @@
     scale={0.24}
     pointerEvents="none"
   >
-    <Moon1Content link="https://m2call.com/">
+    <MoonContent link="https://m2call.com/">
       <span slot="title">M2Call</span>
       <span slot="content"
         >M2Call utilizes artificial intelligence to create new solutions for the healthcare industry
         by optimizing manual tasks and easing workflow processes. The result is greater mobility for
         healthcare personnel and improved, safer care for patients.</span
       >
-    </Moon1Content>
+    </MoonContent>
   </HTML>
 
   <HTML
@@ -80,7 +75,7 @@
     scale={0.24}
     pointerEvents="none"
   >
-    <Moon2Content link="https://lifewithartificials.com/">
+    <MoonContent link="https://lifewithartificials.com/">
       <span slot="title">Not for profit Life with Artificials</span>
       <span slot="content"
         >Foreningen Life with Artificials blander kunst og tech og starter debatter omkring
@@ -88,7 +83,7 @@
         en sikker, etisk, bæredygtig og brugbar integration af AI for det enkelte meneske ved at
         introducere det 18. verdensmål – Life with Artificials.</span
       >
-    </Moon2Content>
+    </MoonContent>
   </HTML>
 
   <HTML
@@ -99,13 +94,13 @@
     scale={0.24}
     pointerEvents="none"
   >
-    <Moon3Content link="https://lifewithartificials.com/">
+    <MoonContent link="https://lifewithartificials.com/">
       <span slot="title">Mindfuture Hub / Food Lab</span>
       <span slot="content"
         >In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident
         nulla ea.</span
       >
-    </Moon3Content>
+    </MoonContent>
   </HTML>
 
   <HTML
@@ -116,13 +111,13 @@
     scale={0.24}
     pointerEvents="none"
   >
-    <Moon4Content link="https://lifewithartificials.com/">
+    <MoonContent link="https://lifewithartificials.com/">
       <span slot="title">MindVision</span>
       <span slot="content"
         >In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident
         nulla ea.</span
       >
-    </Moon4Content>
+    </MoonContent>
   </HTML>
 
   <HTML
@@ -133,12 +128,12 @@
     scale={0.24}
     pointerEvents="none"
   >
-    <Moon5Content link="https://lifewithartificials.com/">
+    <MoonContent link="https://lifewithartificials.com/">
       <span slot="title">Book of Mindsets</span>
       <span slot="content"
         >In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident
         nulla ea.</span
       >
-    </Moon5Content>
+    </MoonContent>
   </HTML>
 </Planet>

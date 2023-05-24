@@ -1,6 +1,5 @@
 <script lang="ts">
   import { HTML } from "@threlte/extras";
-  import { DEG2RAD } from "three/src/math/MathUtils";
   import { Brand } from "$lib/utils";
   import Planet from "$lib/components/Planet.svelte";
   import PlanetContent from "$lib/components/PlanetContent.svelte";
@@ -11,12 +10,12 @@
 <Planet
   brand={Brand.LactoBio}
   {position}
-  planetSize={0.5}
+  planetSize={1.1}
   planetOffsetXY={[3, -1]}
   titleOffsetXY={[0, 3.8]}
   materialIndex={4}
   content="LactoBio info"
-  moonAmount={[1]}
+  moonAmount={0}
 >
   <HTML
     slot="content"

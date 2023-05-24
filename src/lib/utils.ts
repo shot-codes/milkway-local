@@ -12,14 +12,14 @@ import {
   contentMax,
 } from "$lib/stores";
 
-export const zoomIn = (position: [number, number, number], moonAmount: [number]) => {
+export const zoomIn = (position: [number, number, number], moonAmount: number) => {
   camCopyPosition.set(new Vector3(position[0] * 2, 8, position[2] * 2)); // This is to save current camera position right when you click the button "Move camera"
   cameraPosition.set(get(cameraClone).position.clone(), { duration: 0 }); // Set the cameraPosition to the same value as above so the tweened store starts from there (This is to avoid the jump)
   cameraPosition.set(new Vector3(position[0] * 1.3, position[1] + 1, position[2] * 1.3));
   cameraPositionScrollMax.set(position[1] + 1);
   targetPosition.set(new Vector3(position[0], position[1] + 0.5, position[2]));
   zoomedIn.set(true);
-  contentMax.set(position[1] - moonAmount[0] * 3.5);
+  contentMax.set(position[1] - moonAmount * 3.5);
 };
 
 export const zoomInSun = () => {
@@ -61,8 +61,8 @@ export enum Brand {
 
 export const planetLocations: Array<[number, number, number]> = [];
 const numPlanets = Object.keys(Brand).length;
-const min = -15;
-const max = 15;
+const min = -5;
+const max = 5;
 export const orbitRadius = 20;
 
 for (let i = 0; i < numPlanets; i++) {
@@ -73,9 +73,9 @@ for (let i = 0; i < numPlanets; i++) {
   ];
 }
 
-export const moonLocations = (moonAmount: [number]) => {
+export const moonLocations = (moonAmount: number) => {
   const moonPositions: Array<[number, number, number]> = [];
-  const numMoons = moonAmount[0];
+  const numMoons = moonAmount;
   const minMoon = -3;
   const maxMoon = 3;
   const moonOrbitRadius = 4;

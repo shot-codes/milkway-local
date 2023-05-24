@@ -3,12 +3,10 @@
   import { Text } from "@threlte/extras";
   import { zoomIn, Brand } from "$lib/utils";
   import { onDestroy } from "svelte";
-  import { DEG2RAD } from "three/src/math/MathUtils";
   import { spring, tweened, type Tweened } from "svelte/motion";
   import { materials, moonMaterials } from "$lib/materials";
   import { zoomedIn, activePlanet } from "$lib/stores";
   import Label from "./Label.svelte";
-  import { Group } from "three";
 
   interface Moon {
     materialIndex: number;
@@ -16,7 +14,7 @@
   }
 
   export let position: [number, number, number];
-  export let moonAmount: [number];
+  export let moonAmount: number;
   export let content = "";
   export let planetSize = 1;
   export let materialIndex = 0;
@@ -37,9 +35,9 @@
 
   const clonedPlanetSize = spring(planetSize, { stiffness: 0.03, damping: 0.5 });
   const { material } = materials[materialIndex]();
-  const scale = spring(1, { stiffness: 0.05 });
+  const lightIntensity = tweened(0, { duration: 1000 });
   const textOpacity = tweened(0, { delay: 500, duration: 200 });
-  const labelOpacity = tweened(1, { delay: 500, duration: 100 });
+  const labelOpacity = tweened(0, { duration: 100 });
   let moonRotation = tweened(0, { duration: 3000 });
   let showDetails = false;
 
@@ -68,7 +66,6 @@
       clonedPlanetSize.set(2.75);
     } else {
       textOpacity.set(0);
-      labelOpacity.set(1);
       clonedPlanetSize.set(planetSize);
       if (moon1) {
         $moon1Position = moon1.position;
@@ -85,6 +82,12 @@
       if (moon5) {
         $moon5Position = moon5?.position;
       }
+    }
+  }
+
+  $: {
+    if ($zoomedIn) {
+      lightIntensity.set(0);
     }
   }
 
@@ -121,6 +124,7 @@
     />
 
     <T.Mesh {material} scale={$clonedPlanetSize}>
+      <T.PointLight intensity={$lightIntensity} />
       <T.SphereGeometry args={[1, 64, 64]} />
     </T.Mesh>
 
@@ -140,12 +144,20 @@
           moon5Position.set([-5, -17.3, 0]);
         }}
         on:pointerenter={() => {
-          showDetails = true;
-          $scale = 1.2;
+          if (!$zoomedIn) {
+            showDetails = true;
+            labelOpacity.set(1);
+            lightIntensity.set(5);
+            $clonedPlanetSize = planetSize + 1;
+          }
         }}
         on:pointerleave={() => {
-          showDetails = false;
-          $scale = 1;
+          if (!$zoomedIn) {
+            labelOpacity.set(0);
+            showDetails = false;
+            lightIntensity.set(0);
+            $clonedPlanetSize = planetSize;
+          }
         }}
       />
       <T.SphereGeometry args={[1, 16, 16]} />

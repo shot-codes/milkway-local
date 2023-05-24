@@ -36,7 +36,7 @@
   }
 
   $: {
-    // @ts-expect-error
+    // @ts-expect-error The props on displace are not picked up for some reason.
     displace.strength = $displaceScale;
   }
 
@@ -51,11 +51,10 @@
   });
 
   useFrame(() => {
-    // @ts-expect-error
+    // @ts-expect-error The props on displace are not picked up for some reason.
     displace.offset[0] += 0.01;
-    // @ts-expect-error
     displace.offset[1] += 0.01;
-    // @ts-expect-error
+    // @ts-expect-error The props on displace are not picked up for some reason.
     displace.offset[2] += 0.01;
   });
 </script>

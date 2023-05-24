@@ -6,7 +6,6 @@
   import { fade } from "svelte/transition";
   import Scene from "$lib/components/Scene.svelte";
   import ZoomOutButton from "$lib/components/ZoomOutButton.svelte";
-  import { onMount } from "svelte";
   // import Grain from "$lib/components/Grain.svelte";
 
   let audio: HTMLAudioElement;
@@ -36,7 +35,7 @@
   }
 </script>
 
-{#if showLoadingPage}
+{#if showLoadingPage && !dev}
   <div
     transition:fade={{ duration: 800 }}
     class="bg-black/90 fixed inset-0 z-50 flex items-center justify-center"
