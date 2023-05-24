@@ -8,6 +8,7 @@
   import { zoomedIn, activePlanet } from "$lib/stores";
   import Label from "./Label.svelte";
   import MoonLabel from "./MoonLabel.svelte";
+  import { Color } from "three";
 
   interface Moon {
     materialIndex: number;
@@ -37,6 +38,7 @@
 
   const clonedPlanetSize = spring(planetSize, { stiffness: 0.03, damping: 0.5 });
   const { material } = materials[materialIndex]();
+  const emissiveColor = spring([0, 0, 0]);
   const lightIntensity = tweened(0, { duration: 1000 });
   const textOpacity = tweened(0, { delay: 500, duration: 200 });
   const labelOpacity = tweened(0, { duration: 100 });
@@ -84,6 +86,11 @@
         $moon5Position = moon5?.position;
       }
     }
+  }
+
+  $: {
+    // @ts-expect-error The emissive prop isn't picked up by ts
+    material.emissive = new Color($emissiveColor[0], $emissiveColor[1], $emissiveColor[2]);
   }
 
   $: {
@@ -142,6 +149,7 @@
           if (!$zoomedIn) {
             labelOpacity.set(1);
             lightIntensity.set(5);
+            emissiveColor.set([0.1, 0.1, 0.1]);
             $clonedPlanetSize = planetSize + 1;
           }
         }}
@@ -149,6 +157,7 @@
           if (!$zoomedIn) {
             labelOpacity.set(0);
             lightIntensity.set(0);
+            emissiveColor.set([0, 0, 0]);
             $clonedPlanetSize = planetSize;
           }
         }}
