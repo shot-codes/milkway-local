@@ -2,7 +2,7 @@
   import { T, useFrame, useThrelte, InteractiveObject } from "@threlte/core";
   import { sunMaterial } from "$lib/materials";
   const { material, displace } = sunMaterial();
-  import { zoomedIn } from "$lib/stores";
+  import { activePlanet, zoomedIn } from "$lib/stores";
   import { zoomInSun } from "$lib/utils";
   import { tweened } from "svelte/motion";
   import { onMount } from "svelte";
@@ -18,7 +18,7 @@
   let texture: VideoTexture;
 
   $: {
-    if ($zoomedIn) {
+    if ($zoomedIn && $activePlanet == "sun") {
       // Show video
       displaceScale.set(0);
       if (video) {
