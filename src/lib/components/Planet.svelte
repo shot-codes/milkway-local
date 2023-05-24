@@ -64,6 +64,7 @@
 
   $: {
     if ($zoomedIn && $activePlanet == brand) {
+      emissiveColor.set([0, 0, 0]);
       textOpacity.set(1);
       labelOpacity.set(0);
       clonedPlanetSize.set(2.75);

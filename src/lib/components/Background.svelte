@@ -12,9 +12,6 @@
   });
 </script>
 
-<!-- <Fog color="black" near={50} far={120} /> -->
-<T.AmbientLight intensity={0.3} />
-
 <T.Group rotation.x={90 * DEG2RAD} rotation.y={180 * DEG2RAD}>
   <T.Mesh material={backgroundMaterial} scale={1000}>
     <T.SphereGeometry />
