@@ -34,7 +34,7 @@
   let planetRotationZ = tweened(0, { duration: 3000 });
   let ferrariRotation = 0;
 
-  const fogOptions = tweened({ near: 35, far: 75 }, { duration: 1000 });
+  const fogOptions = tweened({ near: 35, far: 75 }, { duration: 1200 });
   const { camera } = useThrelte();
 
   $: cameraClone.set($camera);
@@ -104,7 +104,7 @@
       enableDamping
       enableRotate={true}
       enablePan={false}
-      enableZoom={true}
+      enableZoom={false}
       autoRotate={true}
       autoRotateSpeed={0.15}
       target={$targetPosition}

@@ -77,7 +77,7 @@ export const moonLocations = (moonAmount: number) => {
   const moonPositions: Array<[number, number, number]> = [];
   const numMoons = moonAmount;
   const minMoon = -3;
-  const maxMoon = 3;
+  const maxMoon = 1;
   const moonOrbitRadius = 4;
 
   for (let i = 0; i < numMoons; i++) {
