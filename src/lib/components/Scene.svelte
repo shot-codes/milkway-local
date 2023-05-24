@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { tweened } from "svelte/motion";
   import { PerspectiveCamera, OrbitControls, useThrelte, T, Fog, useFrame } from "@threlte/core";
+  import { GLTF, Float } from "@threlte/extras";
   import { Vector3 } from "three";
   import { DEG2RAD } from "three/src/math/MathUtils";
   import {
@@ -31,6 +32,7 @@
   let planetRotationX = tweened(0, { duration: 3000 });
   let planetRotationY = tweened(0, { duration: 3000 });
   let planetRotationZ = tweened(0, { duration: 3000 });
+  let ferrariRotation = 0;
 
   const fogOptions = tweened({ near: 35, far: 75 }, { duration: 1000 });
   const { camera } = useThrelte();
@@ -47,6 +49,7 @@
   }
 
   useFrame(() => {
+    ferrariRotation -= 0.001;
     if (!$zoomedIn) {
       $planetRotationX += 0.2;
       $planetRotationY += 0.1;
@@ -121,3 +124,11 @@
 <ZibraPartner position={planetLocations[3]} />
 <LactoBio position={planetLocations[4]} />
 <PeopleVentures position={planetLocations[5]} />
+
+<T.Group rotation.y={ferrariRotation}>
+  <T.Group position.x={10} rotation.y={180 * DEG2RAD}>
+    <Float speed={3} floatIntensity={3}>
+      <GLTF url={"/models/ferrari_812_superfast.glb"} scale={50} />
+    </Float>
+  </T.Group>
+</T.Group>
