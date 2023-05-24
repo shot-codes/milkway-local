@@ -28,6 +28,7 @@
         scale={10}
         font={"fonts/space.woff"}
         fillOpacity={opacity}
+        ignorePointer={true}
       />
     </T.Group>
     <T.Group position={[0, radius + 0.2, 0]}>
@@ -38,6 +39,7 @@
         scale={6}
         font={"fonts/space.woff"}
         fillOpacity={opacity}
+        ignorePointer={true}
       />
     </T.Group>
   </T.Group>

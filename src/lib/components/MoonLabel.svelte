@@ -27,6 +27,7 @@
         scale={5}
         font={"fonts/space.woff"}
         fillOpacity={opacity}
+        ignorePointer={true}
       />
     </T.Group>
   </T.Group>
