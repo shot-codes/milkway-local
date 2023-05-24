@@ -59,7 +59,11 @@
 
   $: {
     windowAspect = innerWidth / innerHeight;
-    fov = 70 / windowAspect + 20;
+    if (windowAspect < 1) {
+      fov = 70 / windowAspect;
+    } else {
+      fov = 70 / windowAspect + 20;
+    }
   }
 
   onMount(() => {
