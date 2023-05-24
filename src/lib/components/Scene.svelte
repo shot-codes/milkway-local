@@ -58,8 +58,8 @@
   });
 
   $: {
-    windowAspect = innerWidth/innerHeight;
-    fov = 70/windowAspect + 20;
+    windowAspect = innerWidth / innerHeight;
+    fov = 70 / windowAspect + 20;
   }
 
   onMount(() => {
