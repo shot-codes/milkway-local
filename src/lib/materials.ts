@@ -31,7 +31,7 @@ export class CustomLayerMaterial extends LayerMaterial {
 
 export const sunMaterial = () => {
   const displace = new Displace({
-    strength: 6,
+    strength: 5,
     scale: 0.1,
     type: "perlin",
     offset: [0.09189000000357626, 0, 0],
@@ -43,7 +43,7 @@ export const sunMaterial = () => {
     colorB: new Color("#d97706"),
     colorC: new Color("#b91c1c"),
     colorD: new Color("#ef4444"),
-    alpha: .6,
+    alpha: 0.6,
     scale: 20,
     type: "curl",
     offset: [0, 0, 0],
@@ -61,7 +61,7 @@ export const sunMaterial = () => {
       new Gradient({
         colorA: new Color("#ea580c"),
         colorB: new Color("#ff0000"),
-        alpha: .4,
+        alpha: 0.4,
         contrast: 1,
         start: 1,
         end: -5,

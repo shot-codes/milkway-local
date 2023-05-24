@@ -31,7 +31,10 @@
         <img src="/LactoBio.jpg" alt="" class="w-80 rounded-lg" />
       </span>
       <span slot="description">LactoBio info</span>
-      <span slot="content">In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident nulla ea.</span>
+      <span slot="content"
+        >In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident
+        nulla ea.</span
+      >
     </PlanetContent>
   </HTML>
 </Planet>

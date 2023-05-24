@@ -37,21 +37,28 @@
         <img src="/PeopleVentures.jpg" alt="" class="w-80 rounded-lg" />
       </span>
       <span slot="description">From pre-seed to venture to expansive growth</span>
-      <span slot="content">We back start-ups and founder teams when our operational skillset, experience, and network will bring an original vision to life. From pre-seed to venture to expansive growth with best-in-class founders at every stage of the journey.</span>
+      <span slot="content"
+        >We back start-ups and founder teams when our operational skillset, experience, and network
+        will bring an original vision to life. From pre-seed to venture to expansive growth with
+        best-in-class founders at every stage of the journey.</span
+      >
     </PlanetContent>
   </HTML>
 
   <HTML
     slot="moon1Content"
     transform
-    position={{ y: -5, x: -.5 }}
+    position={{ y: -5, x: -0.5 }}
     rotation={{ y: 0 }}
     scale={0.24}
     pointerEvents="none"
   >
     <Moon1Content>
       <span slot="title">InQvation</span>
-      <span slot="content">In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident nulla ea.</span>
+      <span slot="content"
+        >In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident
+        nulla ea.</span
+      >
     </Moon1Content>
   </HTML>
 
@@ -65,21 +72,27 @@
   >
     <Moon2Content>
       <span slot="title">People Ventures Fond</span>
-      <span slot="content">In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident nulla ea.</span>
+      <span slot="content"
+        >In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident
+        nulla ea.</span
+      >
     </Moon2Content>
   </HTML>
-  
+
   <HTML
     slot="moon3Content"
     transform
-    position={{ y: -11, x: -.5 }}
+    position={{ y: -11, x: -0.5 }}
     rotation={{ y: 0 }}
     scale={0.24}
     pointerEvents="none"
   >
     <Moon3Content>
       <span slot="title">Cortrium</span>
-      <span slot="content">In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident nulla ea.</span>
+      <span slot="content"
+        >In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident
+        nulla ea.</span
+      >
     </Moon3Content>
   </HTML>
 </Planet>

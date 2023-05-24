@@ -19,7 +19,7 @@ export const zoomIn = (position: [number, number, number], moonAmount: [number])
   cameraPositionScrollMax.set(position[1] + 1);
   targetPosition.set(new Vector3(position[0], position[1] + 0.5, position[2]));
   zoomedIn.set(true);
-  contentMax.set(position[1] - (moonAmount[0] * 3.5));
+  contentMax.set(position[1] - moonAmount[0] * 3.5);
 };
 
 export const zoomInSun = () => {
@@ -39,6 +39,7 @@ export const zoomInSun = () => {
     )
   );
   zoomedIn.set(true);
+  activePlanet.set("sun");
 };
 
 export const zoomOut = () => {
@@ -70,7 +71,6 @@ for (let i = 0; i < numPlanets; i++) {
     Math.floor(Math.random() * (max - min + 1) + min),
     orbitRadius * Math.sin(((i + 1) * 2 * Math.PI) / numPlanets),
   ];
-
 }
 
 export const moonLocations = (moonAmount: [number]) => {
@@ -78,7 +78,7 @@ export const moonLocations = (moonAmount: [number]) => {
   const numMoons = moonAmount[0];
   const minMoon = -3;
   const maxMoon = 3;
-  const moonOrbitRadius = 4
+  const moonOrbitRadius = 4;
 
   for (let i = 0; i < numMoons; i++) {
     moonPositions[i] = [
@@ -89,4 +89,4 @@ export const moonLocations = (moonAmount: [number]) => {
   }
 
   return moonPositions;
-}
+};

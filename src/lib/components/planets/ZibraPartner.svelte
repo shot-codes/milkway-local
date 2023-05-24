@@ -31,7 +31,10 @@
         <img src="/ZibraPartner.jpg" alt="" class="w-80 rounded-lg" />
       </span>
       <span slot="description">Få styr på finanserne i små virksomheder</span>
-      <span slot="content">Et spin-off af servicebehovet i de mange selskaber har været en finansfuktion, der kan hjælpe med at få styr på finanserne i små virksomheder. Det er blevet til Confinze.</span>
+      <span slot="content"
+        >Et spin-off af servicebehovet i de mange selskaber har været en finansfuktion, der kan
+        hjælpe med at få styr på finanserne i små virksomheder. Det er blevet til Confinze.</span
+      >
     </PlanetContent>
   </HTML>
 </Planet>
