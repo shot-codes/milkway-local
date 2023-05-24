@@ -27,6 +27,10 @@
   // import Cortrium from "$lib/components/planets/Cortrium.svelte";
 
   let canvas: HTMLCanvasElement;
+  let innerHeight: number;
+  let innerWidth: number;
+  let windowAspect: number;
+  let fov = 50;
   let planetRotationX = tweened(0, { duration: 3000 });
   let planetRotationY = tweened(0, { duration: 3000 });
   let planetRotationZ = tweened(0, { duration: 3000 });
@@ -53,10 +57,14 @@
     }
   });
 
+  $: {
+    windowAspect = innerWidth/innerHeight;
+    fov = 70/windowAspect + 20;
+  }
+
   onMount(() => {
     canvas = document.getElementsByTagName("canvas")[0];
     canvas.addEventListener("wheel", (e: WheelEvent) => {
-      console.log($camera.position.y);
       if ($zoomedIn) {
         if ($camera.position.y >= $cameraPositionScrollMax && e.deltaY < 0) return;
         if ($camera.position.y <= $contentMax && e.deltaY > 0) return;
@@ -75,7 +83,9 @@
   });
 </script>
 
-<PerspectiveCamera position={$cameraPosition} fov={50}>
+<svelte:window bind:innerHeight bind:innerWidth />
+
+<PerspectiveCamera position={$cameraPosition} {fov}>
   {#if $zoomedIn}
     <OrbitControls
       enableRotate={false}
