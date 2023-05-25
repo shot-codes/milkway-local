@@ -127,7 +127,7 @@
 <LactoBio position={planetLocations[4]} />
 <PeopleVentures position={planetLocations[5]} />
 
-<T.Group rotation.y={ferrariRotation} rotation.x={acceleration}>
+<T.Group rotation.y={ferrariRotation} rotation.x={-acceleration}>
   <T.Group position.x={10} rotation.y={180 * DEG2RAD}>
     <Float speed={3} floatIntensity={3}>
       <GLTF url={"/models/ferrari_812_superfast.glb"} scale={50} interactive on:click={() => {
