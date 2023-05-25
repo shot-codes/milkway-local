@@ -17,7 +17,7 @@ export const zoomIn = (position: [number, number, number], moonAmount: number) =
   cameraPosition.set(get(cameraClone).position.clone(), { duration: 0 }); // Set the cameraPosition to the same value as above so the tweened store starts from there (This is to avoid the jump)
   cameraPosition.set(new Vector3(position[0] * 1.3, position[1] + 1, position[2] * 1.3));
   cameraPositionScrollMax.set(position[1] + 1);
-  targetPosition.set(new Vector3(position[0], position[1] + 0.5, position[2]));
+  targetPosition.set(new Vector3(position[0], position[1] + 1, position[2]));
   zoomedIn.set(true);
   contentMax.set(position[1] - moonAmount * 3.5);
 };

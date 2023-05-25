@@ -4,7 +4,7 @@
 </script>
 
 {#if $zoomedIn}
-  <button class="absolute top-10 left-10 rounded-full p-2 ring ring-white z-50" on:click={zoomOut}>
+  <button class="absolute top-10 left-10 rounded-full p-2 ring ring-white z-30" on:click={zoomOut}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
