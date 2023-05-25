@@ -38,11 +38,11 @@
   let innerWidth: number;
   let windowAspect: number;
   let fov = 50;
-  let planetRotationX = tweened(0, { duration: 3000 });
-  let planetRotationY = tweened(0, { duration: 3000 });
-  let planetRotationZ = tweened(0, { duration: 3000 });
+  const planetRotationX = tweened(0, { duration: 3000 });
+  const planetRotationY = tweened(0, { duration: 3000 });
+  const planetRotationZ = tweened(0, { duration: 3000 });
   let ferrariRotation = 0;
-  let ferrariAcceleration = tweened(0.001, { duration: 3000 });
+  const ferrariAcceleration = tweened(0.001, { duration: 3000 });
 
   const fogOptions = tweened({ near: 35, far: 75 }, { duration: 1200 });
   const { camera } = useThrelte();
@@ -136,6 +136,7 @@
 <LactoBio position={planetLocations[4]} />
 <PeopleVentures position={planetLocations[5]} />
 
+<!-- Ferrari -->
 <T.Group rotation.y={ferrariRotation} rotation.x={-$ferrariAcceleration * 2}>
   <T.Group position.x={10} rotation.y={90 * DEG2RAD}>
     <Float speed={3} floatIntensity={3}>

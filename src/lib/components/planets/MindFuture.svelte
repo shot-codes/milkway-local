@@ -128,7 +128,7 @@
     scale={0.24}
     pointerEvents="none"
   >
-    <MoonContent link="https://lifewithartificials.com/" brand={Brand.MindFuture}>
+    <MoonContent link="http://bookofmindsets.dk/" brand={Brand.MindFuture}>
       <span slot="title">Book of Mindsets</span>
       <span slot="content"
         >In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident
