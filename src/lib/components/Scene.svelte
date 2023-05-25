@@ -136,7 +136,7 @@
 <LactoBio position={planetLocations[4]} />
 <PeopleVentures position={planetLocations[5]} />
 
-<T.Group rotation.y={ferrariRotation}>
+<T.Group rotation.y={ferrariRotation} rotation.x={-$ferrariAcceleration * 2}>
   <T.Group position.x={10} rotation.y={90 * DEG2RAD}>
     <Float speed={3} floatIntensity={3}>
       <T.Group>
