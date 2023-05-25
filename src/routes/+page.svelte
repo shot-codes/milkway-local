@@ -35,7 +35,7 @@
   }
 </script>
 
-{#if showLoadingPage && !dev}
+{#if showLoadingPage}
   <div
     transition:fade={{ duration: 800 }}
     class="bg-black/90 fixed inset-0 z-50 flex items-center justify-center"

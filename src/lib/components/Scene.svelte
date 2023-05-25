@@ -1,9 +1,18 @@
 <script lang="ts">
+  import { dev } from "$app/environment";
   import { onMount } from "svelte";
   import { tweened } from "svelte/motion";
-  import { PerspectiveCamera, OrbitControls, useThrelte, T, Fog, useFrame, InteractiveObject } from "@threlte/core";
+  import {
+    PerspectiveCamera,
+    OrbitControls,
+    useThrelte,
+    T,
+    Fog,
+    useFrame,
+    InteractiveObject,
+  } from "@threlte/core";
   import { GLTF, Float } from "@threlte/extras";
-  import { Mesh, Vector3 } from "three";
+  import { Vector3 } from "three";
   import { DEG2RAD } from "three/src/math/MathUtils";
   import {
     cameraClone,
@@ -33,7 +42,7 @@
   let planetRotationY = tweened(0, { duration: 3000 });
   let planetRotationZ = tweened(0, { duration: 3000 });
   let ferrariRotation = 0;
-  let acceleration = 0;
+  let ferrariAcceleration = tweened(0.001, { duration: 3000 });
 
   const fogOptions = tweened({ near: 35, far: 75 }, { duration: 1200 });
   const { camera } = useThrelte();
@@ -50,7 +59,7 @@
   }
 
   useFrame(() => {
-    ferrariRotation -= 0.001;
+    ferrariRotation -= $ferrariAcceleration;
     if (!$zoomedIn) {
       $planetRotationX += 0.2;
       $planetRotationY += 0.1;
@@ -105,7 +114,7 @@
       enableDamping
       enableRotate={true}
       enablePan={false}
-      enableZoom={false}
+      enableZoom={dev ? true : false}
       autoRotate={true}
       autoRotateSpeed={0.15}
       target={$targetPosition}
@@ -127,34 +136,26 @@
 <LactoBio position={planetLocations[4]} />
 <PeopleVentures position={planetLocations[5]} />
 
-<T.Group rotation.y={ferrariRotation} rotation.x={-acceleration}>
-  <T.Group position.x={10} rotation.y={180 * DEG2RAD}>
+<T.Group rotation.y={ferrariRotation}>
+  <T.Group position.x={10} rotation.y={90 * DEG2RAD}>
     <Float speed={3} floatIntensity={3}>
-      <GLTF url={"/models/ferrari_812_superfast.glb"} scale={50} interactive on:click={() => {
-        let accelerationSpeed = 0.005;
-        let drivingTime = 12;
-
-        // Make it into seconds
-        drivingTime = drivingTime * 1000;
-
-        let intervalStart = setInterval(() => {
-          acceleration += accelerationSpeed;
-          ferrariRotation -= acceleration;
-        }, 50)
-
-        setTimeout(() => {
-          clearInterval(intervalStart);
-
-          let intervalEnd = setInterval(() => {
-            acceleration -= accelerationSpeed;
-            ferrariRotation -= acceleration;
-          }, 50);
-
-          setTimeout(() => {
-            clearInterval(intervalEnd);
-          }, drivingTime);
-        }, drivingTime);
-      }} />
+      <T.Group>
+        <GLTF url={"/models/ferrari/scene.gltf"} useDraco scale={1} ignorePointer />
+        <T.Mesh let:ref position.y={0.4}>
+          <InteractiveObject
+            object={ref}
+            interactive
+            on:click={() => {
+              ferrariAcceleration.set(0.2);
+              setTimeout(() => {
+                ferrariAcceleration.set(0.001);
+              }, 10000);
+            }}
+          />
+          <T.BoxGeometry args={[2.4, 0.7, 1.3]} />
+          <T.MeshBasicMaterial transparent opacity={0} />
+        </T.Mesh>
+      </T.Group>
     </Float>
   </T.Group>
 </T.Group>
