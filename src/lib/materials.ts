@@ -94,8 +94,8 @@ export const backgroundMaterial = new LayerMaterial({
   layers: [
     noise,
     new Gradient({
-      colorA: new Color("#000000"),
-      colorB: new Color("#b400f5"),
+      colorA: new Color("#000010"),
+      colorB: new Color("#0000f5"),
       alpha: 0.2,
       contrast: 1,
       start: 1,
@@ -106,7 +106,7 @@ export const backgroundMaterial = new LayerMaterial({
     }),
     new Gradient({
       colorA: new Color("#060404"),
-      colorB: new Color("#ff5900"),
+      colorB: new Color("#aa00ff"),
       alpha: 0.1,
       contrast: 1,
       start: 1,
