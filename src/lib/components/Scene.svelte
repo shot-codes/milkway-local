@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { tweened } from "svelte/motion";
-  import { PerspectiveCamera, OrbitControls, useThrelte, T, Fog, useFrame } from "@threlte/core";
+  import { PerspectiveCamera, OrbitControls, useThrelte, T, Fog, useFrame, InteractiveObject } from "@threlte/core";
   import { GLTF, Float } from "@threlte/extras";
-  import { Vector3 } from "three";
+  import { Mesh, Vector3 } from "three";
   import { DEG2RAD } from "three/src/math/MathUtils";
   import {
     cameraClone,
@@ -33,6 +33,7 @@
   let planetRotationY = tweened(0, { duration: 3000 });
   let planetRotationZ = tweened(0, { duration: 3000 });
   let ferrariRotation = 0;
+  let acceleration = 0;
 
   const fogOptions = tweened({ near: 35, far: 75 }, { duration: 1200 });
   const { camera } = useThrelte();
@@ -126,10 +127,34 @@
 <LactoBio position={planetLocations[4]} />
 <PeopleVentures position={planetLocations[5]} />
 
-<T.Group rotation.y={ferrariRotation}>
+<T.Group rotation.y={ferrariRotation} rotation.x={acceleration}>
   <T.Group position.x={10} rotation.y={180 * DEG2RAD}>
     <Float speed={3} floatIntensity={3}>
-      <GLTF url={"/models/ferrari_812_superfast.glb"} scale={50} />
+      <GLTF url={"/models/ferrari_812_superfast.glb"} scale={50} interactive on:click={() => {
+        let accelerationSpeed = 0.005;
+        let drivingTime = 12;
+
+        // Make it into seconds
+        drivingTime = drivingTime * 1000;
+
+        let intervalStart = setInterval(() => {
+          acceleration += accelerationSpeed;
+          ferrariRotation -= acceleration;
+        }, 50)
+
+        setTimeout(() => {
+          clearInterval(intervalStart);
+
+          let intervalEnd = setInterval(() => {
+            acceleration -= accelerationSpeed;
+            ferrariRotation -= acceleration;
+          }, 50);
+
+          setTimeout(() => {
+            clearInterval(intervalEnd);
+          }, drivingTime);
+        }, drivingTime);
+      }} />
     </Float>
   </T.Group>
 </T.Group>
