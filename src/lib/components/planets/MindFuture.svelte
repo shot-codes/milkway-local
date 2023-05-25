@@ -94,7 +94,7 @@
     scale={0.24}
     pointerEvents="none"
   >
-    <MoonContent link="https://lifewithartificials.com/" brand={Brand.MindFuture}>
+    <MoonContent link="https://instagram.com/mindfuture_hub?igshid=MmJiY2I4NDBkZg==" brand={Brand.MindFuture}>
       <span slot="title">Mindfuture Hub / Food Lab</span>
       <span slot="content"
         >In non anim minim dolore incididunt nulla anim ad consectetur ullamco quis nostrud proident
