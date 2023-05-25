@@ -16,7 +16,7 @@
   titleOffsetXY={[0, 3.8]}
   materialIndex={2}
   moonAmount={5}
-  moon1={{ materialIndex: 0, position: moonLocations(5)[0], label: "M2Call" }}
+  moon1={{ materialIndex: 1, position: moonLocations(5)[0], label: "M2Call" }}
   moon2={{ materialIndex: 0, position: moonLocations(5)[1], label: "Life with Artificials" }}
   moon3={{ materialIndex: 0, position: moonLocations(5)[2], label: "Mindfuture Hub / Food Lab" }}
   moon4={{ materialIndex: 0, position: moonLocations(5)[3], label: "MindVision" }}

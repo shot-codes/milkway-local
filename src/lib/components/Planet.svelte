@@ -173,7 +173,7 @@
         <T.Mesh position={$moon1Position} scale={0.05}>
           <T.SphereGeometry args={[12, 64, 64]} />
           <T.MeshStandardMaterial
-            map={moonMaterials[moon1.materialIndex].color}
+            map={moonMaterials[moon1.materialIndex].diffuse}
             normalMap={moonMaterials[moon1.materialIndex].normal}
             displacementMap={moonMaterials[moon1.materialIndex].displace}
           />
@@ -184,7 +184,7 @@
         <T.Mesh position={$moon2Position} scale={0.05}>
           <T.SphereGeometry args={[12, 64, 64]} />
           <T.MeshStandardMaterial
-            map={moonMaterials[moon2.materialIndex].color}
+            map={moonMaterials[moon2.materialIndex].diffuse}
             normalMap={moonMaterials[moon2.materialIndex].normal}
             displacementMap={moonMaterials[moon2.materialIndex].displace}
           />
@@ -195,7 +195,7 @@
         <T.Mesh position={$moon3Position} scale={0.05}>
           <T.SphereGeometry args={[12, 64, 64]} />
           <T.MeshStandardMaterial
-            map={moonMaterials[moon3.materialIndex].color}
+            map={moonMaterials[moon3.materialIndex].diffuse}
             normalMap={moonMaterials[moon3.materialIndex].normal}
             displacementMap={moonMaterials[moon3.materialIndex].displace}
           />
@@ -206,7 +206,7 @@
         <T.Mesh position={$moon4Position} scale={0.05}>
           <T.SphereGeometry args={[12, 64, 64]} />
           <T.MeshStandardMaterial
-            map={moonMaterials[moon4.materialIndex].color}
+            map={moonMaterials[moon4.materialIndex].diffuse}
             normalMap={moonMaterials[moon4.materialIndex].normal}
             displacementMap={moonMaterials[moon4.materialIndex].displace}
           />
@@ -217,7 +217,7 @@
         <T.Mesh position={$moon5Position} scale={0.05}>
           <T.SphereGeometry args={[12, 64, 64]} />
           <T.MeshStandardMaterial
-            map={moonMaterials[moon5.materialIndex].color}
+            map={moonMaterials[moon5.materialIndex].diffuse}
             normalMap={moonMaterials[moon5.materialIndex].normal}
             displacementMap={moonMaterials[moon5.materialIndex].displace}
           />

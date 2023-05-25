@@ -1,10 +1,11 @@
 <script lang="ts">
   import { T, useFrame, useThrelte, InteractiveObject } from "@threlte/core";
+  import { Float, GLTF } from "@threlte/extras";
   import { sunMaterial } from "$lib/materials";
   const { material, displace } = sunMaterial();
   import { activePlanet, zoomedIn } from "$lib/stores";
   import { zoomInSun } from "$lib/utils";
-  import { tweened } from "svelte/motion";
+  import { spring, tweened } from "svelte/motion";
   import { onMount } from "svelte";
   import { VideoTexture, Group, Vector3 } from "three";
   import { DEG2RAD } from "three/src/math/MathUtils";
@@ -13,6 +14,7 @@
 
   const displaceScale = tweened(5);
   const videoOpacity = tweened(0);
+  const playPauseButtonScale = spring(1);
   let videoGroup: Group;
   let video: HTMLVideoElement;
   let texture: VideoTexture;
@@ -46,7 +48,7 @@
   }
 
   onMount(() => {
-    video = document.getElementById("mf_video") as HTMLVideoElement;
+    video = document.getElementById("zg_video") as HTMLVideoElement;
     texture = new VideoTexture(video);
   });
 
@@ -89,4 +91,38 @@
     <T.SphereGeometry args={[6.01, 64, 64]} />
     <T.MeshBasicMaterial map={texture} transparent={true} opacity={$videoOpacity} />
   </T.Mesh>
+
+  <!-- Projector -->
+  <Float>
+    <T.Group position={[-4, -2, 7]} rotation.y={150 * DEG2RAD}>
+      <GLTF
+        url={"/models/projector/scene.gltf"}
+        useDraco
+        scale={1}
+        ignorePointer
+        visible={$zoomedIn}
+      />
+    </T.Group>
+  </Float>
+
+  <!-- Playback Controls -->
+  <Float>
+    <T.Mesh let:ref position={[4, -2, 7]} scale={$playPauseButtonScale} visible={$zoomedIn}>
+      <InteractiveObject
+        object={ref}
+        interactive
+        on:pointerenter={() => playPauseButtonScale.set(1.2)}
+        on:pointerleave={() => playPauseButtonScale.set(1)}
+        on:click={() => {
+          if (video.paused) {
+            video.play();
+          } else {
+            video.pause();
+          }
+        }}
+      />
+      <T.BoxGeometry args={[0.5, 0.5, 0.5]} />
+      <T.MeshStandardMaterial color="#303060" />
+    </T.Mesh>
+  </Float>
 </T.Group>

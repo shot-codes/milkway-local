@@ -1,4 +1,4 @@
-import { Color, BackSide, Vector2, RepeatWrapping } from "three";
+import { Color, BackSide, Vector2, RepeatWrapping, Texture } from "three";
 import { LayerMaterial, Fresnel, Noise, Gradient, Displace, Depth } from "lamina/vanilla";
 import { useTexture } from "@threlte/core";
 
@@ -458,19 +458,37 @@ export const materials = [
   material9,
 ];
 
-const mf1Color = useTexture("/textures/Moons/snow-diffuse.png");
-const mf1Normal = useTexture("/textures/Moons/snow-normal.png");
-const mf1Displace = useTexture("/textures/Moons/snow-height.png");
+const moonMaterialsPre: Array<{ diffuse: Texture; normal: Texture; displace: Texture }> = [];
+const moonMaterialPaths = [
+  {
+    diffuse: "snow/snow-diffuse.png",
+    normal: "snow/snow-normal.png",
+    displace: "snow/snow-displace.png",
+  },
+  {
+    diffuse: "leaf/leaf-diffuse.png",
+    normal: "leaf/leaf-normal.png",
+    displace: "leaf/leaf-displace.png",
+  },
+];
 
-mf1Color.wrapS = RepeatWrapping;
-mf1Color.wrapT = RepeatWrapping;
-mf1Normal.wrapS = RepeatWrapping;
-mf1Normal.wrapT = RepeatWrapping;
-mf1Displace.wrapS = RepeatWrapping;
-mf1Displace.wrapT = RepeatWrapping;
+moonMaterialPaths.forEach((paths) => {
+  const diffuse = useTexture(`/textures/Moons/${paths.diffuse}`);
+  const normal = useTexture(`/textures/Moons/${paths.normal}`);
+  const displace = useTexture(`/textures/Moons/${paths.displace}`);
 
-mf1Color.repeat = new Vector2(2, 2);
-mf1Normal.repeat = new Vector2(2, 2);
-mf1Displace.repeat = new Vector2(2, 2);
+  diffuse.wrapS = RepeatWrapping;
+  diffuse.wrapT = RepeatWrapping;
+  normal.wrapS = RepeatWrapping;
+  normal.wrapT = RepeatWrapping;
+  displace.wrapS = RepeatWrapping;
+  displace.wrapT = RepeatWrapping;
 
-export const moonMaterials = [{ color: mf1Color, normal: mf1Normal, displace: mf1Displace }];
+  diffuse.repeat = new Vector2(2, 2);
+  normal.repeat = new Vector2(2, 2);
+  displace.repeat = new Vector2(2, 2);
+
+  moonMaterialsPre.push({ diffuse, normal, displace });
+});
+
+export const moonMaterials = moonMaterialsPre;
