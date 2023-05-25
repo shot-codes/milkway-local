@@ -32,6 +32,7 @@
   import ZibraPartner from "$lib/components/planets/ZibraPartner.svelte";
   import LactoBio from "$lib/components/planets/LactoBio.svelte";
   import PeopleVentures from "$lib/components/planets/PeopleVentures.svelte";
+  import Bregnerdgard from "./planets/Bregnerødgård.svelte";
 
   let canvas: HTMLCanvasElement;
   let innerHeight: number;
@@ -135,6 +136,7 @@
 <ZibraPartner position={planetLocations[3]} />
 <LactoBio position={planetLocations[4]} />
 <PeopleVentures position={planetLocations[5]} />
+<Bregnerdgard position={planetLocations[6]} />
 
 <!-- Ferrari -->
 <T.Group rotation.y={ferrariRotation} rotation.x={-$ferrariAcceleration * 2}>

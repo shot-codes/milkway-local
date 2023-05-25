@@ -57,6 +57,7 @@ export enum Brand {
   MindFuture = "MindFuture",
   LactoBio = "LactoBio",
   PeopleVentures = "PeopleVentures",
+  Bregnerødgård = "Bregnerødgård",
 }
 
 export const planetLocations: Array<[number, number, number]> = [];
