@@ -32,7 +32,7 @@
   import ZibraPartner from "$lib/components/planets/ZibraPartner.svelte";
   import LactoBio from "$lib/components/planets/LactoBio.svelte";
   import PeopleVentures from "$lib/components/planets/PeopleVentures.svelte";
-  import Bregnerdgard from "./planets/Bregnerødgård.svelte";
+  import Bregnerdgard from "$lib/components/planets/Bregnerodgaard.svelte";
 
   let canvas: HTMLCanvasElement;
   let innerHeight: number;
