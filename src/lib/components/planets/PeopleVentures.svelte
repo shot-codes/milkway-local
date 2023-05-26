@@ -17,9 +17,9 @@
   materialIndex={5}
   content="From pre-seed to venture to expansive growth"
   moonAmount={3}
-  moon1={{ materialIndex: 0, position: moonLocations(3)[0], label: "InQvation" }}
-  moon2={{ materialIndex: 0, position: moonLocations(3)[1], label: "People Ventures Fond" }}
-  moon3={{ materialIndex: 0, position: moonLocations(3)[2], label: "Cortrium" }}
+  moon1={{ materialIndex: 5, position: moonLocations(3)[0], label: "InQvation" }}
+  moon2={{ materialIndex: 6, position: moonLocations(3)[1], label: "People Ventures Fond" }}
+  moon3={{ materialIndex: 7, position: moonLocations(3)[2], label: "Cortrium" }}
 >
   <HTML
     slot="content"

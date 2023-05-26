@@ -461,14 +461,59 @@ export const materials = [
 const moonMaterialsPre: Array<{ diffuse: Texture; normal: Texture; displace: Texture }> = [];
 const moonMaterialPaths = [
   {
-    diffuse: "snow/snow-diffuse.png",
-    normal: "snow/snow-normal.png",
-    displace: "snow/snow-displace.png",
+    diffuse: "branches/branches-diffuse.png",
+    normal: "branches/branches-normal.png",
+    displace: "branches/branches-displace.png",
+  },
+  {
+    diffuse: "bricks/bricks-diffuse.png",
+    normal: "bricks/bricks-normal.png",
+    displace: "bricks/bricks-displace.png",
+  },
+  {
+    diffuse: "cracks/cracks-diffuse.png",
+    normal: "cracks/cracks-normal.png",
+    displace: "cracks/cracks-displace.png",
   },
   {
     diffuse: "leaf/leaf-diffuse.png",
     normal: "leaf/leaf-normal.png",
     displace: "leaf/leaf-displace.png",
+  },
+  {
+    diffuse: "leaf2/leaf2-diffuse.png",
+    normal: "leaf2/leaf2-normal.png",
+    displace: "leaf2/leaf2-displace.png",
+  },
+  {
+    diffuse: "metal/metal-diffuse.png",
+    normal: "metal/metal-normal.png",
+    displace: "metal/metal-displace.png",
+  },
+  {
+    diffuse: "moss/moss-diffuse.png",
+    normal: "moss/moss-normal.png",
+    displace: "moss/moss-displace.png",
+  },
+  {
+    diffuse: "snow/snow-diffuse.png",
+    normal: "snow/snow-normal.png",
+    displace: "snow/snow-displace.png",
+  },
+  {
+    diffuse: "pebbles/pebbles-diffuse.png",
+    normal: "pebbles/pebbles-normal.png",
+    displace: "pebbles/pebbles-displace.png",
+  },
+  {
+    diffuse: "rust/rust-diffuse.png",
+    normal: "rust/rust-normal.png",
+    displace: "rust/rust-displace.png",
+  },
+  {
+    diffuse: "sandstone/sandstone-diffuse.png",
+    normal: "sandstone/sandstone-normal.png",
+    displace: "sandstone/sandstone-displace.png",
   },
 ];
 

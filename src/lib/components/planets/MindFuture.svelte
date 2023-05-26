@@ -16,11 +16,11 @@
   titleOffsetXY={[0, 3.8]}
   materialIndex={2}
   moonAmount={5}
-  moon1={{ materialIndex: 1, position: moonLocations(5)[0], label: "M2Call" }}
-  moon2={{ materialIndex: 0, position: moonLocations(5)[1], label: "Life with Artificials" }}
-  moon3={{ materialIndex: 0, position: moonLocations(5)[2], label: "Mindfuture Hub / Food Lab" }}
-  moon4={{ materialIndex: 0, position: moonLocations(5)[3], label: "MindVision" }}
-  moon5={{ materialIndex: 0, position: moonLocations(5)[4], label: "Book of Mindsets" }}
+  moon1={{ materialIndex: 0, position: moonLocations(5)[0], label: "M2Call" }}
+  moon2={{ materialIndex: 1, position: moonLocations(5)[1], label: "Life with Artificials" }}
+  moon3={{ materialIndex: 2, position: moonLocations(5)[2], label: "Mindfuture Hub / Food Lab" }}
+  moon4={{ materialIndex: 3, position: moonLocations(5)[3], label: "MindVision" }}
+  moon5={{ materialIndex: 4, position: moonLocations(5)[4], label: "Book of Mindsets" }}
   content="Fra idé til prototype til færdigt produkt"
 >
   <HTML
