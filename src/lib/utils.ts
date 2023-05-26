@@ -39,7 +39,7 @@ export const zoomInSun = () => {
     )
   );
   zoomedIn.set(true);
-  activePlanet.set("sun");
+  activePlanet.set("Sun");
 };
 
 export const zoomOut = () => {

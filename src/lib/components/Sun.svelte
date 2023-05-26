@@ -7,7 +7,7 @@
   import { zoomInSun } from "$lib/utils";
   import { spring, tweened } from "svelte/motion";
   import { onMount } from "svelte";
-  import { VideoTexture, Group, Vector3 } from "three";
+  import { VideoTexture, Group, Vector3, Euler } from "three";
   import { DEG2RAD } from "three/src/math/MathUtils";
 
   const { camera } = useThrelte();
@@ -20,7 +20,7 @@
   let texture: VideoTexture;
 
   $: {
-    if ($zoomedIn && $activePlanet == "sun") {
+    if ($zoomedIn && $activePlanet == "Sun") {
       // Show video
       displaceScale.set(0);
       if (video) {
@@ -43,7 +43,7 @@
   }
 
   $: {
-    if ($displaceScale == 5) videoOpacity.set(0);
+    if ($displaceScale > 0) videoOpacity.set(0);
     if ($displaceScale == 0) videoOpacity.set(1);
   }
 
@@ -78,7 +78,7 @@
 
 <!-- Video -->
 <T.Group bind:ref={videoGroup}>
-  <T.Mesh let:ref rotation.y={-90 * DEG2RAD}>
+  <!-- <T.Mesh let:ref rotation.y={-90 * DEG2RAD}>
     <InteractiveObject
       object={ref}
       interactive
@@ -90,24 +90,40 @@
     />
     <T.SphereGeometry args={[6.01, 64, 64]} />
     <T.MeshBasicMaterial map={texture} transparent={true} opacity={$videoOpacity} />
-  </T.Mesh>
+  </T.Mesh> -->
 
   <!-- Projector -->
-  <Float>
-    <T.Group position={[-4, -2, 7]} rotation.y={150 * DEG2RAD}>
+  <Float position={new Vector3(0,1,0)}>
+    <T.Group position={[-4, -1, 9]} rotation.y={150 * DEG2RAD}>
       <GLTF
         url={"/models/projector/scene.gltf"}
         useDraco
         scale={1}
         ignorePointer
+        visible={$zoomedIn && $activePlanet == "Sun"}
+      />
+    </T.Group>
+
+  <!-- Projector Screen -->/
+    <T.Group position={[-1, -0.4, 7]} rotation.x={90*DEG2RAD} rotation.z={5*DEG2RAD} scale={2}>
+      <GLTF
+        url={"/models/proj/untitled.glb"}
+        useDraco
+        scale={0.27}
+        rotation={new Vector3(90*DEG2RAD ,90*DEG2RAD, 180*DEG2RAD)}
+        ignorePointer
         visible={$zoomedIn}
       />
+      <T.Mesh position.y={0.05} rotation.x={-90*DEG2RAD}>
+        <T.PlaneGeometry args={[2.5,1.4]}/>
+        <T.MeshBasicMaterial map={texture} transparent={true} opacity={$videoOpacity}/>
+      </T.Mesh>
     </T.Group>
   </Float>
 
   <!-- Playback Controls -->
   <Float>
-    <T.Mesh let:ref position={[4, -2, 7]} scale={$playPauseButtonScale} visible={$zoomedIn}>
+    <T.Mesh let:ref position={[4, -2, 7]} scale={$playPauseButtonScale} visible={$zoomedIn && $activePlanet == "Sun"}>
       <InteractiveObject
         object={ref}
         interactive

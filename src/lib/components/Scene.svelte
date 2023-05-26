@@ -143,7 +143,7 @@
   <T.Group position.x={10} rotation.y={90 * DEG2RAD}>
     <Float speed={3} floatIntensity={3}>
       <T.Group>
-        <GLTF url={"/models/ferrari/scene.gltf"} useDraco scale={1} ignorePointer />
+        <GLTF url={"/models/ferrari_812_superfast.glb"} useDraco scale={45} rotation={new Vector3(0, 90*DEG2RAD, 0)} ignorePointer />
         <T.Mesh let:ref position.y={0.4}>
           <InteractiveObject
             object={ref}
