@@ -1,4 +1,4 @@
- <script lang="ts">
+<script lang="ts">
   import { T, useFrame } from "@threlte/core";
   import { HTML, GLTF, Float } from "@threlte/extras";
   import { Brand } from "$lib/utils";

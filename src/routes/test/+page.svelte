@@ -1,19 +1,22 @@
 <script lang="ts">
-  import { OrbitControls, Canvas, T } from "@threlte/core";
-  import { GLTF } from "@threlte/extras";
+  import type { ActionData } from "./$types";
+  import { enhance } from "$app/forms";
+
+  export let form: ActionData;
 </script>
 
-<!-- Threlte content -->
-<div class="w-full h-full absolute">
-  <Canvas>
-    <T.PerspectiveCamera makeDefault position={[0, 0, 40]} fov={24}>
-      <OrbitControls enableDamping />
-    </T.PerspectiveCamera>
+<h1>Chat interface</h1>
 
-    <T.DirectionalLight castShadow position={[3, 10, 10]} />
-    <T.DirectionalLight position={[-3, 10, -10]} intensity={0.2} />
-    <T.AmbientLight intensity={0.2} />
+<form method="POST" use:enhance>
+  <label>
+    Text
+    <input name="prompt" type="text" class="bg-black" />
+  </label>
+  <button>Send</button>
+</form>
 
-    <GLTF url={"/models/ferrari_812_superfast.glb"} scale={100} />
-  </Canvas>
-</div>
+{#if form?.success}
+  <!-- this message is ephemeral; it exists because the page was rendered in
+           response to a form submission. it will vanish if the user reloads -->
+  <p class="text-white">Successfull completion: {form.text}</p>
+{/if}

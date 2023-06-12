@@ -1,9 +1,13 @@
-// See https://kit.svelte.dev/docs/types#app
-// for information about these interfaces
+import type { PineconeClient } from "@pinecone-database/pinecone";
+import type { OpenAIApi } from "openai";
+
 declare global {
   namespace App {
     // interface Error {}
-    // interface Locals {}
+    interface Locals {
+      pinecone: PineconeClient;
+      openai: OpenAIApi;
+    }
     // interface PageData {}
     // interface Platform {}
   }
