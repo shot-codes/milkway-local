@@ -34,26 +34,33 @@ export const actions = {
 
     const limit = 3750;
     let prompt = "";
-    const prompt_start = "Answer the question based on the context below.\n\n" + "Context:\n";
-    const prompt_end = `\n\nQuestion: ${query}\nAnswer:`;
-    if (contexts) {
-      for (let i = 0; i < contexts.length; i++) {
-        if (contexts.slice(0, i).join("\n\n---\n\n").length >= limit) {
-          prompt = prompt_start + contexts.slice(0, i - 1).join("\n\n---\n\n") + prompt_end;
-          break;
-        } else if (i == contexts.length - 1) {
-          prompt = prompt_start + contexts.join("\n\n---\n\n") + prompt_end;
+
+    // If confidence is high, add context.
+    if (res.matches?.[0].score && res.matches[0].score > 0.75) {
+      const prompt_start = "Answer the question based on the context below.\n\n" + "Context:\n";
+      const prompt_end = `\n\nQuestion: ${query}\nAnswer:`;
+      if (contexts) {
+        for (let i = 0; i < contexts.length; i++) {
+          if (contexts.slice(0, i).join("\n\n---\n\n").length >= limit) {
+            prompt = prompt_start + contexts.slice(0, i - 1).join("\n\n---\n\n") + prompt_end;
+            break;
+          } else if (i == contexts.length - 1) {
+            prompt = prompt_start + contexts.join("\n\n---\n\n") + prompt_end;
+          }
         }
       }
+    } else {
+      console.log("no matching context");
+      prompt = String(query);
     }
 
     try {
       const completion = await openaiClient.createCompletion({
         model: "text-davinci-003",
         prompt,
+        max_tokens: 250,
       });
-      console.log(completion.data.choices[0].text);
-      return { success: true, text: completion.data.choices[0].text };
+      return { success: true, query: String(query), response: completion.data.choices[0].text };
 
       // TODO: send potential errors to client.
     } catch (error: unknown) {
@@ -75,6 +82,6 @@ export const actions = {
       }
     }
 
-    return { success: false, text: "" };
+    return { success: false, query: null, response: null };
   },
 } satisfies Actions;

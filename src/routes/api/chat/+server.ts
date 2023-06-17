@@ -9,8 +9,8 @@ const pineconeClient = await getPineconeClient();
 const index = pineconeClient.Index("milkyway");
 
 export const POST = (async ({ request }) => {
-  const data = await request.formData();
-  const query = data.get("prompt");
+  const data = await request.json();
+  const query = data.msg;
 
   const xq = await openaiClient.createEmbedding({
     model: "text-embedding-ada-002",
@@ -34,25 +34,34 @@ export const POST = (async ({ request }) => {
 
   const limit = 3750;
   let prompt = "";
-  const prompt_start = "Answer the question based on the context below.\n\n" + "Context:\n";
-  const prompt_end = `\n\nQuestion: ${query}\nAnswer:`;
-  if (contexts) {
-    for (let i = 0; i < contexts.length; i++) {
-      if (contexts.slice(0, i).join("\n\n---\n\n").length >= limit) {
-        prompt = prompt_start + contexts.slice(0, i - 1).join("\n\n---\n\n") + prompt_end;
-        break;
-      } else if (i == contexts.length - 1) {
-        prompt = prompt_start + contexts.join("\n\n---\n\n") + prompt_end;
+
+  // If confidence is high, add context.
+  console.log(res.matches?.[0].score);
+  if (res.matches?.[0].score && res.matches[0].score > 0.75) {
+    const prompt_start = "Answer the question based on the context below.\n\n" + "Context:\n";
+    const prompt_end = `\n\nQuestion: ${query}\nAnswer:`;
+    if (contexts) {
+      for (let i = 0; i < contexts.length; i++) {
+        if (contexts.slice(0, i).join("\n\n---\n\n").length >= limit) {
+          prompt = prompt_start + contexts.slice(0, i - 1).join("\n\n---\n\n") + prompt_end;
+          break;
+        } else if (i == contexts.length - 1) {
+          prompt = prompt_start + contexts.join("\n\n---\n\n") + prompt_end;
+        }
       }
     }
+  } else {
+    prompt =
+      "You are a chatbot assistant for a website. You're goal is to answer questions about the website experience. Answer the following accordingly:\n" +
+      String(query);
   }
 
   try {
     const completion = await openaiClient.createCompletion({
       model: "text-davinci-003",
       prompt,
+      max_tokens: 250,
     });
-    console.log(completion.data.choices[0].text);
     return json(completion.data.choices[0].text);
 
     // TODO: send potential errors to client.
@@ -75,5 +84,5 @@ export const POST = (async ({ request }) => {
     }
   }
 
-  return json("test");
+  return json("I'm sorry, I wasn't able to generate an answer for you");
 }) satisfies RequestHandler;

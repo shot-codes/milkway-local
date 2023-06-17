@@ -1,0 +1,15 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("PRISMA_DB_URL")
+}
+
+model Suggestion {
+  id    Int             @id @default(autoincrement())
+  name  String          @db.VarChar(50)
+  text  String
+  image String
+}
