@@ -1,6 +1,8 @@
 <script lang="ts">
   let message: string;
+  let downloadString = "";
   let chatContainer: HTMLDivElement;
+  let input: HTMLInputElement;
 
   const sendMessage = async (msg: string) => {
     // Create and add message to DOM
@@ -17,6 +19,9 @@
     sentElement.textContent = msg;
     chatContainer.appendChild(sentElement);
     message = "";
+
+    // Add to download file
+    downloadString += "User:\n" + msg + "\n\n";
 
     // Create pending response element
     const waitingElement = document.createElement("p");
@@ -45,8 +50,24 @@
     const answer = await response.json();
     waitingElement.textContent = answer;
 
+    // Add to download string
+    downloadString += "Chat Bot:\n" + answer + "\n\n";
+
     // Scroll to bottom
     chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    input.focus();
+  };
+
+  // Chat log downloading
+  const download = (filename: string, text: string) => {
+    var element = document.createElement("a");
+    element.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(text));
+    element.setAttribute("download", filename);
+    element.style.display = "none";
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
   };
 </script>
 
@@ -75,6 +96,7 @@
     <form on:submit={() => sendMessage(message)} class="flex w-full mt-2">
       <label class="flex grow">
         <input
+          bind:this={input}
           bind:value={message}
           type="text"
           class="bg-neutral-800 rounded grow mr-2 text-xs px-2"
@@ -99,4 +121,10 @@
       </button>
     </form>
   </div>
+  <button
+    class="bg-neutral-600 rounded p-2 text-sm"
+    on:click={() => {
+      download("log.txt", downloadString);
+    }}>Download Chat</button
+  >
 </div>
