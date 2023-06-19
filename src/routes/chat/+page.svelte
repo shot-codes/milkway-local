@@ -56,8 +56,10 @@
   <div class="w-2/3 max-w-[600px] text-xs p-2">
     <p class="mb-2">
       This is a chatbot built with the OpenAI Completions API and manually copied company content.
-      It is currently aware of Lactobio, Mindfuture, and Confinze. You can try asking it questions
-      about those and see how it responds.
+      It is currently aware of Lactobio, Mindfuture, Zibra Partner Equity, Confinze, ZibraSport,
+      Zybersafe, People Ventures, M2Call, NGUVU, Quinta da Várzea, Byon8, Inniti, MXNEY, Next11,
+      Radiobotics, Sani Nudge, Son of a Tailer, Spiio, Tiimo, and Motus. You can try asking it
+      questions about those and see how it responds.
     </p>
     <p class="mb-2">
       Since this is using the Completions API and not the Chat API, it is not tuned to dialogues.
