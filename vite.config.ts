@@ -6,6 +6,9 @@ const config: UserConfig = {
   ssr: {
     noExternal: ["three", "troika-three-text"],
   },
+  build: {
+    target: "esnext",
+  },
 };
 
 export default config;
