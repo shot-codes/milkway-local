@@ -4,17 +4,13 @@ import { getClientInstance as getPineconeClient } from "$lib/server/pinecone";
 import type { ScoredVector } from "@pinecone-database/pinecone";
 import { json } from "@sveltejs/kit";
 
-// const openaiClient = getOpenAIClient();
-// const pineconeClient = await getPineconeClient();
-// const index = pineconeClient.Index("milkyway");
+const openaiClient = getOpenAIClient();
+const pineconeClient = await getPineconeClient();
+const index = pineconeClient.Index("milkyway");
 
 export const POST = (async ({ request }) => {
   const data = await request.json();
   const query = data.msg;
-
-  const openaiClient = getOpenAIClient();
-  const pineconeClient = await getPineconeClient();
-  const index = pineconeClient.Index("milkyway");
 
   const xq = await openaiClient.createEmbedding({
     model: "text-embedding-ada-002",

@@ -8,9 +8,7 @@ const config = {
   preprocess: seqPreprocessor([vitePreprocess(), preprocessThrelte()]),
 
   kit: {
-    adapter: adapter({
-      runtime: "edge",
-    }),
+    adapter: adapter(),
   },
 };
 
