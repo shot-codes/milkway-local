@@ -40,7 +40,7 @@
     // Scroll to bottom
     chatContainer.scrollTop = chatContainer.scrollHeight;
 
-    const response = await fetch("/api/chat", {
+    const response = await fetch("/api/chatv2", {
       method: "POST",
       body: JSON.stringify({ msg }),
       headers: {
@@ -48,7 +48,8 @@
       },
     });
     const answer = await response.json();
-    waitingElement.textContent = answer;
+    console.log(answer);
+    waitingElement.textContent = answer.content;
 
     // Add to download string
     downloadString += "Chat Bot:\n" + answer + "\n\n";
@@ -71,29 +72,22 @@
   };
 </script>
 
-<div class="flex flex-col items-center h-full py-6 space-y-2">
-  <h1 class="mb-3">Experimental Chat Interfaces</h1>
-  <h2 class="text-sm">Completions API - Manual Data</h2>
-  <div class="w-2/3 max-w-[600px] text-xs p-2">
-    <p class="mb-2">
-      This is a chatbot built with the OpenAI Completions API and manually copied company content.
-      It is currently aware of Lactobio, Mindfuture, Zibra Partner Equity, Confinze, ZibraSport,
-      Zybersafe, People Ventures, M2Call, NGUVU, Quinta da Várzea, Byon8, Inniti, MXNEY, Next11,
-      Radiobotics, Sani Nudge, Son of a Tailer, Spiio, Tiimo, and Motus. You can try asking it
-      questions about those and see how it responds.
+<div class="flex flex-col space-y-2 w-full items-center">
+  <h2 class="text-sm">Chat API</h2>
+  <div class="text-xs p-2 space-y-2">
+    <p>
+      This is a chatbot built with the OpenAI Chat API. It is currently aware of Lactobio,
+      Mindfuture, Zibra Partner Equity, Confinze, ZibraSport, Zybersafe, People Ventures, M2Call,
+      NGUVU, Quinta da Várzea, Byon8, Inniti, MXNEY, Next11, Radiobotics, Sani Nudge, Son of a
+      Tailer, Spiio, Tiimo, and Motus. You can try asking it questions about those and see how it
+      responds.
     </p>
-    <p class="mb-2">
-      Since this is using the Completions API and not the Chat API, it is not tuned to dialogues.
-      This is mitagated through some prompt enrichment I have added but certainly isn't perfect. You
-      might get some very strange answers from it 😂.
-    </p>
-    <p class="mb-2">A chatbot built with the ChatAPI is on the way!</p>
   </div>
 
-  <div class="flex flex-col bg-neutral-600 w-2/3 max-w-[600px] p-2 rounded">
+  <div class="flex flex-col bg-neutral-600 w-full p-2 rounded">
     <div bind:this={chatContainer} class="flex flex-col pr-10 h-[200px] overflow-scroll" />
 
-    <form on:submit={() => sendMessage(message)} class="flex w-full mt-2">
+    <form on:submit|preventDefault={() => sendMessage(message)} class="flex w-full mt-2">
       <label class="flex grow">
         <input
           bind:this={input}
@@ -121,6 +115,7 @@
       </button>
     </form>
   </div>
+
   <button
     class="bg-neutral-600 rounded p-2 text-sm"
     on:click={() => {

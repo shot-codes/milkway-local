@@ -9,10 +9,15 @@ pnpm run dev
 
 ## To Dos
 
+- [ ] Migrate from threlte v5 to threlte v6
+
 - [ ] Chat
 
-  - [ ] Chat API vs Completions API
+  - [x] Chat API vs Completions API
+  - [ ] Chat API: Add previous response messages to query (maintain state in frontend)
+  - [ ] Split data into smaller embeddings (Adding context to each Eg. Lactobio: Is compliant because...)
   - [ ] Interface
+    - [ ] Frontend error handling
   - [ ] Gather content from website for every company
   - [ ] Enrich company data by scraping cvr-virk
   - [ ] Upgrade to Vercel Pro (This is needed to increase the timeout of serverless functions. Once we get our MF network sorted we can run everything locally, which will also speed up the response time.)
