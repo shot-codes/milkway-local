@@ -17,14 +17,7 @@
   content="Få styr på finanserne i små virksomheder"
   moonAmount={0}
 >
-  <HTML
-    slot="content"
-    transform
-    position={{ y: 0, x: -5.5 }}
-    rotation={{ y: 0 }}
-    scale={0.34}
-    pointerEvents="none"
-  >
+  <HTML slot="content" transform position={[-5.5, 0, 0]} scale={0.34} pointerEvents="none">
     <PlanetContent link="https://zibrapartner.com" brand={Brand.ZibraPartner}>
       <span slot="image">
         <img src="/ZibraPartner.jpg" alt="" class="w-80 rounded-lg" />

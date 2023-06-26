@@ -39,7 +39,7 @@
   >
     {#each horsePositions as horsePosition, i}
       <Float
-        position={horsePosition}
+        position={[horsePosition.x, horsePosition.y, horsePosition.z]}
         speed={3}
         floatIntensity={3}
         rotationIntensity={3}
@@ -63,14 +63,7 @@
   content="Anna Zibrandtsen"
   moonAmount={0}
 >
-  <HTML
-    slot="content"
-    transform
-    position={{ y: 0, x: -5.5 }}
-    rotation={{ y: 0 }}
-    scale={0.24}
-    pointerEvents="none"
-  >
+  <HTML slot="content" transform position={[-5.5, 0, 0]} scale={0.24} pointerEvents="none">
     <PlanetContent
       link="https://instagram.com/annazibrandtsen?igshid=MmJiY2I4NDBkZg=="
       brand={Brand.Bregnerødgård}

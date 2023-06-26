@@ -21,14 +21,7 @@
   moon2={{ materialIndex: 9, position: moonLocations(3)[1], label: "ZibraSport" }}
   moon3={{ materialIndex: 10, position: moonLocations(3)[2], label: "ZyberSafe" }}
 >
-  <HTML
-    slot="content"
-    transform
-    position={{ y: 0, x: -5.5 }}
-    rotation={{ y: 0 }}
-    scale={0.24}
-    pointerEvents="none"
-  >
+  <HTML slot="content" transform position={[-5.5, 0, 0]} scale={0.24} pointerEvents="none">
     <PlanetContent brand={Brand.ZibraAS}>
       <span slot="image">
         <img src="/ZibraAS.jpg" alt="" class="w-80 rounded-lg" />
@@ -45,14 +38,7 @@
     </PlanetContent>
   </HTML>
 
-  <HTML
-    slot="moon1Content"
-    transform
-    position={{ y: -5, x: -0.5 }}
-    rotation={{ y: 0 }}
-    scale={0.24}
-    pointerEvents="none"
-  >
+  <HTML slot="moon1Content" transform position={[-0.5, -5, 0]} scale={0.24} pointerEvents="none">
     <MoonContent brand={Brand.ZibraAS}>
       <span slot="title">Mutos</span>
       <span slot="content"
@@ -62,14 +48,7 @@
     </MoonContent>
   </HTML>
 
-  <HTML
-    slot="moon2Content"
-    transform
-    position={{ y: -8, x: -5 }}
-    rotation={{ y: 0 }}
-    scale={0.24}
-    pointerEvents="none"
-  >
+  <HTML slot="moon2Content" transform position={[-5, -8, 0]} scale={0.24} pointerEvents="none">
     <MoonContent brand={Brand.ZibraAS}>
       <span slot="title">ZibraSport</span>
       <span slot="content"
@@ -79,14 +58,7 @@
     </MoonContent>
   </HTML>
 
-  <HTML
-    slot="moon3Content"
-    transform
-    position={{ y: -11, x: -0.5 }}
-    rotation={{ y: 0 }}
-    scale={0.24}
-    pointerEvents="none"
-  >
+  <HTML slot="moon3Content" transform position={[-0.5, -11, 0]} scale={0.24} pointerEvents="none">
     <MoonContent brand={Brand.ZibraAS}>
       <span slot="title">ZyberSafe</span>
       <span slot="content"

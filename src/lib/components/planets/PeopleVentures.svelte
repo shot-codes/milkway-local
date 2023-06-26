@@ -21,14 +21,7 @@
   moon2={{ materialIndex: 6, position: moonLocations(3)[1], label: "People Ventures Fond" }}
   moon3={{ materialIndex: 7, position: moonLocations(3)[2], label: "Cortrium" }}
 >
-  <HTML
-    slot="content"
-    transform
-    position={{ y: 0, x: -5.5 }}
-    rotation={{ y: 0 }}
-    scale={0.24}
-    pointerEvents="none"
-  >
+  <HTML slot="content" transform position={[-5.5, 0, 0]} scale={0.24} pointerEvents="none">
     <PlanetContent link="https://people.ventures/" brand={Brand.PeopleVentures}>
       <span slot="image">
         <img src="/PeopleVentures.jpg" alt="" class="w-80 rounded-lg" />
@@ -42,14 +35,7 @@
     </PlanetContent>
   </HTML>
 
-  <HTML
-    slot="moon1Content"
-    transform
-    position={{ y: -5, x: -0.5 }}
-    rotation={{ y: 0 }}
-    scale={0.24}
-    pointerEvents="none"
-  >
+  <HTML slot="moon1Content" transform position={[-0.5, -5, 0]} scale={0.24} pointerEvents="none">
     <MoonContent brand={Brand.PeopleVentures}>
       <span slot="title">InQvation</span>
       <span slot="content"
@@ -59,14 +45,7 @@
     </MoonContent>
   </HTML>
 
-  <HTML
-    slot="moon2Content"
-    transform
-    position={{ y: -8, x: -5 }}
-    rotation={{ y: 0 }}
-    scale={0.24}
-    pointerEvents="none"
-  >
+  <HTML slot="moon2Content" transform position={[-5, -8, 0]} scale={0.24} pointerEvents="none">
     <MoonContent brand={Brand.PeopleVentures}>
       <span slot="title">People Ventures Fond</span>
       <span slot="content"
@@ -76,14 +55,7 @@
     </MoonContent>
   </HTML>
 
-  <HTML
-    slot="moon3Content"
-    transform
-    position={{ y: -11, x: -0.5 }}
-    rotation={{ y: 0 }}
-    scale={0.24}
-    pointerEvents="none"
-  >
+  <HTML slot="moon3Content" transform position={[-0.5, -11, 0]} scale={0.24} pointerEvents="none">
     <MoonContent brand={Brand.PeopleVentures}>
       <span slot="title">Cortrium</span>
       <span slot="content"

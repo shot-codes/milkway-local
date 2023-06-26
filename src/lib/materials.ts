@@ -1,6 +1,7 @@
 import { Color, BackSide, Vector2, RepeatWrapping, Texture } from "three";
 import { LayerMaterial, Fresnel, Noise, Gradient, Displace, Depth } from "lamina/vanilla";
-import { useTexture } from "@threlte/core";
+import { useTexture } from "@threlte/extras";
+import type { AsyncWritable } from "@threlte/core";
 
 export const noise = new Noise({
   colorA: new Color("#bfabab"),
@@ -458,8 +459,13 @@ export const materials = [
   material9,
 ];
 
-const moonMaterialsPre: Array<{ diffuse: Texture; normal: Texture; displace: Texture }> = [];
-const moonMaterialPaths = [
+// const moonMaterialsPre: Array<{
+// diffuse: AsyncWritable<Texture>;
+// normal: AsyncWritable<Texture>;
+// displace: AsyncWritable<Texture>;
+// }> = [];
+
+export const moonMaterialPaths = [
   {
     diffuse: "branches/branches-diffuse.png",
     normal: "branches/branches-normal.png",
@@ -517,23 +523,32 @@ const moonMaterialPaths = [
   },
 ];
 
-moonMaterialPaths.forEach((paths) => {
-  const diffuse = useTexture(`/textures/Moons/${paths.diffuse}`);
-  const normal = useTexture(`/textures/Moons/${paths.normal}`);
-  const displace = useTexture(`/textures/Moons/${paths.displace}`);
-
-  diffuse.wrapS = RepeatWrapping;
-  diffuse.wrapT = RepeatWrapping;
-  normal.wrapS = RepeatWrapping;
-  normal.wrapT = RepeatWrapping;
-  displace.wrapS = RepeatWrapping;
-  displace.wrapT = RepeatWrapping;
-
-  diffuse.repeat = new Vector2(2, 2);
-  normal.repeat = new Vector2(2, 2);
-  displace.repeat = new Vector2(2, 2);
-
-  moonMaterialsPre.push({ diffuse, normal, displace });
-});
-
-export const moonMaterials = moonMaterialsPre;
+// moonMaterialPaths.forEach((paths) => {
+//   const diffuse = useTexture(`/textures/Moons/${paths.diffuse}`)
+//     .then((texture) => {
+//       texture.wrapS = RepeatWrapping;
+//       texture.wrapT = RepeatWrapping;
+//       texture.repeat = new Vector2(2, 2);
+//       return texture;
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//     });
+//   const normal = useTexture(`/textures/Moons/${paths.normal}`);
+//   const displace = useTexture(`/textures/Moons/${paths.displace}`);
+//
+//   diffuse.wrapS = RepeatWrapping;
+//   diffuse.wrapT = RepeatWrapping;
+//   normal.wrapS = RepeatWrapping;
+//   normal.wrapT = RepeatWrapping;
+//   displace.wrapS = RepeatWrapping;
+//   displace.wrapT = RepeatWrapping;
+//
+//   diffuse.repeat = new Vector2(2, 2);
+//   normal.repeat = new Vector2(2, 2);
+//   displace.repeat = new Vector2(2, 2);
+//
+//   moonMaterialsPre.push({ diffuse, normal, displace });
+// });
+//
+// export const moonMaterials = moonMaterialsPre;

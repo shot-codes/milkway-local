@@ -2,16 +2,8 @@
   import { dev } from "$app/environment";
   import { onMount } from "svelte";
   import { tweened } from "svelte/motion";
-  import {
-    PerspectiveCamera,
-    OrbitControls,
-    useThrelte,
-    T,
-    Fog,
-    useFrame,
-    InteractiveObject,
-  } from "@threlte/core";
-  import { GLTF, Float } from "@threlte/extras";
+  import { useThrelte, T, useFrame } from "@threlte/core";
+  import { GLTF, Float, OrbitControls, interactivity } from "@threlte/extras";
   import { Vector3 } from "three";
   import { DEG2RAD } from "three/src/math/MathUtils";
   import {
@@ -33,6 +25,8 @@
   import LactoBio from "$lib/components/planets/LactoBio.svelte";
   import PeopleVentures from "$lib/components/planets/PeopleVentures.svelte";
   import Bregnerdgard from "$lib/components/planets/Bregnerodgaard.svelte";
+
+  interactivity();
 
   let canvas: HTMLCanvasElement;
   let innerHeight: number;
@@ -100,13 +94,13 @@
 
 <svelte:window bind:innerHeight bind:innerWidth />
 
-<PerspectiveCamera position={$cameraPosition} {fov}>
+<T.PerspectiveCamera position={[$cameraPosition.x, $cameraPosition.y, $cameraPosition.z]} {fov}>
   {#if $zoomedIn}
     <OrbitControls
       enableRotate={false}
       enablePan={false}
       enableZoom={false}
-      target={$targetPosition}
+      target={[$targetPosition.x, $targetPosition.y, $targetPosition.z]}
     />
   {:else}
     <OrbitControls
@@ -118,14 +112,14 @@
       enableZoom={dev ? true : false}
       autoRotate={true}
       autoRotateSpeed={0.15}
-      target={$targetPosition}
+      target={[$targetPosition.x, $targetPosition.y, $targetPosition.z]}
     />
   {/if}
-</PerspectiveCamera>
+</T.PerspectiveCamera>
 
 <T.AmbientLight intensity={0.3} />
 <T.DirectionalLight castShadow position={[8, 8, -8]} />
-<Fog color={"#000000"} near={$fogOptions.near} far={$fogOptions.far} />
+<T.Fog color={"#000000"} near={$fogOptions.near} far={$fogOptions.far} />
 
 <Background />
 <Particles position={[0, 0, 0]} />
@@ -147,20 +141,18 @@
           url={"/models/ferrari_812_superfast.glb"}
           useDraco
           scale={45}
-          rotation={new Vector3(0, 90 * DEG2RAD, 0)}
+          rotation={[0, 90 * DEG2RAD, 0]}
           ignorePointer
         />
-        <T.Mesh let:ref position.y={0.4}>
-          <InteractiveObject
-            object={ref}
-            interactive
-            on:click={() => {
-              ferrariAcceleration.set(0.2);
-              setTimeout(() => {
-                ferrariAcceleration.set(0.001);
-              }, 10000);
-            }}
-          />
+        <T.Mesh
+          position.y={0.4}
+          on:click={() => {
+            ferrariAcceleration.set(0.2);
+            setTimeout(() => {
+              ferrariAcceleration.set(0.001);
+            }, 10000);
+          }}
+        >
           <T.BoxGeometry args={[2.4, 0.7, 1.3]} />
           <T.MeshBasicMaterial transparent opacity={0} />
         </T.Mesh>

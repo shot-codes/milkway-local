@@ -17,14 +17,7 @@
   content="LactoBio info"
   moonAmount={0}
 >
-  <HTML
-    slot="content"
-    transform
-    position={{ y: 0, x: -5.5 }}
-    rotation={{ y: 0 }}
-    scale={0.24}
-    pointerEvents="none"
-  >
+  <HTML slot="content" transform position={[-5.5, 0, 0]} scale={0.24} pointerEvents="none">
     <PlanetContent link="https://lactobio.com" brand={Brand.LactoBio}>
       <span slot="image">
         <img src="/LactoBio.jpg" alt="" class="w-80 rounded-lg" />

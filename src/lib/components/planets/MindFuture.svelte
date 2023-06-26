@@ -23,14 +23,7 @@
   moon5={{ materialIndex: 4, position: moonLocations(5)[4], label: "Book of Mindsets" }}
   content="Fra idé til prototype til færdigt produkt"
 >
-  <HTML
-    slot="content"
-    transform
-    position={{ y: 0, x: -5.5 }}
-    rotation={{ y: 0 }}
-    scale={0.24}
-    pointerEvents="none"
-  >
+  <HTML slot="content" transform position={[-5.5, 0, 0]} scale={0.24} pointerEvents="none">
     <PlanetContent link="https://mindfuture.com" brand={Brand.MindFuture}>
       <span slot="image">
         <img src="/Mindfuture.jpg" alt="" class="w-80 rounded-lg" />
@@ -49,14 +42,7 @@
     </PlanetContent>
   </HTML>
 
-  <HTML
-    slot="moon1Content"
-    transform
-    position={{ y: -5, x: -0.5 }}
-    rotation={{ y: 0 }}
-    scale={0.24}
-    pointerEvents="none"
-  >
+  <HTML slot="moon1Content" transform position={[-0.5, -5, 0]} scale={0.24} pointerEvents="none">
     <MoonContent link="https://m2call.com/" brand={Brand.MindFuture}>
       <span slot="title">M2Call</span>
       <span slot="content"
@@ -67,14 +53,7 @@
     </MoonContent>
   </HTML>
 
-  <HTML
-    slot="moon2Content"
-    transform
-    position={{ y: -8, x: -5 }}
-    rotation={{ y: 0 }}
-    scale={0.24}
-    pointerEvents="none"
-  >
+  <HTML slot="moon2Content" transform position={[-5, -8, 0]} scale={0.24} pointerEvents="none">
     <MoonContent link="https://lifewithartificials.com/" brand={Brand.MindFuture}>
       <span slot="title">Not for profit Life with Artificials</span>
       <span slot="content"
@@ -86,14 +65,7 @@
     </MoonContent>
   </HTML>
 
-  <HTML
-    slot="moon3Content"
-    transform
-    position={{ y: -11, x: -0.5 }}
-    rotation={{ y: 0 }}
-    scale={0.24}
-    pointerEvents="none"
-  >
+  <HTML slot="moon3Content" transform position={[-0.5, -11, 0]} scale={0.24} pointerEvents="none">
     <MoonContent
       link="https://instagram.com/mindfuture_hub?igshid=MmJiY2I4NDBkZg=="
       brand={Brand.MindFuture}
@@ -106,14 +78,7 @@
     </MoonContent>
   </HTML>
 
-  <HTML
-    slot="moon4Content"
-    transform
-    position={{ y: -14, x: -5 }}
-    rotation={{ y: 0 }}
-    scale={0.24}
-    pointerEvents="none"
-  >
+  <HTML slot="moon4Content" transform position={[-5, -14, 0]} scale={0.24} pointerEvents="none">
     <MoonContent link="https://lifewithartificials.com/" brand={Brand.MindFuture}>
       <span slot="title">MindVision</span>
       <span slot="content"
@@ -123,14 +88,7 @@
     </MoonContent>
   </HTML>
 
-  <HTML
-    slot="moon5Content"
-    transform
-    position={{ y: -17, x: -0.5 }}
-    rotation={{ y: 0 }}
-    scale={0.24}
-    pointerEvents="none"
-  >
+  <HTML slot="moon5Content" transform position={[-0.5, -17, 0]} scale={0.24} pointerEvents="none">
     <MoonContent link="http://bookofmindsets.dk/" brand={Brand.MindFuture}>
       <span slot="title">Book of Mindsets</span>
       <span slot="content"

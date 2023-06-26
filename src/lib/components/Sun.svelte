@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { T, useFrame, useThrelte, InteractiveObject } from "@threlte/core";
+  import { T, useFrame, useThrelte } from "@threlte/core";
   import { Float, GLTF } from "@threlte/extras";
   import { sunMaterial } from "$lib/materials";
   const { material, displace } = sunMaterial();
@@ -63,37 +63,32 @@
 </script>
 
 <!-- Sun -->
-<T.Mesh {material} let:ref>
-  <InteractiveObject
-    object={ref}
-    interactive
-    on:click={() => {
-      if (!$zoomedIn) {
-        zoomInSun();
-      }
-    }}
-  />
+<T.Mesh
+  {material}
+  on:click={() => {
+    if (!$zoomedIn) {
+      zoomInSun();
+    }
+  }}
+>
   <T.SphereGeometry args={[6, 64, 64]} />
 </T.Mesh>
 
 <!-- Video -->
 <T.Group bind:ref={videoGroup}>
-  <!-- <T.Mesh let:ref rotation.y={-90 * DEG2RAD}>
-    <InteractiveObject
-      object={ref}
-      interactive
+  <!-- <T.Mesh let:ref rotation.y={-90 * DEG2RAD}
       on:click={() => {
         if (!$zoomedIn) {
           zoomInSun();
         }
       }}
-    />
+    >
     <T.SphereGeometry args={[6.01, 64, 64]} />
     <T.MeshBasicMaterial map={texture} transparent={true} opacity={$videoOpacity} />
   </T.Mesh> -->
 
   <!-- Projector -->
-  <Float position={new Vector3(0, 1, 0)}>
+  <Float position={[0, 1, 0]}>
     <T.Group position={[-4, -1, 9]} rotation.y={150 * DEG2RAD}>
       <GLTF
         url={"/models/projector/scene.gltf"}
@@ -110,7 +105,7 @@
         url={"/models/proj/untitled.glb"}
         useDraco
         scale={0.27}
-        rotation={new Vector3(90 * DEG2RAD, 90 * DEG2RAD, 180 * DEG2RAD)}
+        rotation={[90 * DEG2RAD, 90 * DEG2RAD, 180 * DEG2RAD]}
         ignorePointer
         visible={$zoomedIn}
       />
@@ -124,24 +119,19 @@
   <!-- Playback Controls -->
   <Float>
     <T.Mesh
-      let:ref
       position={[4, -2, 7]}
       scale={$playPauseButtonScale}
       visible={$zoomedIn && $activePlanet == "Sun"}
+      on:pointerenter={() => playPauseButtonScale.set(1.2)}
+      on:pointerleave={() => playPauseButtonScale.set(1)}
+      on:click={() => {
+        if (video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      }}
     >
-      <InteractiveObject
-        object={ref}
-        interactive
-        on:pointerenter={() => playPauseButtonScale.set(1.2)}
-        on:pointerleave={() => playPauseButtonScale.set(1)}
-        on:click={() => {
-          if (video.paused) {
-            video.play();
-          } else {
-            video.pause();
-          }
-        }}
-      />
       <T.BoxGeometry args={[0.5, 0.5, 0.5]} />
       <T.MeshStandardMaterial color="#303060" />
     </T.Mesh>
