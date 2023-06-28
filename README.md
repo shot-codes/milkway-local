@@ -9,7 +9,19 @@ pnpm run dev
 
 ## To Dos
 
+- Bugs
+
+  - [ ] HTML is still present when zoomed out. This results in miss-clicks and HTML needs to be removed after it has faded out.
+  - [ ] Fix zoomed in scroll heights
+
 - [ ] Migrate from threlte v5 to threlte v6
+
+  - [ ] Revamp moon handling
+    - [ ] - Moon texture handling
+  - [x] Fix fog
+  - [x] Fix float parameters (projector and horses)
+  - [ ] Fix GlTF
+  - [ ] Stop interactivity propagation
 
 - [ ] Chat
 

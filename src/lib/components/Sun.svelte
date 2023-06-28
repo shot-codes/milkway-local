@@ -9,6 +9,7 @@
   import { onMount } from "svelte";
   import { VideoTexture, Group, Vector3 } from "three";
   import { DEG2RAD } from "three/src/math/MathUtils";
+  import Projector from "$lib/assets/models/Projector.svelte";
 
   const { camera } = useThrelte();
 
@@ -88,52 +89,45 @@
   </T.Mesh> -->
 
   <!-- Projector -->
-  <Float position={[0, 1, 0]}>
-    <T.Group position={[-4, -1, 9]} rotation.y={150 * DEG2RAD}>
-      <GLTF
-        url={"/models/projector/scene.gltf"}
-        useDraco
-        scale={1}
-        ignorePointer
+  {#if $zoomedIn && $activePlanet == "Sun"}
+    <Float>
+      <T.Group position={[-4, 0, 9]} rotation.y={150 * DEG2RAD}>
+        <Projector visible={$zoomedIn && $activePlanet == "Sun"} />
+      </T.Group>
+
+      <!-- Projector Screen -->/
+      <T.Group
+        position={[-1, -0.4, 7]}
+        rotation.x={90 * DEG2RAD}
+        rotation.z={5 * DEG2RAD}
+        scale={2}
+      >
+        <T.Mesh position.y={0.05} rotation.x={-90 * DEG2RAD}>
+          <T.PlaneGeometry args={[2.5, 1.4]} />
+          <T.MeshBasicMaterial map={texture} transparent={true} opacity={$videoOpacity} />
+        </T.Mesh>
+      </T.Group>
+    </Float>
+
+    <!-- Playback Controls -->
+    <Float>
+      <T.Mesh
+        position={[4, -2, 7]}
+        scale={$playPauseButtonScale}
         visible={$zoomedIn && $activePlanet == "Sun"}
-      />
-    </T.Group>
-
-    <!-- Projector Screen -->/
-    <T.Group position={[-1, -0.4, 7]} rotation.x={90 * DEG2RAD} rotation.z={5 * DEG2RAD} scale={2}>
-      <GLTF
-        url={"/models/proj/untitled.glb"}
-        useDraco
-        scale={0.27}
-        rotation={[90 * DEG2RAD, 90 * DEG2RAD, 180 * DEG2RAD]}
-        ignorePointer
-        visible={$zoomedIn}
-      />
-      <T.Mesh position.y={0.05} rotation.x={-90 * DEG2RAD}>
-        <T.PlaneGeometry args={[2.5, 1.4]} />
-        <T.MeshBasicMaterial map={texture} transparent={true} opacity={$videoOpacity} />
+        on:pointerenter={() => playPauseButtonScale.set(1.2)}
+        on:pointerleave={() => playPauseButtonScale.set(1)}
+        on:click={() => {
+          if (video.paused) {
+            video.play();
+          } else {
+            video.pause();
+          }
+        }}
+      >
+        <T.BoxGeometry args={[0.5, 0.5, 0.5]} />
+        <T.MeshStandardMaterial color="#303060" />
       </T.Mesh>
-    </T.Group>
-  </Float>
-
-  <!-- Playback Controls -->
-  <Float>
-    <T.Mesh
-      position={[4, -2, 7]}
-      scale={$playPauseButtonScale}
-      visible={$zoomedIn && $activePlanet == "Sun"}
-      on:pointerenter={() => playPauseButtonScale.set(1.2)}
-      on:pointerleave={() => playPauseButtonScale.set(1)}
-      on:click={() => {
-        if (video.paused) {
-          video.play();
-        } else {
-          video.pause();
-        }
-      }}
-    >
-      <T.BoxGeometry args={[0.5, 0.5, 0.5]} />
-      <T.MeshStandardMaterial color="#303060" />
-    </T.Mesh>
-  </Float>
+    </Float>
+  {/if}
 </T.Group>

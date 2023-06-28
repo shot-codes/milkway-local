@@ -5,6 +5,7 @@
   import Planet from "$lib/components/Planet.svelte";
   import PlanetContent from "$lib/components/PlanetContent.svelte";
   import { Vector3 } from "three";
+  import Horse from "$lib/assets/models/Horse.svelte";
 
   export let position: [number, number, number];
   const planetOffsetXY: [number, number] = [3, -1];
@@ -41,12 +42,13 @@
       <Float
         position={[horsePosition.x, horsePosition.y, horsePosition.z]}
         speed={3}
-        floatIntensity={3}
-        rotationIntensity={3}
-        floatingRange={[-10, 10]}
+        floatIntensity={1}
+        rotationIntensity={1}
+        rotationSpeed={1}
+        floatingRange={[-0.005, 0.005]}
       >
         <T.Group rotation.y={-horseRotations[i] - 1.2}>
-          <GLTF url={"/models/Horse.glb"} scale={0.005} ignorePointer />
+          <Horse scale={0.005} />
         </T.Group>
       </Float>
     {/each}

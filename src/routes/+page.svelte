@@ -5,6 +5,7 @@
   import AudioOn from "$lib/components/icons/AudioOn.svelte";
   import AudioOff from "$lib/components/icons/AudioOff.svelte";
   import LandingPage from "$lib/components/LandingPage.svelte";
+  import { dev } from "$app/environment";
 
   let audio: HTMLAudioElement;
   let threlteRoot: ComponentType;
@@ -16,7 +17,9 @@
   });
 </script>
 
-<LandingPage />
+{#if !dev}
+  <LandingPage />
+{/if}
 
 <audio bind:this={audio} loop>
   <source src="/ambience.mp3" type="audio/mpeg" />

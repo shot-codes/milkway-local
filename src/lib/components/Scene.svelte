@@ -4,7 +4,6 @@
   import { tweened } from "svelte/motion";
   import { useThrelte, T, useFrame } from "@threlte/core";
   import { GLTF, Float, OrbitControls, interactivity } from "@threlte/extras";
-  import { Vector3 } from "three";
   import { DEG2RAD } from "three/src/math/MathUtils";
   import {
     cameraClone,
@@ -12,6 +11,7 @@
     targetPosition,
     cameraPositionScrollMax,
     zoomedIn,
+    zoomedInWithDelay,
     contentMax,
   } from "$lib/stores";
   import { planetLocations } from "$lib/utils";
@@ -25,8 +25,13 @@
   import LactoBio from "$lib/components/planets/LactoBio.svelte";
   import PeopleVentures from "$lib/components/planets/PeopleVentures.svelte";
   import Bregnerdgard from "$lib/components/planets/Bregnerodgaard.svelte";
+  import Ferrari from "$lib/assets/models/Ferrari.svelte";
 
-  interactivity();
+  interactivity({
+    filter: (hits, _) => {
+      return hits.slice(0, 1);
+    },
+  });
 
   let canvas: HTMLCanvasElement;
   let innerHeight: number;
@@ -40,7 +45,7 @@
   const ferrariAcceleration = tweened(0.001, { duration: 3000 });
 
   const fogOptions = tweened({ near: 35, far: 75 }, { duration: 1200 });
-  const { camera } = useThrelte();
+  const { camera, scene } = useThrelte();
 
   $: cameraClone.set($camera);
 
@@ -74,19 +79,23 @@
   onMount(() => {
     canvas = document.getElementsByTagName("canvas")[0];
     canvas.addEventListener("wheel", (e: WheelEvent) => {
-      if ($zoomedIn) {
-        if ($camera.position.y >= $cameraPositionScrollMax && e.deltaY < 0) return;
-        if ($camera.position.y <= $contentMax && e.deltaY > 0) return;
-        try {
-          $cameraPosition = $cameraPosition.add(new Vector3(0, -e.deltaY / 200, 0));
-          $targetPosition = $targetPosition.add(new Vector3(0, -e.deltaY / 200, 0));
-        } catch (e) {
-          // Since zoomedIn is set upon clicking a planet, this event listener fires
-          // if you scroll _while_ the camera is flying into position.
-          // I was prepared to have to block scrolling _until_ the camera is in position
-          // but cameraPosition happens to fail here... Convenient.
-          // We will need to test this across devices/browsers.
+      if ($zoomedInWithDelay) {
+        const newPosition: [number, number, number] = [
+          $cameraPosition[0],
+          $cameraPosition[1] + -e.deltaY / 200,
+          $cameraPosition[2],
+        ];
+        const newTarget: [number, number, number] = [
+          $targetPosition[0],
+          $targetPosition[1] + -e.deltaY / 200,
+          $targetPosition[2],
+        ];
+
+        if (newPosition[1] >= $cameraPositionScrollMax || newPosition[1] <= $contentMax) {
+          return;
         }
+        cameraPosition.set(newPosition, { duration: 100 });
+        targetPosition.set(newTarget, { duration: 100 });
       }
     });
   });
@@ -94,13 +103,14 @@
 
 <svelte:window bind:innerHeight bind:innerWidth />
 
-<T.PerspectiveCamera position={[$cameraPosition.x, $cameraPosition.y, $cameraPosition.z]} {fov}>
+<T.PerspectiveCamera position={$cameraPosition} makeDefault {fov}>
   {#if $zoomedIn}
     <OrbitControls
       enableRotate={false}
       enablePan={false}
       enableZoom={false}
-      target={[$targetPosition.x, $targetPosition.y, $targetPosition.z]}
+      target={$targetPosition}
+      enableDamping
     />
   {:else}
     <OrbitControls
@@ -112,14 +122,22 @@
       enableZoom={dev ? true : false}
       autoRotate={true}
       autoRotateSpeed={0.15}
-      target={[$targetPosition.x, $targetPosition.y, $targetPosition.z]}
+      target={$targetPosition}
     />
   {/if}
 </T.PerspectiveCamera>
 
 <T.AmbientLight intensity={0.3} />
 <T.DirectionalLight castShadow position={[8, 8, -8]} />
-<T.Fog color={"#000000"} near={$fogOptions.near} far={$fogOptions.far} />
+<T.Fog
+  on:create={({ ref, cleanup }) => {
+    scene.fog = ref;
+    cleanup(() => (scene.fog = null));
+  }}
+  color={0x000000}
+  near={$fogOptions.near}
+  far={$fogOptions.far}
+/>
 
 <Background />
 <Particles position={[0, 0, 0]} />
@@ -135,15 +153,9 @@
 <!-- Ferrari -->
 <T.Group rotation.y={ferrariRotation} rotation.x={-$ferrariAcceleration * 2}>
   <T.Group position.x={10} rotation.y={90 * DEG2RAD}>
-    <Float speed={3} floatIntensity={3}>
+    <Float speed={3} floatIntensity={3} rotationIntensity={1} rotationSpeed={1}>
       <T.Group>
-        <GLTF
-          url={"/models/ferrari_812_superfast.glb"}
-          useDraco
-          scale={45}
-          rotation={[0, 90 * DEG2RAD, 0]}
-          ignorePointer
-        />
+        <Ferrari scale={0.7} />
         <T.Mesh
           position.y={0.4}
           on:click={() => {
