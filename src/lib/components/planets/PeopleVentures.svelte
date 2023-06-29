@@ -14,8 +14,8 @@
   planetSize={1.8}
   planetOffsetXY={[3, -1]}
   titleOffsetXY={[0.5, 3.8]}
-  materialIndex={5}
   content="From pre-seed to venture to expansive growth"
+  color="#ff0000"
   moons={[
     {
       label: "InQvation",

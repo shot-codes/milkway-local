@@ -16,10 +16,10 @@ pnpm run dev
   - [ ] Pressing back button before planet zoom is complete results in the HTML sticking around.
     - This has been partially mitigated by just removing the delay on the opacity. Should re-address this together with the outright removal of the html when faded out.
 
-- [ ] Migrate from threlte v5 to threlte v6
+- [x] Migrate from threlte v5 to threlte v6
 
-  - [ ] Revamp moon handling
-    - [ ] - Moon texture handling
+  - [x] Revamp moon handling
+    - [x] - Moon texture handling
   - [x] Fix fog
   - [x] Fix float parameters (projector and horses)
   - [x] Fix GlTF

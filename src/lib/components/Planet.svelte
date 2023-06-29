@@ -4,13 +4,13 @@
   import { zoomIn, Brand } from "$lib/utils";
   import { onDestroy } from "svelte";
   import { spring, tweened } from "svelte/motion";
-  import { materials } from "$lib/materials";
   import { moonLocations } from "$lib/utils";
   import { zoomedIn, activePlanet } from "$lib/stores";
   import Label from "./Label.svelte";
   import MoonLabel from "./MoonLabel.svelte";
   import Moon from "./Moon.svelte";
-  import { Color } from "three";
+  import { Color, type ColorRepresentation } from "three";
+  import { LayerMaterial, Noise, Fresnel } from "lamina/vanilla";
 
   interface MoonInterface {
     label: string;
@@ -20,19 +20,47 @@
   export let position: [number, number, number];
   export let content = "";
   export let planetSize = 1;
-  export let materialIndex = 0;
   export let planetOffsetXY: [number, number];
   export let titleOffsetXY: [number, number];
   export let brand: Brand;
   export let moons: Array<MoonInterface> = [];
+  export let color: ColorRepresentation;
 
   // Initialize moon locations
   const orbitPositions = moons.map((_, i) => {
     return moonLocations(moons.length)[i];
   });
 
+  const material = new LayerMaterial({
+    color,
+    lighting: "physical",
+    layers: [
+      new Noise({
+        colorA: new Color("#aaaaaa"),
+        colorB: new Color("#aaaaaa"),
+        colorC: new Color("#000000"),
+        colorD: new Color("#000000"),
+        alpha: 0.5,
+        scale: 30,
+        type: "curl",
+        offset: [0, 0, 0],
+        mapping: "local",
+        mode: "normal",
+        visible: true,
+      }),
+      new Fresnel({
+        color: new Color("#ffffff"),
+        alpha: 0.4,
+        power: 1.55,
+        intensity: 1.1,
+        bias: 0,
+        mode: "screen",
+        visible: true,
+      }),
+    ],
+  });
+
   const clonedPlanetSize = spring(planetSize, { stiffness: 0.03, damping: 0.5 });
-  const { material } = materials[materialIndex]();
   const emissiveColor = spring([0, 0, 0]);
   const lightIntensity = tweened(0, { duration: 1000 });
   const textOpacity = tweened(0, { delay: 500, duration: 200 });

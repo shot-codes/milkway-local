@@ -142,13 +142,13 @@
 <Background />
 <Particles position={[0, 0, 0]} />
 <Sun />
-<ZibraAS position={planetLocations[0]} />
-<Confinze position={planetLocations[1]} />
-<MindFuture position={planetLocations[2]} />
-<ZibraPartner position={planetLocations[3]} />
-<LactoBio position={planetLocations[4]} />
+<!-- <ZibraAS position={planetLocations[0]} /> -->
+<!-- <Confinze position={planetLocations[1]} /> -->
+<!-- <MindFuture position={planetLocations[2]} /> -->
+<!-- <ZibraPartner position={planetLocations[3]} /> -->
+<!-- <LactoBio position={planetLocations[4]} /> -->
 <PeopleVentures position={planetLocations[5]} />
-<Bregnerdgard position={planetLocations[6]} />
+<!-- <Bregnerdgard position={planetLocations[6]} /> -->
 
 <!-- Ferrari -->
 <T.Group rotation.y={ferrariRotation} rotation.x={-$ferrariAcceleration * 2}>

@@ -104,3 +104,17 @@ export const moonZoomLocations: Array<[number, number, number]> = [
   [-1.6, -14.3, 0],
   [-5, -17.3, 0],
 ];
+
+export const lightenHexColor = (hex: string, amount: number) => {
+  const match = hex.slice(1).match(/.{2}/g);
+  if (match == null) {
+    throw new Error("Invalid hex color code");
+  }
+  let [r, g, b] = match.map((x) => parseInt(x, 16));
+  r = Math.min(255, r + amount);
+  g = Math.min(255, g + amount);
+  b = Math.min(255, b + amount);
+  return `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b
+    .toString(16)
+    .padStart(2, "0")}`;
+};
