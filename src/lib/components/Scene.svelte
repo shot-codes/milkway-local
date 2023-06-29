@@ -3,7 +3,7 @@
   import { onMount } from "svelte";
   import { tweened } from "svelte/motion";
   import { useThrelte, T, useFrame } from "@threlte/core";
-  import { GLTF, Float, OrbitControls, interactivity } from "@threlte/extras";
+  import { Float, OrbitControls, interactivity } from "@threlte/extras";
   import { DEG2RAD } from "three/src/math/MathUtils";
   import {
     cameraClone,
@@ -28,7 +28,7 @@
   import Ferrari from "$lib/assets/models/Ferrari.svelte";
 
   interactivity({
-    filter: (hits, _) => {
+    filter: (hits) => {
       return hits.slice(0, 1);
     },
   });

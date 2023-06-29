@@ -16,7 +16,7 @@
 
   $: {
     if ($activePlanet == brand) {
-      setOpacity(1, 1500);
+      setOpacity(1, 0);
     }
     if (!$zoomedIn) {
       setOpacity(0, 0);

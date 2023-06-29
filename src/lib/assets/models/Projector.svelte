@@ -8,15 +8,15 @@ Title: Old Beamer (Low-Poly)
 -->
 
 <script>
-  import { Group } from 'three'
-  import { T, forwardEventHandlers } from '@threlte/core'
-  import { useGltf } from '@threlte/extras'
+  import { Group } from "three";
+  import { T, forwardEventHandlers } from "@threlte/core";
+  import { useGltf } from "@threlte/extras";
 
-  export const ref = new Group()
+  export const ref = new Group();
 
-  const gltf = useGltf('/models/projector/scene.gltf')
+  const gltf = useGltf("/models/projector/scene.gltf");
 
-  const component = forwardEventHandlers()
+  const component = forwardEventHandlers();
 </script>
 
 <T is={ref} dispose={false} {...$$restProps} bind:this={$component}>
@@ -25,9 +25,18 @@ Title: Old Beamer (Low-Poly)
   {:then gltf}
     <T.Group rotation={[-Math.PI / 2, 0, 0]}>
       <T.Group scale={0.13}>
-        <T.Mesh geometry={gltf.nodes.Plane547_0.geometry} material={gltf.materials['Material.047']} />
-        <T.Mesh geometry={gltf.nodes.Plane547_1.geometry} material={gltf.materials['Material.054']} />
-        <T.Mesh geometry={gltf.nodes.Plane547_2.geometry} material={gltf.materials['Material.058']} />
+        <T.Mesh
+          geometry={gltf.nodes.Plane547_0.geometry}
+          material={gltf.materials["Material.047"]}
+        />
+        <T.Mesh
+          geometry={gltf.nodes.Plane547_1.geometry}
+          material={gltf.materials["Material.054"]}
+        />
+        <T.Mesh
+          geometry={gltf.nodes.Plane547_2.geometry}
+          material={gltf.materials["Material.058"]}
+        />
       </T.Group>
     </T.Group>
   {:catch error}

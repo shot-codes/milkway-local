@@ -15,7 +15,6 @@
   titleOffsetXY={[0, 3.8]}
   materialIndex={4}
   content="LactoBio info"
-  moonAmount={0}
 >
   <HTML slot="content" transform position={[-5.5, 0, 0]} scale={0.24} pointerEvents="none">
     <PlanetContent link="https://lactobio.com" brand={Brand.LactoBio}>

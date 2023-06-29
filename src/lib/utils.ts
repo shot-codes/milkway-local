@@ -96,3 +96,11 @@ export const moonLocations = (moonAmount: number) => {
 
   return moonPositions;
 };
+
+export const moonZoomLocations: Array<[number, number, number]> = [
+  [-5, -5.3, 0],
+  [-1.6, -8.3, 0],
+  [-5, -11.3, 0],
+  [-1.6, -14.3, 0],
+  [-5, -17.3, 0],
+];

@@ -8,15 +8,15 @@ Title: Low Poly Ferrari Testarossa
 -->
 
 <script>
-  import { Group } from 'three'
-  import { T, forwardEventHandlers } from '@threlte/core'
-  import { useGltf } from '@threlte/extras'
+  import { Group } from "three";
+  import { T, forwardEventHandlers } from "@threlte/core";
+  import { useGltf } from "@threlte/extras";
 
-  export const ref = new Group()
+  export const ref = new Group();
 
-  const gltf = useGltf('/models/ferrari/scene.gltf')
+  const gltf = useGltf("/models/ferrari/scene.gltf");
 
-  const component = forwardEventHandlers()
+  const component = forwardEventHandlers();
 </script>
 
 <T is={ref} dispose={false} {...$$restProps} bind:this={$component}>
@@ -26,19 +26,49 @@ Title: Low Poly Ferrari Testarossa
     <T.Group scale={0.01}>
       <T.Group rotation={[-Math.PI / 2, 0, 0]} scale={100}>
         <T.Group position={[-0.83, 0, 0.22]} scale={0.16}>
-          <T.Mesh geometry={gltf.nodes.Circle024_Material147_0.geometry} material={gltf.materials['Material.147']} />
-          <T.Mesh geometry={gltf.nodes.Circle024_Material146_0.geometry} material={gltf.materials['Material.146']} />
+          <T.Mesh
+            geometry={gltf.nodes.Circle024_Material147_0.geometry}
+            material={gltf.materials["Material.147"]}
+          />
+          <T.Mesh
+            geometry={gltf.nodes.Circle024_Material146_0.geometry}
+            material={gltf.materials["Material.146"]}
+          />
         </T.Group>
         <T.Group position={[0.87, 0, 0.22]} scale={0.16}>
-          <T.Mesh geometry={gltf.nodes.Circle023_Material147_0.geometry} material={gltf.materials['Material.147']} />
-          <T.Mesh geometry={gltf.nodes.Circle023_Material146_0.geometry} material={gltf.materials['Material.146']} />
+          <T.Mesh
+            geometry={gltf.nodes.Circle023_Material147_0.geometry}
+            material={gltf.materials["Material.147"]}
+          />
+          <T.Mesh
+            geometry={gltf.nodes.Circle023_Material146_0.geometry}
+            material={gltf.materials["Material.146"]}
+          />
         </T.Group>
-        <T.Mesh geometry={gltf.nodes.Plane015_Material153_0.geometry} material={gltf.materials['Material.153']} />
-        <T.Mesh geometry={gltf.nodes.Plane015_Material152_0.geometry} material={gltf.materials['Material.152']} />
-        <T.Mesh geometry={gltf.nodes.Plane015_Material149_0.geometry} material={gltf.materials['Material.149']} />
-        <T.Mesh geometry={gltf.nodes.Plane015_Material151_0.geometry} material={gltf.materials['Material.151']} />
-        <T.Mesh geometry={gltf.nodes.Plane015_Material148_0.geometry} material={gltf.materials['Material.148']} />
-        <T.Mesh geometry={gltf.nodes.Plane015_Material150_0.geometry} material={gltf.materials['Material.150']} />
+        <T.Mesh
+          geometry={gltf.nodes.Plane015_Material153_0.geometry}
+          material={gltf.materials["Material.153"]}
+        />
+        <T.Mesh
+          geometry={gltf.nodes.Plane015_Material152_0.geometry}
+          material={gltf.materials["Material.152"]}
+        />
+        <T.Mesh
+          geometry={gltf.nodes.Plane015_Material149_0.geometry}
+          material={gltf.materials["Material.149"]}
+        />
+        <T.Mesh
+          geometry={gltf.nodes.Plane015_Material151_0.geometry}
+          material={gltf.materials["Material.151"]}
+        />
+        <T.Mesh
+          geometry={gltf.nodes.Plane015_Material148_0.geometry}
+          material={gltf.materials["Material.148"]}
+        />
+        <T.Mesh
+          geometry={gltf.nodes.Plane015_Material150_0.geometry}
+          material={gltf.materials["Material.150"]}
+        />
       </T.Group>
     </T.Group>
   {:catch error}

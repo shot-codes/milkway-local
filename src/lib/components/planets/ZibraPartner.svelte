@@ -15,7 +15,6 @@
   titleOffsetXY={[0, 3.8]}
   materialIndex={3}
   content="Få styr på finanserne i små virksomheder"
-  moonAmount={0}
 >
   <HTML slot="content" transform position={[-5.5, 0, 0]} scale={0.34} pointerEvents="none">
     <PlanetContent link="https://zibrapartner.com" brand={Brand.ZibraPartner}>

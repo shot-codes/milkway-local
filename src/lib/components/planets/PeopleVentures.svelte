@@ -1,6 +1,6 @@
 <script lang="ts">
   import { HTML } from "@threlte/extras";
-  import { Brand, moonLocations } from "$lib/utils";
+  import { Brand } from "$lib/utils";
   import Planet from "$lib/components/Planet.svelte";
   import PlanetContent from "$lib/components/PlanetContent.svelte";
   import MoonContent from "$lib/components/MoonContent.svelte";
@@ -16,10 +16,20 @@
   titleOffsetXY={[0.5, 3.8]}
   materialIndex={5}
   content="From pre-seed to venture to expansive growth"
-  moonAmount={3}
-  moon1={{ materialIndex: 5, position: moonLocations(3)[0], label: "InQvation" }}
-  moon2={{ materialIndex: 6, position: moonLocations(3)[1], label: "People Ventures Fond" }}
-  moon3={{ materialIndex: 7, position: moonLocations(3)[2], label: "Cortrium" }}
+  moons={[
+    {
+      label: "InQvation",
+      texture: "branches",
+    },
+    {
+      label: "People Ventures Fond",
+      texture: "bricks",
+    },
+    {
+      label: "Cortrium",
+      texture: "cracks",
+    },
+  ]}
 >
   <HTML slot="content" transform position={[-5.5, 0, 0]} scale={0.24} pointerEvents="none">
     <PlanetContent link="https://people.ventures/" brand={Brand.PeopleVentures}>

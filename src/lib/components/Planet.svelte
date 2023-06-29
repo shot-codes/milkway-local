@@ -1,40 +1,35 @@
 <script lang="ts">
-  import { T, useFrame, type AsyncWritable } from "@threlte/core";
-  import { Text, useTexture } from "@threlte/extras";
+  import { T, useFrame } from "@threlte/core";
+  import { Text } from "@threlte/extras";
   import { zoomIn, Brand } from "$lib/utils";
   import { onDestroy } from "svelte";
-  import { spring, tweened, type Tweened } from "svelte/motion";
-  import { materials, moonMaterialPaths } from "$lib/materials";
+  import { spring, tweened } from "svelte/motion";
+  import { materials } from "$lib/materials";
+  import { moonLocations } from "$lib/utils";
   import { zoomedIn, activePlanet } from "$lib/stores";
   import Label from "./Label.svelte";
   import MoonLabel from "./MoonLabel.svelte";
-  import { Color, RepeatWrapping, Vector2, Texture } from "three";
+  import Moon from "./Moon.svelte";
+  import { Color } from "three";
 
-  interface Moon {
-    materialIndex: number;
-    position: [number, number, number];
+  interface MoonInterface {
     label: string;
+    texture: string;
   }
 
   export let position: [number, number, number];
-  export let moonAmount: number;
   export let content = "";
   export let planetSize = 1;
   export let materialIndex = 0;
   export let planetOffsetXY: [number, number];
   export let titleOffsetXY: [number, number];
   export let brand: Brand;
-  export let moon1: Moon | undefined = undefined;
-  export let moon2: Moon | undefined = undefined;
-  export let moon3: Moon | undefined = undefined;
-  export let moon4: Moon | undefined = undefined;
-  export let moon5: Moon | undefined = undefined;
+  export let moons: Array<MoonInterface> = [];
 
-  const moon1Position: Tweened<[number, number, number]> = tweened([0, 0, 0], { duration: 1000 });
-  const moon2Position: Tweened<[number, number, number]> = tweened([0, 0, 0], { duration: 1000 });
-  const moon3Position: Tweened<[number, number, number]> = tweened([0, 0, 0], { duration: 1000 });
-  const moon4Position: Tweened<[number, number, number]> = tweened([0, 0, 0], { duration: 1000 });
-  const moon5Position: Tweened<[number, number, number]> = tweened([0, 0, 0], { duration: 1000 });
+  // Initialize moon locations
+  const orbitPositions = moons.map((_, i) => {
+    return moonLocations(moons.length)[i];
+  });
 
   const clonedPlanetSize = spring(planetSize, { stiffness: 0.03, damping: 0.5 });
   const { material } = materials[materialIndex]();
@@ -43,35 +38,6 @@
   const textOpacity = tweened(0, { delay: 500, duration: 200 });
   const labelOpacity = tweened(0, { duration: 100 });
   let moonRotation = tweened(0, { duration: 3000 });
-
-  // TODO: This is temporary for migration purposes.
-  const maps: [AsyncWritable<Texture>, AsyncWritable<Texture>, AsyncWritable<Texture>] = [
-    "diffuse",
-    "normal",
-    "displace",
-  ].map((s) => {
-    return useTexture(`/textures/Moons/branches/branches-${s}.png`);
-  }) as [AsyncWritable<Texture>, AsyncWritable<Texture>, AsyncWritable<Texture>];
-
-  const promise = Promise.all(maps);
-
-  $: {
-    if (moon1) {
-      $moon1Position = moon1.position;
-    }
-    if (moon2) {
-      $moon2Position = moon2.position;
-    }
-    if (moon3) {
-      $moon3Position = moon3.position;
-    }
-    if (moon4) {
-      $moon4Position = moon4.position;
-    }
-    if (moon5) {
-      $moon5Position = moon5.position;
-    }
-  }
 
   $: {
     if ($zoomedIn && $activePlanet == brand) {
@@ -82,21 +48,6 @@
     } else {
       textOpacity.set(0);
       clonedPlanetSize.set(planetSize);
-      if (moon1) {
-        $moon1Position = moon1.position;
-      }
-      if (moon2) {
-        $moon2Position = moon2?.position;
-      }
-      if (moon3) {
-        $moon3Position = moon3?.position;
-      }
-      if (moon4) {
-        $moon4Position = moon4?.position;
-      }
-      if (moon5) {
-        $moon5Position = moon5?.position;
-      }
     }
   }
 
@@ -147,13 +98,8 @@
       scale={$clonedPlanetSize - 0.1}
       on:click={() => {
         activePlanet.set(brand);
-        zoomIn(position, moonAmount);
+        zoomIn(position, moons.length);
         moonRotation.set($moonRotation - ($moonRotation % (2 * Math.PI)));
-        moon1Position.set([-5, -5.3, 0]);
-        moon2Position.set([-1.6, -8.3, 0]);
-        moon3Position.set([-5, -11.3, 0]);
-        moon4Position.set([-1.6, -14.3, 0]);
-        moon5Position.set([-5, -17.3, 0]);
       }}
       on:pointerenter={() => {
         if (!$zoomedIn) {
@@ -177,59 +123,10 @@
 
     <!-- Moons -->
     <T.Group rotation.y={$moonRotation}>
-      {#if moon1}
-        {#await promise then [dif, norm, disp]}
-          <MoonLabel position={$moon1Position} opacity={$labelOpacity} text={moon1.label} />
-          <T.Mesh position={$moon1Position} scale={0.05}>
-            <T.SphereGeometry args={[12, 64, 64]} />
-            <T.MeshStandardMaterial map={dif} normalMap={norm} displacementMap={disp} />
-          </T.Mesh>
-        {/await}
-      {/if}
-      <!-- {#if moon2} -->
-      <!--   <MoonLabel position={$moon2Position} opacity={$labelOpacity} text={moon2.label} /> -->
-      <!--   <T.Mesh position={$moon2Position} scale={0.05}> -->
-      <!--     <T.SphereGeometry args={[12, 64, 64]} /> -->
-      <!--     <T.MeshStandardMaterial -->
-      <!--       map={moonMaterials[moon2.materialIndex].diffuse} -->
-      <!--       normalMap={moonMaterials[moon2.materialIndex].normal} -->
-      <!--       displacementMap={moonMaterials[moon2.materialIndex].displace} -->
-      <!--     /> -->
-      <!--   </T.Mesh> -->
-      <!-- {/if} -->
-      <!-- {#if moon3} -->
-      <!--   <MoonLabel position={$moon3Position} opacity={$labelOpacity} text={moon3.label} /> -->
-      <!--   <T.Mesh position={$moon3Position} scale={0.05}> -->
-      <!--     <T.SphereGeometry args={[12, 64, 64]} /> -->
-      <!--     <T.MeshStandardMaterial -->
-      <!--       map={moonMaterials[moon3.materialIndex].diffuse} -->
-      <!--       normalMap={moonMaterials[moon3.materialIndex].normal} -->
-      <!--       displacementMap={moonMaterials[moon3.materialIndex].displace} -->
-      <!--     /> -->
-      <!--   </T.Mesh> -->
-      <!-- {/if} -->
-      <!-- {#if moon4} -->
-      <!--   <MoonLabel position={$moon4Position} opacity={$labelOpacity} text={moon4.label} /> -->
-      <!--   <T.Mesh position={$moon4Position} scale={0.05}> -->
-      <!--     <T.SphereGeometry args={[12, 64, 64]} /> -->
-      <!--     <T.MeshStandardMaterial -->
-      <!--       map={moonMaterials[moon4.materialIndex].diffuse} -->
-      <!--       normalMap={moonMaterials[moon4.materialIndex].normal} -->
-      <!--       displacementMap={moonMaterials[moon4.materialIndex].displace} -->
-      <!--     /> -->
-      <!--   </T.Mesh> -->
-      <!-- {/if} -->
-      <!-- {#if moon5} -->
-      <!--   <MoonLabel position={$moon5Position} opacity={$labelOpacity} text={moon5.label} /> -->
-      <!--   <T.Mesh position={$moon5Position} scale={0.05}> -->
-      <!--     <T.SphereGeometry args={[12, 64, 64]} /> -->
-      <!--     <T.MeshStandardMaterial -->
-      <!--       map={moonMaterials[moon5.materialIndex].diffuse} -->
-      <!--       normalMap={moonMaterials[moon5.materialIndex].normal} -->
-      <!--       displacementMap={moonMaterials[moon5.materialIndex].displace} -->
-      <!--     /> -->
-      <!--   </T.Mesh> -->
-      <!-- {/if} -->
+      {#each moons as moon, index}
+        <MoonLabel position={orbitPositions[index]} opacity={$labelOpacity} text={moon.label} />
+        <Moon position={orbitPositions[index]} {index} parent={brand} texture={moon.texture} />
+      {/each}
     </T.Group>
   </T.Group>
 

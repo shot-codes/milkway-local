@@ -13,6 +13,8 @@ pnpm run dev
 
   - [ ] HTML is still present when zoomed out. This results in miss-clicks and HTML needs to be removed after it has faded out.
   - [ ] Fix zoomed in scroll heights
+  - [ ] Pressing back button before planet zoom is complete results in the HTML sticking around.
+    - This has been partially mitigated by just removing the delay on the opacity. Should re-address this together with the outright removal of the html when faded out.
 
 - [ ] Migrate from threlte v5 to threlte v6
 
@@ -20,8 +22,8 @@ pnpm run dev
     - [ ] - Moon texture handling
   - [x] Fix fog
   - [x] Fix float parameters (projector and horses)
-  - [ ] Fix GlTF
-  - [ ] Stop interactivity propagation
+  - [x] Fix GlTF
+  - [x] Stop interactivity propagation
 
 - [ ] Chat
 
@@ -39,6 +41,8 @@ pnpm run dev
   - [ ] Update planet structure to reflect the corporate structure (as seen below)
   - [ ] Replace HTML content with native three text and geometries (This is to address issues on safari)
   - [ ] Change images out with logos
+  - [ ] Revamp materials definition/loading
+    - [ ] Perhaps just provide a color/set of colors instead of a materail index. Can be used for the emissive as well.
 
 - [ ] Sun
 

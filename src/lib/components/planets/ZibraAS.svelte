@@ -1,6 +1,6 @@
 <script lang="ts">
   import { HTML } from "@threlte/extras";
-  import { Brand, moonLocations } from "$lib/utils";
+  import { Brand } from "$lib/utils";
   import Planet from "$lib/components/Planet.svelte";
   import PlanetContent from "$lib/components/PlanetContent.svelte";
   import MoonContent from "$lib/components/MoonContent.svelte";
@@ -16,10 +16,17 @@
   titleOffsetXY={[0, 3.8]}
   materialIndex={0}
   content="Med fokus på IT – og teknologisektoren"
-  moonAmount={3}
-  moon1={{ materialIndex: 8, position: moonLocations(3)[0], label: "Mutos" }}
-  moon2={{ materialIndex: 9, position: moonLocations(3)[1], label: "ZibraSport" }}
-  moon3={{ materialIndex: 10, position: moonLocations(3)[2], label: "ZyberSafe" }}
+  moons={[
+    { label: "Motus", texture: "rust" },
+    {
+      label: "ZibraSport",
+      texture: "sandstone",
+    },
+    {
+      label: "ZyberSafe",
+      texture: "snow",
+    },
+  ]}
 >
   <HTML slot="content" transform position={[-5.5, 0, 0]} scale={0.24} pointerEvents="none">
     <PlanetContent brand={Brand.ZibraAS}>

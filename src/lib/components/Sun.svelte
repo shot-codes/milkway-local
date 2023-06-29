@@ -1,6 +1,6 @@
 <script lang="ts">
   import { T, useFrame, useThrelte } from "@threlte/core";
-  import { Float, GLTF } from "@threlte/extras";
+  import { Float } from "@threlte/extras";
   import { sunMaterial } from "$lib/materials";
   const { material, displace } = sunMaterial();
   import { activePlanet, zoomedIn } from "$lib/stores";

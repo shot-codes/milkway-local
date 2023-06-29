@@ -1,6 +1,6 @@
 <script lang="ts">
   import { HTML } from "@threlte/extras";
-  import { Brand, moonLocations } from "$lib/utils";
+  import { Brand } from "$lib/utils";
   import Planet from "$lib/components/Planet.svelte";
   import PlanetContent from "$lib/components/PlanetContent.svelte";
   import MoonContent from "$lib/components/MoonContent.svelte";
@@ -15,13 +15,29 @@
   planetOffsetXY={[3, -1]}
   titleOffsetXY={[0, 3.8]}
   materialIndex={2}
-  moonAmount={5}
-  moon1={{ materialIndex: 0, position: moonLocations(5)[0], label: "M2Call" }}
-  moon2={{ materialIndex: 1, position: moonLocations(5)[1], label: "Life with Artificials" }}
-  moon3={{ materialIndex: 2, position: moonLocations(5)[2], label: "Mindfuture Hub / Food Lab" }}
-  moon4={{ materialIndex: 3, position: moonLocations(5)[3], label: "MindVision" }}
-  moon5={{ materialIndex: 4, position: moonLocations(5)[4], label: "Book of Mindsets" }}
   content="Fra idé til prototype til færdigt produkt"
+  moons={[
+    {
+      label: "M2Call",
+      texture: "leaf",
+    },
+    {
+      label: "Life with Artificials",
+      texture: "leaf2",
+    },
+    {
+      label: "Mindfuture Hub / Food Lab",
+      texture: "metal",
+    },
+    {
+      label: "MindVision",
+      texture: "moss",
+    },
+    {
+      label: "Book of Mindsets",
+      texture: "pebbles",
+    },
+  ]}
 >
   <HTML slot="content" transform position={[-5.5, 0, 0]} scale={0.24} pointerEvents="none">
     <PlanetContent link="https://mindfuture.com" brand={Brand.MindFuture}>
