@@ -61,7 +61,7 @@
   planetSize={3}
   {planetOffsetXY}
   titleOffsetXY={[0, 3.8]}
-  materialIndex={6}
+  color="#004343"
   content="Anna Zibrandtsen"
 >
   <HTML slot="content" transform position={[-5.5, 0, 0]} scale={0.24} pointerEvents="none">

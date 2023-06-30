@@ -41,8 +41,7 @@ pnpm run dev
   - [ ] Update planet structure to reflect the corporate structure (as seen below)
   - [ ] Replace HTML content with native three text and geometries (This is to address issues on safari)
   - [ ] Change images out with logos
-  - [ ] Revamp materials definition/loading
-    - [ ] Perhaps just provide a color/set of colors instead of a materail index. Can be used for the emissive as well.
+  - [x] Revamp materials definition/loading
 
 - [ ] Sun
 
@@ -58,6 +57,7 @@ pnpm run dev
   - [ ] Gateway to company sites?
 
 - [ ] Make the ferrari an easter egg (one idea is to hide it in the chatbot)
+- [ ] Slow+dampened global lighting following camera.
 
 ## Corporate Structure (for planets)
 

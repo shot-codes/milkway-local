@@ -1,15 +1,14 @@
 <script lang="ts">
   import { T, useFrame, useThrelte } from "@threlte/core";
   import { Float } from "@threlte/extras";
-  import { sunMaterial } from "$lib/materials";
-  const { material, displace } = sunMaterial();
   import { activePlanet, zoomedIn } from "$lib/stores";
   import { zoomInSun } from "$lib/utils";
   import { spring, tweened } from "svelte/motion";
   import { onMount } from "svelte";
-  import { VideoTexture, Group, Vector3 } from "three";
+  import { VideoTexture, Group, Vector3, Color } from "three";
   import { DEG2RAD } from "three/src/math/MathUtils";
   import Projector from "$lib/assets/models/Projector.svelte";
+  import { LayerMaterial, Noise, Displace, Gradient, Fresnel } from "lamina/vanilla";
 
   const { camera } = useThrelte();
 
@@ -19,6 +18,59 @@
   let videoGroup: Group;
   let video: HTMLVideoElement;
   let texture: VideoTexture;
+
+  const materialDisplace = new Displace({
+    strength: 5,
+    scale: 0.1,
+    type: "perlin",
+    offset: [0.09189000000357626, 0, 0],
+    mode: "normal",
+    visible: true,
+  });
+
+  const materialNoise = new Noise({
+    colorA: new Color("#b91c1c"),
+    colorB: new Color("#d97706"),
+    colorC: new Color("#b91c1c"),
+    colorD: new Color("#ef4444"),
+    alpha: 0.6,
+    scale: 20,
+    type: "curl",
+    offset: [0, 0, 0],
+    mapping: "local",
+    mode: "normal",
+    visible: true,
+  });
+
+  const material = new LayerMaterial({
+    color: "#ef4444",
+    lighting: "standard",
+    alpha: 1,
+    layers: [
+      materialDisplace,
+      materialNoise,
+      new Gradient({
+        colorA: new Color("#ea580c"),
+        colorB: new Color("#ff0000"),
+        alpha: 0.4,
+        contrast: 1,
+        start: 1,
+        end: -5,
+        axes: "x",
+        mapping: "world",
+        visible: true,
+      }),
+      new Fresnel({
+        color: new Color("#ff0000"),
+        alpha: 0.2,
+        power: 1.55,
+        intensity: 1.1,
+        bias: 0,
+        mode: "screen",
+        visible: true,
+      }),
+    ],
+  });
 
   $: {
     if ($zoomedIn && $activePlanet == "Sun") {
@@ -40,7 +92,7 @@
 
   $: {
     // @ts-expect-error The props on displace are not picked up for some reason.
-    displace.strength = $displaceScale;
+    materialDisplace.strength = $displaceScale;
   }
 
   $: {
@@ -55,11 +107,11 @@
 
   useFrame(() => {
     // @ts-expect-error The props on displace are not picked up for some reason.
-    displace.offset[0] += 0.01;
+    materialDisplace.offset[0] += 0.02;
     // @ts-expect-error The props on displace are not picked up for some reason.
-    displace.offset[1] += 0.01;
+    materialDisplace.offset[1] += 0.02;
     // @ts-expect-error The props on displace are not picked up for some reason.
-    displace.offset[2] += 0.01;
+    materialDisplace.offset[2] += 0.02;
   });
 </script>
 

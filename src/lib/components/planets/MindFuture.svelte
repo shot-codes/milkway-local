@@ -14,7 +14,7 @@
   planetSize={2}
   planetOffsetXY={[3, -1]}
   titleOffsetXY={[0, 3.8]}
-  materialIndex={2}
+  color="#008585"
   content="Fra idé til prototype til færdigt produkt"
   moons={[
     {

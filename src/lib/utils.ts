@@ -1,5 +1,6 @@
 import { get } from "svelte/store";
 import { Vector3 } from "three";
+import { LayerMaterial, Fresnel, Noise, Gradient, Displace, Depth } from "lamina/vanilla";
 import {
   cameraPosition,
   targetPosition,
@@ -118,3 +119,20 @@ export const lightenHexColor = (hex: string, amount: number) => {
     .toString(16)
     .padStart(2, "0")}`;
 };
+
+export class CustomLayerMaterial extends LayerMaterial {
+  constructor(
+    roughness: number,
+    transmission: number,
+    thickness: number,
+    layers: Array<Depth | Displace | Fresnel | Noise | Gradient>
+  ) {
+    super({
+      lighting: "physical",
+      roughness,
+      transmission,
+      thickness,
+      layers,
+    });
+  }
+}

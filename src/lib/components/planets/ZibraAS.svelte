@@ -14,7 +14,7 @@
   planetSize={1.5}
   planetOffsetXY={[3, -1]}
   titleOffsetXY={[0, 3.8]}
-  materialIndex={0}
+  color="#963e20"
   content="Med fokus på IT – og teknologisektoren"
   moons={[
     { label: "Motus", texture: "rust" },

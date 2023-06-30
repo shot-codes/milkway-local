@@ -4,7 +4,7 @@
   import { zoomIn, Brand } from "$lib/utils";
   import { onDestroy } from "svelte";
   import { spring, tweened } from "svelte/motion";
-  import { moonLocations } from "$lib/utils";
+  import { moonLocations, lightenHexColor } from "$lib/utils";
   import { zoomedIn, activePlanet } from "$lib/stores";
   import Label from "./Label.svelte";
   import MoonLabel from "./MoonLabel.svelte";
@@ -26,21 +26,28 @@
   export let moons: Array<MoonInterface> = [];
   export let color: ColorRepresentation;
 
-  // Initialize moon locations
+  const colorObj = new Color(color);
   const orbitPositions = moons.map((_, i) => {
     return moonLocations(moons.length)[i];
   });
+  const clonedPlanetSize = spring(planetSize, { stiffness: 0.03, damping: 0.5 });
+  const emissiveColor = spring([0, 0, 0], { stiffness: 0.01, damping: 0.6 });
+  const lightColor = lightenHexColor(color as string, 100);
+  const lightIntensity = tweened(0, { duration: 1000 });
+  const textOpacity = tweened(0, { delay: 500, duration: 200 });
+  const labelOpacity = tweened(0, { duration: 100 });
+  let moonRotation = tweened(0, { duration: 3000 });
 
   const material = new LayerMaterial({
     color,
-    lighting: "physical",
+    lighting: "standard",
     layers: [
       new Noise({
         colorA: new Color("#aaaaaa"),
         colorB: new Color("#aaaaaa"),
         colorC: new Color("#000000"),
         colorD: new Color("#000000"),
-        alpha: 0.5,
+        alpha: 0.1,
         scale: 30,
         type: "curl",
         offset: [0, 0, 0],
@@ -49,7 +56,7 @@
         visible: true,
       }),
       new Fresnel({
-        color: new Color("#ffffff"),
+        color: new Color(lightenHexColor(color as string, 100)),
         alpha: 0.4,
         power: 1.55,
         intensity: 1.1,
@@ -59,13 +66,6 @@
       }),
     ],
   });
-
-  const clonedPlanetSize = spring(planetSize, { stiffness: 0.03, damping: 0.5 });
-  const emissiveColor = spring([0, 0, 0]);
-  const lightIntensity = tweened(0, { duration: 1000 });
-  const textOpacity = tweened(0, { delay: 500, duration: 200 });
-  const labelOpacity = tweened(0, { duration: 100 });
-  let moonRotation = tweened(0, { duration: 3000 });
 
   $: {
     if ($zoomedIn && $activePlanet == brand) {
@@ -117,7 +117,7 @@
     <Label radius={$clonedPlanetSize} text={brand} {content} opacity={$labelOpacity} />
 
     <T.Mesh {material} scale={$clonedPlanetSize}>
-      <T.PointLight intensity={$lightIntensity} />
+      <T.PointLight intensity={$lightIntensity} color={lightColor} />
       <T.SphereGeometry args={[1, 64, 64]} />
     </T.Mesh>
 
@@ -133,7 +133,7 @@
         if (!$zoomedIn) {
           labelOpacity.set(1);
           lightIntensity.set(5);
-          emissiveColor.set([0.1, 0.1, 0.1]);
+          emissiveColor.set(colorObj.toArray());
           $clonedPlanetSize = planetSize + 1;
         }
       }}

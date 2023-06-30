@@ -13,7 +13,7 @@
   planetSize={1.1}
   planetOffsetXY={[3, -1]}
   titleOffsetXY={[0, 3.8]}
-  materialIndex={4}
+  color="#c7522a"
   content="LactoBio info"
 >
   <HTML slot="content" transform position={[-5.5, 0, 0]} scale={0.24} pointerEvents="none">

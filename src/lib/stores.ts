@@ -19,6 +19,7 @@ export const zoomedInWithDelay = derived(zoomedIn, ($zoomedIn, set) => {
 export const activePlanet = writable("");
 export const contentMax = writable(0);
 
+// @ts-expect-error TS complains about calling the abstract Camera class, but it works fine.
 export const cameraClone = writable(new Camera());
 
 export const ogCameraPosition: [number, number, number] = [0, 10, 50];

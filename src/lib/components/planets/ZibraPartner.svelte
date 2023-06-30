@@ -13,7 +13,7 @@
   planetSize={3.5}
   planetOffsetXY={[3, -1]}
   titleOffsetXY={[0, 3.8]}
-  materialIndex={3}
+  color="#74a892"
   content="Få styr på finanserne i små virksomheder"
 >
   <HTML slot="content" transform position={[-5.5, 0, 0]} scale={0.34} pointerEvents="none">
