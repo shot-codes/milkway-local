@@ -42,6 +42,7 @@ pnpm run dev
   - [ ] Replace HTML content with native three text and geometries (This is to address issues on safari)
   - [ ] Change images out with logos
   - [x] Revamp materials definition/loading
+  - [ ] Moon materials replaced with lamina materials
 
 - [ ] Sun
 
@@ -59,7 +60,7 @@ pnpm run dev
 - [ ] Make the ferrari an easter egg (one idea is to hide it in the chatbot)
 - [ ] Slow+dampened global lighting following camera.
 
-## Corporate Structure (for planets)
+## Corporate Structure
 
 - Partner equity
   - Nordisk Innovation

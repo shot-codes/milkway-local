@@ -8,7 +8,7 @@
   import { VideoTexture, Group, Vector3, Color } from "three";
   import { DEG2RAD } from "three/src/math/MathUtils";
   import Projector from "$lib/assets/models/Projector.svelte";
-  import { LayerMaterial, Noise, Displace, Gradient, Fresnel } from "lamina/vanilla";
+  import { LayerMaterial, Noise, Displace, Fresnel } from "lamina/vanilla";
 
   const { camera } = useThrelte();
 
@@ -21,57 +21,42 @@
 
   const materialDisplace = new Displace({
     strength: 5,
-    scale: 0.1,
+    scale: 0.15,
     type: "perlin",
-    offset: [0.09189000000357626, 0, 0],
+    offset: [0, 0, 0],
     mode: "normal",
     visible: true,
   });
-
   const materialNoise = new Noise({
-    colorA: new Color("#b91c1c"),
-    colorB: new Color("#d97706"),
-    colorC: new Color("#b91c1c"),
-    colorD: new Color("#ef4444"),
-    alpha: 0.6,
-    scale: 20,
+    colorA: new Color("#000000"),
+    colorB: new Color("#080808"),
+    colorC: new Color("#606060"),
+    colorD: new Color("#808080"),
+    scale: 0.5,
     type: "curl",
     offset: [0, 0, 0],
-    mapping: "local",
     mode: "normal",
     visible: true,
+    mapping: "local",
   });
 
   const material = new LayerMaterial({
-    color: "#ef4444",
+    color: "#ffffff",
     lighting: "standard",
-    alpha: 1,
     layers: [
-      materialDisplace,
       materialNoise,
-      new Gradient({
-        colorA: new Color("#ea580c"),
-        colorB: new Color("#ff0000"),
-        alpha: 0.4,
-        contrast: 1,
-        start: 1,
-        end: -5,
-        axes: "x",
-        mapping: "world",
-        visible: true,
-      }),
+      materialDisplace,
       new Fresnel({
-        color: new Color("#ff0000"),
-        alpha: 0.2,
-        power: 1.55,
-        intensity: 1.1,
+        color: new Color("#909090"),
+        alpha: 0.9,
+        power: 2.5,
+        intensity: 1.5,
         bias: 0,
-        mode: "screen",
+        mode: "normal",
         visible: true,
       }),
     ],
   });
-
   $: {
     if ($zoomedIn && $activePlanet == "Sun") {
       // Show video
@@ -82,7 +67,7 @@
       }
     } else {
       // Hide video and reset playback
-      displaceScale.set(5);
+      displaceScale.set(4);
       if (video) {
         video.pause();
         video.currentTime = 0;
