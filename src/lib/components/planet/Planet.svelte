@@ -7,8 +7,8 @@
   import { moonLocations, lightenHexColor } from "$lib/utils";
   import { zoomedIn, activePlanet } from "$lib/stores";
   import Label from "./Label.svelte";
-  import MoonLabel from "./MoonLabel.svelte";
-  import Moon from "./Moon.svelte";
+  import MoonLabel from "../moon/MoonLabel.svelte";
+  import Moon from "../moon/Moon.svelte";
   import { Color, type ColorRepresentation } from "three";
   import { LayerMaterial, Noise, Fresnel } from "lamina/vanilla";
 

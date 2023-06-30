@@ -13,7 +13,7 @@ pnpm run dev
 
   - [ ] HTML is still present when zoomed out. This results in miss-clicks and HTML needs to be removed after it has faded out.
   - [ ] Fix zoomed in scroll heights
-  - [ ] Pressing back button before planet zoom is complete results in the HTML sticking around.
+  - [x] Pressing back button before planet zoom is complete results in the HTML sticking around.
     - This has been partially mitigated by just removing the delay on the opacity. Should re-address this together with the outright removal of the html when faded out.
 
 - [x] Migrate from threlte v5 to threlte v6
@@ -58,7 +58,7 @@ pnpm run dev
   - [ ] Gateway to company sites?
 
 - [ ] Make the ferrari an easter egg (one idea is to hide it in the chatbot)
-- [ ] Slow+dampened global lighting following camera.
+- [ ] Slow+dampened global lighting following camera/toggles on zoom in.
 
 ## Corporate Structure
 

@@ -1,9 +1,9 @@
 <script lang="ts">
   import { HTML } from "@threlte/extras";
   import { Brand } from "$lib/utils";
-  import Planet from "$lib/components/Planet.svelte";
-  import PlanetContent from "$lib/components/PlanetContent.svelte";
-  import MoonContent from "$lib/components/MoonContent.svelte";
+  import Planet from "$lib/components/planet/Planet.svelte";
+  import PlanetContent from "$lib/components/planet/PlanetContent.svelte";
+  import MoonContent from "$lib/components/moon/MoonContent.svelte";
 
   export let position: [number, number, number];
 </script>

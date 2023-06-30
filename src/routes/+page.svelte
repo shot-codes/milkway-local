@@ -4,7 +4,7 @@
   import { onMount } from "svelte";
   import AudioOn from "$lib/components/icons/AudioOn.svelte";
   import AudioOff from "$lib/components/icons/AudioOff.svelte";
-  import LandingPage from "$lib/components/LandingPage.svelte";
+  import LandingPage from "./LandingPage.svelte";
   import { dev } from "$app/environment";
 
   let audio: HTMLAudioElement;
@@ -26,7 +26,7 @@
 </audio>
 
 <button
-  class="fixed top-6 right-6 text-white z-30 p-3 rounded-full ring-2 ring-white cursor-pointer"
+  class="fixed w-8 h-8 top-6 right-6 text-white z-30 pl-[6px] rounded-full ring-2 ring-white cursor-pointer"
   on:click={() => {
     audioPlaying = !audioPlaying;
     if (audioPlaying) {

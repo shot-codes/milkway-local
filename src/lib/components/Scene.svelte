@@ -17,14 +17,14 @@
   import { planetLocations } from "$lib/utils";
   import Background from "$lib/components/Background.svelte";
   // import Particles from "$lib/components/Particles.svelte";
-  import Sun from "$lib/components/Sun.svelte";
-  import Confinze from "$lib/components/planets/Confinze.svelte";
-  import ZibraAS from "$lib/components/planets/ZibraAS.svelte";
-  import MindFuture from "$lib/components/planets/MindFuture.svelte";
-  import ZibraPartner from "$lib/components/planets/ZibraPartner.svelte";
-  import LactoBio from "$lib/components/planets/LactoBio.svelte";
-  import PeopleVentures from "$lib/components/planets/PeopleVentures.svelte";
-  import Bregnerdgard from "$lib/components/planets/Bregnerodgaard.svelte";
+  import Sun from "$lib/components/planet/Sun.svelte";
+  import Confinze from "$lib/components/planet/companies/Confinze.svelte";
+  import ZibraAS from "$lib/components/planet/companies/ZibraAS.svelte";
+  import MindFuture from "$lib/components/planet/companies/MindFuture.svelte";
+  import ZibraPartner from "$lib/components/planet/companies/ZibraPartner.svelte";
+  import LactoBio from "$lib/components/planet/companies/LactoBio.svelte";
+  import PeopleVentures from "$lib/components/planet/companies/PeopleVentures.svelte";
+  import Bregnerdgard from "$lib/components/planet/companies/Bregnerodgaard.svelte";
   import Ferrari from "$lib/assets/models/Ferrari.svelte";
 
   interactivity({
@@ -142,11 +142,11 @@
 <Background />
 <!-- <Particles position={[0, 0, 0]} /> -->
 <Sun />
-<ZibraAS position={planetLocations[0]} />
-<Confinze position={planetLocations[1]} />
-<MindFuture position={planetLocations[2]} />
-<ZibraPartner position={planetLocations[3]} />
-<LactoBio position={planetLocations[4]} />
+<!-- <ZibraAS position={planetLocations[0]} /> -->
+<!-- <Confinze position={planetLocations[1]} /> -->
+<!-- <MindFuture position={planetLocations[2]} /> -->
+<!-- <ZibraPartner position={planetLocations[3]} /> -->
+<!-- <LactoBio position={planetLocations[4]} /> -->
 <PeopleVentures position={planetLocations[5]} />
 <Bregnerdgard position={planetLocations[6]} />
 

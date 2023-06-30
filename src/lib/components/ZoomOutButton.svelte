@@ -4,14 +4,14 @@
 </script>
 
 {#if $zoomedIn}
-  <button class="absolute top-10 left-10 rounded-full p-2 ring ring-white z-30" on:click={zoomOut}>
+  <button class="fixed top-7 left-10 rounded-full p-2 ring ring-white z-30" on:click={zoomOut}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
       stroke-width="1"
       stroke="currentColor"
-      class="w-12 h-12"
+      class="w-4 h-4"
     >
       <path
         stroke-linecap="round"

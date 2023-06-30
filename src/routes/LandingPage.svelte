@@ -2,11 +2,11 @@
   import { useProgress } from "@threlte/extras";
   import { fade } from "svelte/transition";
   import { tweened } from "svelte/motion";
-  import RightArrow from "./icons/RightArrow.svelte";
-  import Magnifier from "./icons/Magnifier.svelte";
-  import ClosedHand from "./icons/ClosedHand.svelte";
-  import ClickingHand from "./icons/ClickingHand.svelte";
-  import UpRightArrow from "./icons/UpRightArrow.svelte";
+  import RightArrow from "$lib/components/icons/RightArrow.svelte";
+  import Magnifier from "$lib/components/icons/Magnifier.svelte";
+  import ClosedHand from "$lib/components/icons/ClosedHand.svelte";
+  import ClickingHand from "$lib/components/icons/ClickingHand.svelte";
+  import UpRightArrow from "$lib/components/icons/UpRightArrow.svelte";
 
   let showLandingPage = true;
   const { progress } = useProgress();
