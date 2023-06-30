@@ -153,7 +153,7 @@
     <T.Group rotation.y={$moonRotation}>
       {#each moons as moon, index}
         <MoonLabel position={orbitPositions[index]} opacity={$labelOpacity} text={moon.label} />
-        <Moon position={orbitPositions[index]} {index} parent={brand} texture={moon.texture} />
+        <Moon position={orbitPositions[index]} {index} parent={brand} {color} />
       {/each}
     </T.Group>
   </T.Group>

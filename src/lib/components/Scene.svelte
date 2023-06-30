@@ -16,7 +16,7 @@
   } from "$lib/stores";
   import { planetLocations } from "$lib/utils";
   import Background from "$lib/components/Background.svelte";
-  import Particles from "$lib/components/Particles.svelte";
+  // import Particles from "$lib/components/Particles.svelte";
   import Sun from "$lib/components/Sun.svelte";
   import Confinze from "$lib/components/planets/Confinze.svelte";
   import ZibraAS from "$lib/components/planets/ZibraAS.svelte";
@@ -140,7 +140,7 @@
 />
 
 <Background />
-<Particles position={[0, 0, 0]} />
+<!-- <Particles position={[0, 0, 0]} /> -->
 <Sun />
 <ZibraAS position={planetLocations[0]} />
 <Confinze position={planetLocations[1]} />

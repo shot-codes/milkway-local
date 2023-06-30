@@ -18,42 +18,21 @@
         colorC: new Color("#000000"),
         colorD: new Color("#030303"),
         alpha: 0.25,
-        scale: 500,
+        scale: 300,
         type: "perlin",
         offset: [0, 0, 0],
         mapping: "local",
         mode: "normal",
         visible: true,
       }),
+
       new Gradient({
-        colorA: new Color("#000010"),
-        colorB: new Color("#0000f5"),
+        colorA: new Color("#003950"),
+        colorB: new Color("#000000"),
         alpha: 0.2,
-        contrast: 1,
+        contrast: 1.5,
         start: 1,
-        end: -5,
-        axes: "x",
-        mapping: "local",
-        visible: true,
-      }),
-      new Gradient({
-        colorA: new Color("#060404"),
-        colorB: new Color("#aa00ff"),
-        alpha: 0.1,
-        contrast: 1,
-        start: 1,
-        end: -3,
-        axes: "y",
-        mapping: "local",
-        visible: true,
-      }),
-      new Gradient({
-        colorA: new Color("#030202"),
-        colorB: new Color("#5b14ff"),
-        alpha: 0,
-        contrast: 1,
-        start: 1,
-        end: -1,
+        end: -2,
         axes: "z",
         mapping: "local",
         visible: true,
@@ -70,6 +49,6 @@
 
 <T.Group rotation.x={90 * DEG2RAD} rotation.y={180 * DEG2RAD}>
   <T.Mesh {material} scale={1000}>
-    <T.SphereGeometry />
+    <T.SphereGeometry args={[1, 64, 64]} />
   </T.Mesh>
 </T.Group>

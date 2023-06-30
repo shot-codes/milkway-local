@@ -15,6 +15,8 @@
   const displaceScale = tweened(5);
   const videoOpacity = tweened(0);
   const playPauseButtonScale = spring(1);
+  const lightIntensity = tweened(0);
+  const emissiveColor = spring([0, 0, 0], { stiffness: 0.01, damping: 0.6 });
   let videoGroup: Group;
   let video: HTMLVideoElement;
   let texture: VideoTexture;
@@ -57,6 +59,12 @@
       }),
     ],
   });
+
+  $: {
+    // @ts-expect-error The emissive prop isn't picked up by ts
+    material.emissive = new Color($emissiveColor[0], $emissiveColor[1], $emissiveColor[2]);
+  }
+
   $: {
     if ($zoomedIn && $activePlanet == "Sun") {
       // Show video
@@ -103,14 +111,32 @@
 <!-- Sun -->
 <T.Mesh
   {material}
+  on:pointerenter={() => {
+    if (!$zoomedIn) {
+      displaceScale.set(0);
+      lightIntensity.set(4);
+      emissiveColor.set([0.1, 0.1, 0.1]);
+    }
+  }}
+  on:pointerleave={() => {
+    if (!$zoomedIn) {
+      displaceScale.set(4);
+    }
+    lightIntensity.set(0);
+    emissiveColor.set([0, 0, 0]);
+  }}
   on:click={() => {
     if (!$zoomedIn) {
       zoomInSun();
+      lightIntensity.set(0);
     }
   }}
 >
   <T.SphereGeometry args={[6, 64, 64]} />
 </T.Mesh>
+
+<!-- Light -->
+<T.PointLight intensity={$lightIntensity} color="#ffffff" />
 
 <!-- Video -->
 <T.Group bind:ref={videoGroup}>
