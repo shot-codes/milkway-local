@@ -16,7 +16,7 @@
   } from "$lib/stores";
   import { planetLocations } from "$lib/utils";
   import Background from "$lib/components/Background.svelte";
-  // import Particles from "$lib/components/Particles.svelte";
+  import Particles from "$lib/components/Particles.svelte";
   import Sun from "$lib/components/planet/Sun.svelte";
   import Confinze from "$lib/components/planet/companies/Confinze.svelte";
   import ZibraAS from "$lib/components/planet/companies/ZibraAS.svelte";
@@ -46,6 +46,12 @@
 
   const fogOptions = tweened({ near: 35, far: 75 }, { duration: 1200 });
   const { camera, scene } = useThrelte();
+
+  const planets = [
+    {
+      title: "LactoBio",
+    },
+  ];
 
   $: cameraClone.set($camera);
 
@@ -140,13 +146,13 @@
 />
 
 <Background />
-<!-- <Particles position={[0, 0, 0]} /> -->
+<Particles position={[0, 0, 0]} />
 <Sun />
 <!-- <ZibraAS position={planetLocations[0]} /> -->
 <!-- <Confinze position={planetLocations[1]} /> -->
 <!-- <MindFuture position={planetLocations[2]} /> -->
 <!-- <ZibraPartner position={planetLocations[3]} /> -->
-<!-- <LactoBio position={planetLocations[4]} /> -->
+<LactoBio position={planetLocations[4]} />
 <PeopleVentures position={planetLocations[5]} />
 <Bregnerdgard position={planetLocations[6]} />
 

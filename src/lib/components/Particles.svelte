@@ -2,6 +2,10 @@
   import {
     PointsMaterial,
     AdditiveBlending,
+    NoBlending,
+    NormalBlending,
+    SubtractiveBlending,
+    MultiplyBlending,
     Float32BufferAttribute,
     Vector3,
     BufferGeometry,
@@ -38,16 +42,17 @@
 
     let pts = new Array(0);
 
-    for (let i = 0; i < 3000; i++) {
+    for (let i = 0; i < 30000; i++) {
       let r = 50,
-        R = 600;
+        // R = 500;
+        R = 500;
       let rand = Math.pow(Math.random(), 1.5);
       let radius = Math.sqrt(R * R * rand + (1 - rand) * r * r);
       pts.push(
-        new Vector3().setFromCylindricalCoords(
+        new Vector3().setFromSphericalCoords(
           radius,
           Math.random() * 2 * Math.PI,
-          (Math.random() - 0.5) * 4
+          (Math.random() - 0.5) * 40
         )
       );
       sizes.push(Math.random() * 1.5 + 0.5);
@@ -59,7 +64,7 @@
     g.setAttribute("shift", new Float32BufferAttribute(shift, 4));
 
     const material = new PointsMaterial({
-      size: 0.125,
+      size: 0.015,
       fog: false,
       transparent: true,
       depthTest: true,
@@ -80,7 +85,7 @@
           `#include <color_vertex>
         float d = length(abs(position) / vec3(40., 10., 40));
         d = clamp(d, 0., 1.);
-        vColor = mix(vec3(227., 155., 0.), vec3(100., 50., 255.), d) / 255.;
+        vColor = mix(vec3(227., 155., 250.), vec3(255., 255., 255.), d) / 255.;
       `
         )
         .replace(
@@ -100,13 +105,13 @@
         .replace(
           `#include <clipping_planes_fragment>`,
           `#include <clipping_planes_fragment>
-        float d = length(gl_PointCoord.xy - 0.5);
+float d = max(abs(gl_PointCoord.x - 0.1), abs(gl_PointCoord.y + 0.2));
         //if (d > 0.5) discard;
       `
         )
         .replace(
           `vec4 diffuseColor = vec4( diffuse, opacity );`,
-          `vec4 diffuseColor = vec4( vColor, smoothstep(0.5, 0.1, d)/* * 0.5 + 0.5*/ );`
+          `vec4 diffuseColor = vec4( vColor, smoothstep(0.1, 0.1, d)/* * 0.5 + 0.5*/ );`
         );
       //console.log(shader.fragmentShader);
     };
