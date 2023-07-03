@@ -1,3 +1,4 @@
+import type { Prisma } from "@prisma/client";
 import { get } from "svelte/store";
 import { Vector3 } from "three";
 import {
@@ -11,6 +12,22 @@ import {
   activePlanet,
   contentMax,
 } from "$lib/stores";
+
+export type System = Prisma.SystemGetPayload<{
+  include: {
+    planets: {
+      include: {
+        moons: true;
+      };
+    };
+  };
+}>;
+
+export type Planet = Prisma.PlanetGetPayload<{
+  include: {
+    moons: true;
+  };
+}>;
 
 export const zoomIn = (position: [number, number, number], moonAmount: number) => {
   camCopyPosition.set([position[0] * 2, 8, position[2] * 2]); // This is to save current camera position right when you click the button "Move camera"
@@ -55,46 +72,21 @@ export const zoomOut = () => {
   activePlanet.set("");
 };
 
-export enum Brand {
-  ZibraAS = "ZibraAS",
-  Confinze = "Confinze",
-  ZibraPartner = "ZibraPartner",
-  MindFuture = "MindFuture",
-  LactoBio = "LactoBio",
-  PeopleVentures = "PeopleVentures",
-  Bregnerødgård = "Bregnerødgård",
-}
-
-export const planetLocations: Array<[number, number, number]> = [];
-const numPlanets = Object.keys(Brand).length;
-const min = -5;
-const max = 5;
-export const orbitRadius = 20;
-
-for (let i = 0; i < numPlanets; i++) {
-  planetLocations[i] = [
-    orbitRadius * Math.cos(((i + 1) * 2 * Math.PI) / numPlanets),
-    Math.floor(Math.random() * (max - min + 1) + min),
-    orbitRadius * Math.sin(((i + 1) * 2 * Math.PI) / numPlanets),
-  ];
-}
-
-export const moonLocations = (moonAmount: number) => {
-  const moonPositions: Array<[number, number, number]> = [];
-  const numMoons = moonAmount;
-  const minMoon = -3;
-  const maxMoon = 1;
-  const moonOrbitRadius = 4;
-
-  for (let i = 0; i < numMoons; i++) {
-    moonPositions[i] = [
-      moonOrbitRadius * Math.cos(((i + 1) * 2 * Math.PI) / numMoons),
-      Math.floor(Math.random() * (maxMoon - minMoon + 1) + minMoon),
-      moonOrbitRadius * Math.sin(((i + 1) * 2 * Math.PI) / numMoons),
+export const generateOrbitPositions = (args: {
+  n: number;
+  radius: number;
+  yMin: number;
+  yMax: number;
+}) => {
+  const positions: Array<[number, number, number]> = [];
+  for (let i = 0; i < args.n; i++) {
+    positions[i] = [
+      args.radius * Math.cos(((i + 1) * 2 * Math.PI) / args.n),
+      Math.floor(Math.random() * (args.yMax - args.yMin + 1) + args.yMin),
+      args.radius * Math.sin(((i + 1) * 2 * Math.PI) / args.n),
     ];
   }
-
-  return moonPositions;
+  return positions;
 };
 
 export const moonZoomLocations: Array<[number, number, number]> = [
@@ -117,4 +109,34 @@ export const lightenHexColor = (hex: string, amount: number) => {
   return `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b
     .toString(16)
     .padStart(2, "0")}`;
+};
+
+// Delete below after rewriting planet rendering.
+
+export enum Brand {
+  ZibraAS = "ZibraAS",
+  Confinze = "Confinze",
+  ZibraPartner = "ZibraPartner",
+  MindFuture = "MindFuture",
+  LactoBio = "LactoBio",
+  PeopleVentures = "PeopleVentures",
+  Bregnerødgård = "Bregnerødgård",
+}
+
+export const moonLocations = (moonAmount: number) => {
+  const moonPositions: Array<[number, number, number]> = [];
+  const numMoons = moonAmount;
+  const minMoon = -3;
+  const maxMoon = 1;
+  const moonOrbitRadius = 4;
+
+  for (let i = 0; i < numMoons; i++) {
+    moonPositions[i] = [
+      moonOrbitRadius * Math.cos(((i + 1) * 2 * Math.PI) / numMoons),
+      Math.floor(Math.random() * (maxMoon - minMoon + 1) + minMoon),
+      moonOrbitRadius * Math.sin(((i + 1) * 2 * Math.PI) / numMoons),
+    ];
+  }
+
+  return moonPositions;
 };

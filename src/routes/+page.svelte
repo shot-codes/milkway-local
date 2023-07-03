@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { PageData } from "./$types";
   import ZoomOutButton from "$lib/components/ZoomOutButton.svelte";
   import type { ComponentType } from "svelte";
   import { onMount } from "svelte";
@@ -6,6 +7,8 @@
   import AudioOff from "$lib/components/icons/AudioOff.svelte";
   import LandingPage from "./LandingPage.svelte";
   import { dev } from "$app/environment";
+
+  export let data: PageData;
 
   let audio: HTMLAudioElement;
   let threlteRoot: ComponentType;
@@ -45,4 +48,4 @@
 
 <ZoomOutButton />
 
-<svelte:component this={threlteRoot} />
+<svelte:component this={threlteRoot} system={data} />

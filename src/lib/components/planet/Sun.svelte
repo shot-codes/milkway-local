@@ -12,7 +12,7 @@
 
   const { camera } = useThrelte();
 
-  const displaceScale = tweened(5);
+  const displaceScale = spring(5);
   const videoOpacity = tweened(0);
   const playPauseButtonScale = spring(1);
   const lightIntensity = tweened(0);

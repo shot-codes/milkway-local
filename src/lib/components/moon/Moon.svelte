@@ -8,7 +8,7 @@
 
   export let index: number;
   export let position: [number, number, number];
-  export let parent: Brand;
+  export let parent: string;
   // export let texture: string;
   export let color: ColorRepresentation;
   let variablePosition = tweened(position, { duration: 1500 });

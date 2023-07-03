@@ -2,7 +2,7 @@
   import { T, useFrame } from "@threlte/core";
   import { HTML, Float } from "@threlte/extras";
   import { Brand } from "$lib/utils";
-  import Planet from "$lib/components/planet/Planet.svelte";
+  import Planet from "$lib/components/planet/Planet2.svelte";
   import PlanetContent from "$lib/components/planet/PlanetContent.svelte";
   import { Vector3 } from "three";
   import Horse from "$lib/assets/models/Horse.svelte";

@@ -13,3 +13,29 @@ model Suggestion {
   text  String
   image String
 }
+
+model Moon {
+  id Int @id @default(autoincrement())
+  title String
+  planet Planet     @relation(fields: [planetId], references: [id], onDelete: Cascade)
+  planetId  Int
+}
+
+model Planet {
+  id    Int       @id @default(autoincrement())
+  url String
+  title String
+  subTitle String
+  color String
+  content String
+  size  Float
+  moons Moon[]
+  system System   @relation(fields: [systemId], references: [id], onDelete: Cascade)
+  systemId Int
+}
+
+model System {
+  id    Int       @id @default(autoincrement())
+  name  String
+  planets Planet[]
+}

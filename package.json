@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "dbseed": "prisma db execute --file prisma/cleardb.sql && prisma db push && tsc --target 'es6' --moduleResolution 'node' --outDir 'prisma/build/' prisma/seed.ts && node prisma/build/seed.js",
     "dev": "vite dev",
     "build": "vite build",
     "postinstall": "prisma generate",

@@ -2,10 +2,6 @@
   import {
     PointsMaterial,
     AdditiveBlending,
-    NoBlending,
-    NormalBlending,
-    SubtractiveBlending,
-    MultiplyBlending,
     Float32BufferAttribute,
     Vector3,
     BufferGeometry,

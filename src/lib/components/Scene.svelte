@@ -1,5 +1,6 @@
 <script lang="ts">
   import { dev } from "$app/environment";
+  import { page } from "$app/stores";
   import { onMount } from "svelte";
   import { tweened } from "svelte/motion";
   import { useThrelte, T, useFrame } from "@threlte/core";
@@ -14,7 +15,7 @@
     zoomedInWithDelay,
     contentMax,
   } from "$lib/stores";
-  import { planetLocations } from "$lib/utils";
+  import { type System, generateOrbitPositions } from "$lib/utils";
   import Background from "$lib/components/Background.svelte";
   import Particles from "$lib/components/Particles.svelte";
   import Sun from "$lib/components/planet/Sun.svelte";
@@ -26,6 +27,7 @@
   import PeopleVentures from "$lib/components/planet/companies/PeopleVentures.svelte";
   import Bregnerdgard from "$lib/components/planet/companies/Bregnerodgaard.svelte";
   import Ferrari from "$lib/assets/models/Ferrari.svelte";
+  import Planet from "./planet/Planet.svelte";
 
   interactivity({
     filter: (hits) => {
@@ -33,11 +35,19 @@
     },
   });
 
+  export let system: System;
+
   let canvas: HTMLCanvasElement;
   let innerHeight: number;
   let innerWidth: number;
   let windowAspect: number;
   let fov = 50;
+  const orbitPositions = generateOrbitPositions({
+    n: system.planets.length,
+    radius: 20,
+    yMin: -5,
+    yMax: 5,
+  });
   const planetRotationX = tweened(0, { duration: 3000 });
   const planetRotationY = tweened(0, { duration: 3000 });
   const planetRotationZ = tweened(0, { duration: 3000 });
@@ -46,12 +56,6 @@
 
   const fogOptions = tweened({ near: 35, far: 75 }, { duration: 1200 });
   const { camera, scene } = useThrelte();
-
-  const planets = [
-    {
-      title: "LactoBio",
-    },
-  ];
 
   $: cameraClone.set($camera);
 
@@ -152,9 +156,13 @@
 <!-- <Confinze position={planetLocations[1]} /> -->
 <!-- <MindFuture position={planetLocations[2]} /> -->
 <!-- <ZibraPartner position={planetLocations[3]} /> -->
-<LactoBio position={planetLocations[4]} />
-<PeopleVentures position={planetLocations[5]} />
-<Bregnerdgard position={planetLocations[6]} />
+<!-- <LactoBio position={planetLocations[4]} /> -->
+<!-- <PeopleVentures position={planetLocations[5]} /> -->
+<!-- <Bregnerdgard position={planetLocations[6]} /> -->
+
+{#each system.planets as planet, index}
+  <Planet {planet} position={orbitPositions[index]} />
+{/each}
 
 <!-- Ferrari -->
 <T.Group rotation.y={ferrariRotation} rotation.x={-$ferrariAcceleration * 2}>
