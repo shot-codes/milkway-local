@@ -1,12 +1,19 @@
 <script lang="ts">
-  import { T } from "@threlte/core";
+  import { T, useFrame } from "@threlte/core";
   import { Text } from "@threlte/extras";
   import { spring, tweened } from "svelte/motion";
-  import { type Planet, lightenHexColor, zoomIn, generateOrbitPositions } from "$lib/utils";
+  import {
+    type Planet,
+    lightenHexColor,
+    zoomIn,
+    generateOrbitPositions,
+    moonZoomLocations,
+  } from "$lib/utils";
   import { activePlanet, zoomedIn } from "$lib/stores";
   import { LayerMaterial, Noise, Fresnel } from "lamina/vanilla";
   import { Color } from "three";
   import Label from "./Label.svelte";
+  import Content from "../Content.svelte";
   import Moon from "../moon/Moon.svelte";
   import MoonLabel from "../moon/MoonLabel.svelte";
 
@@ -38,7 +45,7 @@
         colorC: new Color("#000000"),
         colorD: new Color("#000000"),
         alpha: 0.1,
-        scale: 30,
+        scale: 10,
         type: "curl",
         offset: [0, 0, 0],
         mapping: "local",
@@ -68,12 +75,18 @@
       lightIntensity.set(0);
       textOpacity.set(1);
       labelOpacity.set(0);
-      planetSize.set(2.75);
+      planetSize.set(1.75);
     } else {
       textOpacity.set(0);
       planetSize.set(planet.size);
     }
   }
+
+  useFrame(() => {
+    if (!$zoomedIn) {
+      $moonRotation += 0.2;
+    }
+  });
 </script>
 
 <T.Group {position} rotation.y={Math.atan2(position[0], position[2])}>
@@ -81,18 +94,18 @@
     <Text
       text={planet.title}
       anchorX="center"
-      scale={20}
-      position={[0, 3.8, -3]}
+      scale={12}
+      position={[0, 3.0, -3]}
       fillOpacity={$textOpacity}
       font={"fonts/space.woff"}
     />
   {/if}
 
-  <T.Group position={[3, -1, 0]}>
+  <T.Group position={[2, -0.2, 0]}>
     <Label
       radius={$planetSize}
       text={planet.title}
-      content={planet.content}
+      content={planet.subTitle}
       opacity={$labelOpacity}
     />
 
@@ -128,6 +141,7 @@
     >
       <T.SphereGeometry args={[1, 16, 16]} />
     </T.Mesh>
+
     <!-- Moons -->
     <T.Group rotation.y={$moonRotation}>
       {#each planet.moons as moon, index}
@@ -136,4 +150,15 @@
       {/each}
     </T.Group>
   </T.Group>
+
+  <Content position={[-1, 0.3, 1.0]} planet={planet.title} text={planet.content} />
+  {#each planet.moons as moon, index}
+    <T.Group position={moonZoomLocations[index]}>
+      {#if (index & 1) === 0}
+        <Content position={[4.5, -0.2, 0]} planet={planet.title} text={moon.title} />
+      {:else}
+        <Content position={[-0.6, -0.2, 0]} planet={planet.title} text={moon.title} />
+      {/if}
+    </T.Group>
+  {/each}
 </T.Group>

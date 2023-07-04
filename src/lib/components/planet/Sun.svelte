@@ -12,7 +12,7 @@
 
   const { camera } = useThrelte();
 
-  const displaceScale = spring(5);
+  const displaceScale = spring(5, { stiffness: 0.03, damping: 0.3 });
   const videoOpacity = tweened(0);
   const playPauseButtonScale = spring(1);
   const lightIntensity = tweened(0);
@@ -132,7 +132,7 @@
     }
   }}
 >
-  <T.SphereGeometry args={[6, 64, 64]} />
+  <T.SphereGeometry args={[4, 64, 64]} />
 </T.Mesh>
 
 <!-- Light -->

@@ -1,8 +1,7 @@
 <script lang="ts">
   import { dev } from "$app/environment";
-  import { page } from "$app/stores";
   import { onMount } from "svelte";
-  import { tweened } from "svelte/motion";
+  import { spring, tweened } from "svelte/motion";
   import { useThrelte, T, useFrame } from "@threlte/core";
   import { Float, OrbitControls, interactivity } from "@threlte/extras";
   import { DEG2RAD } from "three/src/math/MathUtils";
@@ -19,13 +18,6 @@
   import Background from "$lib/components/Background.svelte";
   import Particles from "$lib/components/Particles.svelte";
   import Sun from "$lib/components/planet/Sun.svelte";
-  import Confinze from "$lib/components/planet/companies/Confinze.svelte";
-  import ZibraAS from "$lib/components/planet/companies/ZibraAS.svelte";
-  import MindFuture from "$lib/components/planet/companies/MindFuture.svelte";
-  import ZibraPartner from "$lib/components/planet/companies/ZibraPartner.svelte";
-  import LactoBio from "$lib/components/planet/companies/LactoBio.svelte";
-  import PeopleVentures from "$lib/components/planet/companies/PeopleVentures.svelte";
-  import Bregnerdgard from "$lib/components/planet/companies/Bregnerodgaard.svelte";
   import Ferrari from "$lib/assets/models/Ferrari.svelte";
   import Planet from "./planet/Planet.svelte";
 
@@ -41,7 +33,7 @@
   let innerHeight: number;
   let innerWidth: number;
   let windowAspect: number;
-  let fov = 50;
+  let fov = 24;
   const orbitPositions = generateOrbitPositions({
     n: system.planets.length,
     radius: 20,
@@ -64,7 +56,7 @@
       fogOptions.set({ near: 10, far: 15 });
     }
     if (!$zoomedIn) {
-      fogOptions.set({ near: 15, far: 175 });
+      fogOptions.set({ near: 15, far: 205 });
     }
   }
 
@@ -80,9 +72,9 @@
   $: {
     windowAspect = innerWidth / innerHeight;
     if (windowAspect < 1) {
-      fov = 70 / windowAspect;
+      fov = 24 / windowAspect;
     } else {
-      fov = 70 / windowAspect + 20;
+      fov = 24 / windowAspect + 20;
     }
   }
 
@@ -152,37 +144,30 @@
 <Background />
 <Particles position={[0, 0, 0]} />
 <Sun />
-<!-- <ZibraAS position={planetLocations[0]} /> -->
-<!-- <Confinze position={planetLocations[1]} /> -->
-<!-- <MindFuture position={planetLocations[2]} /> -->
-<!-- <ZibraPartner position={planetLocations[3]} /> -->
-<!-- <LactoBio position={planetLocations[4]} /> -->
-<!-- <PeopleVentures position={planetLocations[5]} /> -->
-<!-- <Bregnerdgard position={planetLocations[6]} /> -->
 
 {#each system.planets as planet, index}
   <Planet {planet} position={orbitPositions[index]} />
 {/each}
 
 <!-- Ferrari -->
-<T.Group rotation.y={ferrariRotation} rotation.x={-$ferrariAcceleration * 2}>
-  <T.Group position.x={10} rotation.y={90 * DEG2RAD}>
-    <Float speed={3} floatIntensity={3} rotationIntensity={1} rotationSpeed={1}>
-      <T.Group>
-        <Ferrari scale={0.7} />
-        <T.Mesh
-          position.y={0.4}
-          on:click={() => {
-            ferrariAcceleration.set(0.2);
-            setTimeout(() => {
-              ferrariAcceleration.set(0.001);
-            }, 10000);
-          }}
-        >
-          <T.BoxGeometry args={[2.4, 0.7, 1.3]} />
-          <T.MeshBasicMaterial transparent opacity={0} />
-        </T.Mesh>
-      </T.Group>
-    </Float>
-  </T.Group>
-</T.Group>
+<!-- <T.Group rotation.y={ferrariRotation} rotation.x={-$ferrariAcceleration * 2}> -->
+<!--   <T.Group position.x={10} rotation.y={90 * DEG2RAD}> -->
+<!--     <Float speed={3} floatIntensity={3} rotationIntensity={1} rotationSpeed={1}> -->
+<!--       <T.Group> -->
+<!--         <Ferrari scale={0.7} /> -->
+<!--         <T.Mesh -->
+<!--           position.y={0.4} -->
+<!--           on:click={() => { -->
+<!--             ferrariAcceleration.set(0.2); -->
+<!--             setTimeout(() => { -->
+<!--               ferrariAcceleration.set(0.001); -->
+<!--             }, 10000); -->
+<!--           }} -->
+<!--         > -->
+<!--           <T.BoxGeometry args={[2.4, 0.7, 1.3]} /> -->
+<!--           <T.MeshBasicMaterial transparent opacity={0} /> -->
+<!--         </T.Mesh> -->
+<!--       </T.Group> -->
+<!--     </Float> -->
+<!--   </T.Group> -->
+<!-- </T.Group> -->

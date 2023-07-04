@@ -22,7 +22,7 @@ export const contentMax = writable(0);
 // @ts-expect-error TS complains about calling the abstract Camera class, but it works fine.
 export const cameraClone = writable(new Camera());
 
-export const ogCameraPosition: [number, number, number] = [0, 10, 50];
+export const ogCameraPosition: [number, number, number] = [0, 10, 70];
 export const ogTargetPosition: [number, number, number] = [0, 0, 0];
 
 export const camCopyPosition = writable<[number, number, number]>([0, 0, 0]);
