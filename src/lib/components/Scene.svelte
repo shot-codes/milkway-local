@@ -20,6 +20,7 @@
   import Sun from "$lib/components/planet/Sun.svelte";
   import Ferrari from "$lib/assets/models/Ferrari.svelte";
   import Planet from "./planet/Planet.svelte";
+  import { MeshBasicMaterial } from "three";
 
   interactivity({
     filter: (hits) => {
@@ -47,7 +48,9 @@
   const ferrariAcceleration = tweened(0.001, { duration: 3000 });
 
   const fogOptions = tweened({ near: 35, far: 75 }, { duration: 1200 });
-  const { camera, scene } = useThrelte();
+  const { camera, scene, renderer } = useThrelte();
+
+  scene.overrideMaterial = new MeshBasicMaterial();
 
   $: cameraClone.set($camera);
 
@@ -61,6 +64,13 @@
   }
 
   useFrame(() => {
+    console.log("Draw calls: ", renderer.info.render.calls);
+    console.log("Scene polycount:", renderer.info.render.triangles);
+    console.log("Active Drawcalls:", renderer.info.render.calls);
+    console.log("Textures in Memory", renderer.info.memory.textures);
+    console.log("Geometries in Memory", renderer.info.memory.geometries);
+    console.log("---------------------------");
+
     ferrariRotation -= $ferrariAcceleration;
     if (!$zoomedIn) {
       $planetRotationX += 0.2;
