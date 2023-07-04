@@ -141,8 +141,8 @@
   far={$fogOptions.far}
 />
 
-<Background />
-<Particles position={[0, 0, 0]} />
+<!-- <Background /> -->
+<!-- <Particles position={[0, 0, 0]} /> -->
 <Sun />
 
 {#each system.planets as planet, index}
@@ -150,24 +150,24 @@
 {/each}
 
 <!-- Ferrari -->
-<!-- <T.Group rotation.y={ferrariRotation} rotation.x={-$ferrariAcceleration * 2}> -->
-<!--   <T.Group position.x={10} rotation.y={90 * DEG2RAD}> -->
-<!--     <Float speed={3} floatIntensity={3} rotationIntensity={1} rotationSpeed={1}> -->
-<!--       <T.Group> -->
-<!--         <Ferrari scale={0.7} /> -->
-<!--         <T.Mesh -->
-<!--           position.y={0.4} -->
-<!--           on:click={() => { -->
-<!--             ferrariAcceleration.set(0.2); -->
-<!--             setTimeout(() => { -->
-<!--               ferrariAcceleration.set(0.001); -->
-<!--             }, 10000); -->
-<!--           }} -->
-<!--         > -->
-<!--           <T.BoxGeometry args={[2.4, 0.7, 1.3]} /> -->
-<!--           <T.MeshBasicMaterial transparent opacity={0} /> -->
-<!--         </T.Mesh> -->
-<!--       </T.Group> -->
-<!--     </Float> -->
-<!--   </T.Group> -->
-<!-- </T.Group> -->
+<T.Group rotation.y={ferrariRotation} rotation.x={-$ferrariAcceleration * 2}>
+  <T.Group position.x={10} rotation.y={90 * DEG2RAD}>
+    <Float speed={3} floatIntensity={3} rotationIntensity={1} rotationSpeed={1}>
+      <T.Group>
+        <Ferrari scale={0.7} />
+        <T.Mesh
+          position.y={0.4}
+          on:click={() => {
+            ferrariAcceleration.set(0.2);
+            setTimeout(() => {
+              ferrariAcceleration.set(0.001);
+            }, 10000);
+          }}
+        >
+          <T.BoxGeometry args={[2.4, 0.7, 1.3]} />
+          <T.MeshBasicMaterial transparent opacity={0} />
+        </T.Mesh>
+      </T.Group>
+    </Float>
+  </T.Group>
+</T.Group>

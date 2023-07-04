@@ -70,6 +70,7 @@
   }
 
   $: {
+    console.log("Planet ")
     if ($zoomedIn && $activePlanet == planet.title) {
       emissiveColor.set([0, 0, 0]);
       lightIntensity.set(0);
