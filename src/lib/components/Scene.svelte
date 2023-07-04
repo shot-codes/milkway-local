@@ -50,7 +50,7 @@
   const fogOptions = tweened({ near: 35, far: 75 }, { duration: 1200 });
   const { camera, scene, renderer } = useThrelte();
 
-  scene.overrideMaterial = new MeshBasicMaterial();
+  // scene.overrideMaterial = new MeshBasicMaterial();
 
   $: cameraClone.set($camera);
 
