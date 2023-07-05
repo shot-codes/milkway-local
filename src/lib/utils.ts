@@ -93,7 +93,21 @@ export const generateOrbitPositions = (args: {
   return positions;
 };
 
-export const moonZoomLocations: Array<[number, number, number]> = [
+const generateMoonZoomPositions = (length: number): Array<[number, number, number]> => {
+  const positions: Array<[number, number, number]> = [];
+  for (let i = 0; i < length; i++) {
+    if (i % 2 === 0) {
+      positions.push([-3.2, -3.3 - i * 2, 0]);
+    } else {
+      positions.push([-0.7, -3.3 - i * 2, 0]);
+    }
+  }
+  return positions;
+};
+
+export const moonZoomLocations = generateMoonZoomPositions(13);
+
+export const moonZoomLocations1: Array<[number, number, number]> = [
   [-3.2, -3.3, 0],
   [-0.7, -5.3, 0],
   [-3.2, -7.3, 0],

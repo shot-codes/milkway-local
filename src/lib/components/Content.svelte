@@ -13,17 +13,14 @@
 
   const setOpacity = (text: number, bg: number, delay: number) => {
     setTimeout(() => {
-      if (!$zoomedIn && $opacity == 0) {
-        return;
-      } else {
-        opacity.set(text);
-        bgOpacity.set(bg);
-      }
+      console.log("setting opacity");
+      opacity.set(text);
+      bgOpacity.set(bg);
     }, delay);
   };
 
   $: {
-    if ($activePlanet == planet) {
+    if ($zoomedIn && $activePlanet == planet) {
       setOpacity(1, 0.5, 1000);
     }
     if (!$zoomedIn) {

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { activePlanet, zoomedIn } from "$lib/stores";
-  import { moonZoomLocations, type Brand, lightenHexColor } from "$lib/utils";
+  import { moonZoomLocations, lightenHexColor } from "$lib/utils";
   import { T } from "@threlte/core";
   import { tweened } from "svelte/motion";
   import { type ColorRepresentation, Color } from "three";

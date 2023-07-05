@@ -39,19 +39,19 @@
     color: planet.color,
     lighting: "standard",
     layers: [
-      new Noise({
-        colorA: new Color("#aaaaaa"),
-        colorB: new Color("#aaaaaa"),
-        colorC: new Color("#000000"),
-        colorD: new Color("#000000"),
-        alpha: 0.1,
-        scale: 10,
-        type: "curl",
-        offset: [0, 0, 0],
-        mapping: "local",
-        mode: "normal",
-        visible: true,
-      }),
+      // new Noise({
+      //   colorA: new Color("#aaaaaa"),
+      //   colorB: new Color("#aaaaaa"),
+      //   colorC: new Color("#000000"),
+      //   colorD: new Color("#000000"),
+      //   alpha: 0.1,
+      //   scale: 10,
+      //   type: "curl",
+      //   offset: [0, 0, 0],
+      //   mapping: "local",
+      //   mode: "normal",
+      //   visible: true,
+      // }),
       new Fresnel({
         color: new Color(lightColor),
         alpha: 0.4,
@@ -70,7 +70,6 @@
   }
 
   $: {
-    console.log("Planet ")
     if ($zoomedIn && $activePlanet == planet.title) {
       emissiveColor.set([0, 0, 0]);
       lightIntensity.set(0);
