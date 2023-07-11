@@ -13,6 +13,7 @@
     zoomedIn,
     zoomedInWithDelay,
     contentMax,
+    zooming,
   } from "$lib/stores";
   import { type System, generateOrbitPositions } from "$lib/utils";
   import Background from "$lib/components/Background.svelte";
@@ -33,7 +34,7 @@
   let innerHeight: number;
   let innerWidth: number;
   let windowAspect: number;
-  let fov = 24;
+  let fov = 44;
   const orbitPositions = generateOrbitPositions({
     n: system.planets.length,
     radius: 20,
@@ -70,12 +71,8 @@
   });
 
   $: {
-    windowAspect = innerWidth / innerHeight;
-    if (windowAspect < 1) {
-      fov = 24 / windowAspect;
-    } else {
-      fov = 24 / windowAspect + 20;
-    }
+    windowAspect = innerHeight / innerWidth;
+    fov = 44 * 1.5 * windowAspect;
   }
 
   onMount(() => {
@@ -119,7 +116,7 @@
       maxPolarAngle={160 * DEG2RAD}
       minPolarAngle={30 * DEG2RAD}
       enableDamping
-      enableRotate={true}
+      enableRotate={!$zooming}
       enablePan={false}
       enableZoom={dev ? true : false}
       autoRotate={true}
@@ -130,7 +127,7 @@
 </T.PerspectiveCamera>
 
 <T.AmbientLight intensity={0.3} />
-<T.DirectionalLight castShadow position={[8, 8, -8]} />
+<T.DirectionalLight castShadow position={[-8, 8, 8]} />
 <T.Fog
   on:create={({ ref, cleanup }) => {
     scene.fog = ref;

@@ -73,7 +73,7 @@ async function main() {
             content:
               "We help entrepreneurs succeed by investing money and engage ourselves in early-stage companies. With a careful hand, we actively push and support early-stage startups with our operational skillset, experience, and network to move them fast forward.",
             url: "https://people.ventures",
-            color: "#0c9493",
+            color: "#399E9D",
             size: 2.5,
             moons: {
               create: [
@@ -96,7 +96,7 @@ async function main() {
             subTitle: "This is LactoBio",
             content: "Some content",
             url: "https://lactobio.com",
-            color: "#0c9493",
+            color: "#33CFCD",
             size: 2.5,
           },
           {
@@ -105,7 +105,7 @@ async function main() {
             content:
               "inQvation represents Zibra Groups minority investments. These companies are very diverse startups with that in common that they have invented unique products with innovative business plans. This group of companies are administrated and supported by People Ventures.",
             url: "https://people.ventures",
-            color: "#0c9493",
+            color: "#E0703F",
             size: 2.5,
             moons: {
               create: [
@@ -194,7 +194,7 @@ async function main() {
             subTitle: "This is CSR",
             content: "Some content",
             url: "https://shot.codes",
-            color: "#0c9493",
+            color: "#873FE0",
             size: 2.5,
             moons: {
               create: [
@@ -212,7 +212,7 @@ async function main() {
             subTitle: "This is Equestrian",
             content: "Some content",
             url: "https://shot.codes",
-            color: "#0c9493",
+            color: "#E03F98",
             size: 2.5,
             moons: {
               create: [
@@ -235,7 +235,7 @@ async function main() {
             subTitle: "This is Mindfuture",
             content: "Some content",
             url: "https://mindfuture.com",
-            color: "#0c9493",
+            color: "#E0D83F",
             size: 2.5,
             moons: {
               create: [
@@ -270,7 +270,7 @@ async function main() {
             title: "SomeCompany",
             subTitle: "This is SomeCompany",
             content:
-              "SomeCompany is a leading space exploration company that is dedicated to pushing the boundaries of human knowledge and technology.\n\n Our team of experienced scientists and engineers are constantly working to develop new and innovative ways to explore the vast expanse of space.",
+              "SomeCompany is a leading space exploration company that is dedicated to pushing the boundaries of human knowledge and technology. Our team of experienced scientists and engineers are constantly working to develop new and innovative ways to explore the vast expanse of space.",
             url: "https://shot.codes",
             color: "#005067",
             size: 3,
@@ -280,13 +280,12 @@ async function main() {
                   title: "Phobos",
                   url: "https://shot.codes",
                   content:
-                    "SomeCompany is a leading space exploration company that is dedicated to pushing the boundaries of human knowledge and technology. Our team of experienced scientists and engineers are constantly working to develop new and innovative ways to explore the vast expanse of space.",
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim.",
                 },
                 {
                   title: "Deimos",
                   url: "https://shot.codes",
-                  content:
-                    "SomeCompany is a leading space exploration company that is dedicated to pushing the boundaries of human knowledge and technology. Our team of experienced scientists and engineers are constantly working to develop new and innovative ways to explore the vast expanse of space.",
+                  content: "This is some short content",
                 },
               ],
             },

@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { zoomedIn } from "$lib/stores";
+  import { zoomedIn, zooming } from "$lib/stores";
   import { zoomOut } from "$lib/utils";
 </script>
 
-{#if $zoomedIn}
+{#if $zoomedIn && !$zooming}
   <button class="fixed top-7 left-10 rounded-full p-2 ring ring-white z-30" on:click={zoomOut}>
     <svg
       xmlns="http://www.w3.org/2000/svg"

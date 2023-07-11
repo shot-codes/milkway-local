@@ -151,13 +151,31 @@
     </T.Group>
   </T.Group>
 
-  <Content position={[-1, 0.3, 1.0]} planet={planet.title} text={planet.content} />
+  <Content
+    position={[-1, 0.3, 1.0]}
+    planet={planet.title}
+    title={planet.title}
+    text={planet.content}
+    url={planet.url}
+  />
   {#each planet.moons as moon, index}
     <T.Group position={moonZoomLocations[index]}>
       {#if (index & 1) === 0}
-        <Content position={[4.5, -0.2, 0]} planet={planet.title} text={moon.title} />
+        <Content
+          position={[4.5, -0.2, 0]}
+          planet={planet.title}
+          title={moon.title}
+          text={moon.content}
+          url={moon.url}
+        />
       {:else}
-        <Content position={[-0.6, -0.2, 0]} planet={planet.title} text={moon.title} />
+        <Content
+          position={[-0.6, -0.2, 0]}
+          planet={planet.title}
+          title={moon.title}
+          text={moon.content}
+          url={moon.url}
+        />
       {/if}
     </T.Group>
   {/each}

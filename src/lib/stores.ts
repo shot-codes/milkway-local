@@ -30,3 +30,4 @@ export const camCopyPosition = writable<[number, number, number]>([0, 0, 0]);
 export const cameraPosition = tweened(ogCameraPosition, tweenedOptions);
 export const cameraPositionScrollMax = writable(0);
 export const targetPosition = tweened(ogTargetPosition, tweenedOptions);
+export const zooming = writable(false);

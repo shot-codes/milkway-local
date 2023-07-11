@@ -9,7 +9,7 @@ export const load = (async () => {
   try {
     const system = await prismaClient.system.findMany({
       where: {
-        name: dev ? "dev" : "Solar System",
+        name: dev ? "Solar System" : "Solar System",
       },
       include: {
         planets: {

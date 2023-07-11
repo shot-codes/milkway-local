@@ -11,7 +11,7 @@ pnpm run dev
 
 - Bugs
 
-  - [ ] HTML is still present when zoomed out. This results in miss-clicks and HTML needs to be removed after it has faded out.
+  - [x] HTML is still present when zoomed out. This results in miss-clicks and HTML needs to be removed after it has faded out.
   - [ ] Fix zoomed in scroll heights
   - [x] Pressing back button before planet zoom is complete results in the HTML sticking around.
     - This has been partially mitigated by just removing the delay on the opacity. Should re-address this together with the outright removal of the html when faded out.
@@ -28,6 +28,7 @@ pnpm run dev
 - [ ] Chat
 
   - [x] Chat API vs Completions API
+  - [ ] Try fine-tuning instead of using embeddings to prompt engineer
   - [ ] Chat API: Add previous response messages to query (maintain state in frontend)
   - [ ] Split data into smaller embeddings (Adding context to each Eg. Lactobio: Is compliant because...)
   - [ ] Interface
@@ -38,11 +39,11 @@ pnpm run dev
 
 - [ ] Planets
 
-  - [ ] Update planet structure to reflect the corporate structure (as seen below)
+  - [x] Update planet structure to reflect the corporate structure (as seen below)
   - [ ] Replace HTML content with native three text and geometries (This is to address issues on safari)
   - [ ] Change images out with logos
   - [x] Revamp materials definition/loading
-  - [ ] Moon materials replaced with lamina materials
+  - [x] Moon materials replaced with lamina materials
 
 - [ ] Sun
 
