@@ -1,6 +1,6 @@
 import type { Prisma } from "@prisma/client";
 import { get } from "svelte/store";
-import { Vector3 } from "three";
+import { Vector3, PlaneGeometry } from "three";
 import {
   cameraPosition,
   targetPosition,
@@ -58,7 +58,7 @@ export const zoomInSun = () => {
     new Vector3(0, 1, 0),
     Math.atan2(cam.position.x, cam.position.z)
   );
-  const camPositionVec = new Vector3(0, 2, 24).applyAxisAngle(
+  const camPositionVec = new Vector3(0, 2, 14).applyAxisAngle(
     new Vector3(0, 1, 0),
     Math.atan2(cam.position.x, cam.position.z)
   );
@@ -137,4 +137,12 @@ export const lightenHexColor = (hex: string, amount: number) => {
   return `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b
     .toString(16)
     .padStart(2, "0")}`;
+};
+
+export const createPlaneGeometryFromImage = (image: HTMLImageElement) => {
+  const imageWidth = image.naturalWidth;
+  const imageHeight = image.naturalHeight;
+  const aspectRatio = imageWidth / imageHeight;
+  const geometry = new PlaneGeometry(aspectRatio, 1);
+  return geometry;
 };

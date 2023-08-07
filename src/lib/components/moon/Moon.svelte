@@ -1,17 +1,34 @@
 <script lang="ts">
   import { activePlanet, zoomedIn } from "$lib/stores";
-  import { moonZoomLocations, lightenHexColor } from "$lib/utils";
+  import { moonZoomLocations, lightenHexColor, createPlaneGeometryFromImage } from "$lib/utils";
   import { T } from "@threlte/core";
+  import { useTexture } from "@threlte/extras";
   import { tweened } from "svelte/motion";
-  import { type ColorRepresentation, Color } from "three";
+  import { type ColorRepresentation, Color, PlaneGeometry, MeshStandardMaterial } from "three";
   import { LayerMaterial, Fresnel } from "lamina/vanilla";
 
   export let index: number;
   export let position: [number, number, number];
   export let parent: string;
-  // export let texture: string;
+  export let title: string;
   export let color: ColorRepresentation;
+  export let logoOpacity: number;
+  export let logoUrl: string;
   let variablePosition = tweened(position, { duration: 1500 });
+
+  let logoGeometry: PlaneGeometry;
+  let logoMaterial: MeshStandardMaterial;
+  const logo = useTexture(`/logos/moons/${logoUrl}.png`);
+  $: {
+    if ($logo) {
+      logoGeometry = createPlaneGeometryFromImage($logo.image);
+      logoMaterial = new MeshStandardMaterial({
+        map: $logo,
+        transparent: true,
+        opacity: logoOpacity,
+      });
+    }
+  }
 
   const material = new LayerMaterial({
     color,
@@ -37,15 +54,11 @@
       variablePosition.set(position);
     }
   }
-
-  // const textures = useLoader(TextureLoader).load({
-  //   map: `/textures/Moons/${texture}/${texture}-diffuse.png`,
-  //   normalMap: `/textures/Moons/${texture}/${texture}-normal.png`,
-  //   displacementMap: `/textures/Moons/${texture}/${texture}-displace.png`,
-  // });
 </script>
 
 <T.Mesh {material} position={$variablePosition} scale={0.05}>
+  {#if logoGeometry && logoMaterial}
+    <T.Mesh position={[1, 2.4, 12]} geometry={logoGeometry} material={logoMaterial} scale={20.5} />
+  {/if}
   <T.SphereGeometry args={[12, 64, 64]} />
-  <!-- <T.MeshStandardMaterial {...$textures} /> -->
 </T.Mesh>

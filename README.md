@@ -9,41 +9,8 @@ pnpm run dev
 
 ## To Dos
 
-- Bugs
-
-  - [x] HTML is still present when zoomed out. This results in miss-clicks and HTML needs to be removed after it has faded out.
-  - [ ] Fix zoomed in scroll heights
-  - [x] Pressing back button before planet zoom is complete results in the HTML sticking around.
-    - This has been partially mitigated by just removing the delay on the opacity. Should re-address this together with the outright removal of the html when faded out.
-
-- [x] Migrate from threlte v5 to threlte v6
-
-  - [x] Revamp moon handling
-    - [x] - Moon texture handling
-  - [x] Fix fog
-  - [x] Fix float parameters (projector and horses)
-  - [x] Fix GlTF
-  - [x] Stop interactivity propagation
-
-- [ ] Chat
-
-  - [x] Chat API vs Completions API
-  - [ ] Try fine-tuning instead of using embeddings to prompt engineer
-  - [ ] Chat API: Add previous response messages to query (maintain state in frontend)
-  - [ ] Split data into smaller embeddings (Adding context to each Eg. Lactobio: Is compliant because...)
-  - [ ] Interface
-    - [ ] Frontend error handling
-  - [ ] Gather content from website for every company
-  - [ ] Enrich company data by scraping cvr-virk
-  - [ ] Upgrade to Vercel Pro (This is needed to increase the timeout of serverless functions. Once we get our MF network sorted we can run everything locally, which will also speed up the response time.)
-
-- [ ] Planets
-
-  - [x] Update planet structure to reflect the corporate structure (as seen below)
-  - [ ] Replace HTML content with native three text and geometries (This is to address issues on safari)
-  - [ ] Change images out with logos
-  - [x] Revamp materials definition/loading
-  - [x] Moon materials replaced with lamina materials
+- [x] Add image names to prisma model + update image fetching
+- [ ] Make solid black versions of logos
 
 - [ ] Sun
 
@@ -58,7 +25,7 @@ pnpm run dev
   - [ ] Total visits
   - [ ] Gateway to company sites?
 
-- [ ] Make the ferrari an easter egg (one idea is to hide it in the chatbot)
+- [ ] Make the ferrari an easter egg
 - [ ] Slow+dampened global lighting following camera/toggles on zoom in.
 
 ## Corporate Structure

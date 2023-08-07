@@ -48,7 +48,6 @@
       },
     });
     const answer = await response.json();
-    console.log(answer);
     waitingElement.textContent = answer.content;
 
     // Add to download string

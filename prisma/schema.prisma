@@ -17,6 +17,7 @@ model Suggestion {
 model Moon {
   id Int @id @default(autoincrement())
   url String
+  logoUrl String
   title String
   content String
   planet Planet     @relation(fields: [planetId], references: [id], onDelete: Cascade)
@@ -26,6 +27,7 @@ model Moon {
 model Planet {
   id    Int       @id @default(autoincrement())
   url String
+  logoUrl String
   title String
   subTitle String
   color String

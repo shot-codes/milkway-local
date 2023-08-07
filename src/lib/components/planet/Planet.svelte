@@ -1,6 +1,6 @@
 <script lang="ts">
   import { T, useFrame } from "@threlte/core";
-  import { Text } from "@threlte/extras";
+  import { Text, useTexture } from "@threlte/extras";
   import { spring, tweened } from "svelte/motion";
   import {
     type Planet,
@@ -8,10 +8,11 @@
     zoomIn,
     generateOrbitPositions,
     moonZoomLocations,
+    createPlaneGeometryFromImage,
   } from "$lib/utils";
   import { activePlanet, zoomedIn } from "$lib/stores";
   import { LayerMaterial, Noise, Fresnel } from "lamina/vanilla";
-  import { Color } from "three";
+  import { Color, PlaneGeometry, MeshStandardMaterial } from "three";
   import Label from "./Label.svelte";
   import Content from "../Content.svelte";
   import Moon from "../moon/Moon.svelte";
@@ -35,8 +36,24 @@
     yMax: 1,
   });
 
+  let logoGeometry: PlaneGeometry;
+  let logoMaterial: MeshStandardMaterial;
+  const logo = useTexture(`/logos/planets/${planet.logoUrl}.png`);
+
+  $: {
+    if ($logo) {
+      logoGeometry = createPlaneGeometryFromImage($logo.image);
+      logoMaterial = new MeshStandardMaterial({
+        map: $logo,
+        transparent: true,
+        opacity: $textOpacity,
+      });
+    }
+  }
+
   const material = new LayerMaterial({
-    color: planet.color,
+    // color: planet.color,
+    color: "#000000",
     lighting: "standard",
     layers: [
       // new Noise({
@@ -71,7 +88,7 @@
 
   $: {
     if ($zoomedIn && $activePlanet == planet.title) {
-      emissiveColor.set([0, 0, 0]);
+      // emissiveColor.set([0, 0, 0]);
       lightIntensity.set(0);
       textOpacity.set(1);
       labelOpacity.set(0);
@@ -79,6 +96,12 @@
     } else {
       textOpacity.set(0);
       planetSize.set(planet.size);
+    }
+  }
+
+  $: {
+    if (!$zoomedIn) {
+      emissiveColor.set([0, 0, 0]);
     }
   }
 
@@ -99,6 +122,11 @@
       fillOpacity={$textOpacity}
       font={"fonts/space.woff"}
     />
+  {/if}
+
+  <!-- Logo -->
+  {#if logoGeometry && logoMaterial}
+    <T.Mesh position={[1, 0.4, 2]} geometry={logoGeometry} material={logoMaterial} scale={0.5} />
   {/if}
 
   <T.Group position={[2, -0.2, 0]}>
@@ -146,7 +174,15 @@
     <T.Group rotation.y={$moonRotation}>
       {#each planet.moons as moon, index}
         <MoonLabel position={orbitPositions[index]} opacity={$labelOpacity} text={moon.title} />
-        <Moon position={orbitPositions[index]} {index} parent={planet.title} color={planet.color} />
+        <Moon
+          position={orbitPositions[index]}
+          {index}
+          parent={planet.title}
+          color={planet.color}
+          title={moon.title}
+          logoOpacity={$textOpacity}
+          logoUrl={moon.logoUrl}
+        />
       {/each}
     </T.Group>
   </T.Group>
