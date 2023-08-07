@@ -307,7 +307,7 @@ async function main() {
               "SomeCompany is a leading space exploration company that is dedicated to pushing the boundaries of human knowledge and technology. Our team of experienced scientists and engineers are constantly working to develop new and innovative ways to explore the vast expanse of space.",
             url: "https://shot.codes",
             logoUrl: "some_company",
-            color: "#005067",
+            color: "#E0703F",
             size: 3,
             moons: {
               create: [

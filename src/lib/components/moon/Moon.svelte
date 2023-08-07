@@ -1,9 +1,9 @@
 <script lang="ts">
   import { activePlanet, zoomedIn } from "$lib/stores";
-  import { moonZoomLocations, lightenHexColor, createPlaneGeometryFromImage } from "$lib/utils";
+  import { moonZoomLocations, createPlaneGeometryFromImage } from "$lib/utils";
   import { T } from "@threlte/core";
   import { useTexture } from "@threlte/extras";
-  import { tweened } from "svelte/motion";
+  import { spring, tweened } from "svelte/motion";
   import { type ColorRepresentation, Color, PlaneGeometry, MeshStandardMaterial } from "three";
   import { LayerMaterial, Fresnel } from "lamina/vanilla";
 
@@ -14,6 +14,8 @@
   export let color: ColorRepresentation;
   export let logoOpacity: number;
   export let logoUrl: string;
+  const emissiveRawColor = new Color(color);
+  const emissiveColor = spring([0, 0, 0], { stiffness: 0.01, damping: 0.6 });
   let variablePosition = tweened(position, { duration: 1500 });
 
   let logoGeometry: PlaneGeometry;
@@ -31,13 +33,13 @@
   }
 
   const material = new LayerMaterial({
-    color,
+    color: "#000000",
     lighting: "standard",
     layers: [
       new Fresnel({
-        color: new Color(lightenHexColor(color as string, 100)),
+        color: new Color(color),
         alpha: 0.4,
-        power: 4.55,
+        power: 1.55,
         intensity: 1.1,
         bias: 0,
         mode: "screen",
@@ -47,11 +49,18 @@
   });
 
   $: {
+    // @ts-expect-error The emissive prop isn't picked up by ts
+    material.emissive = new Color($emissiveColor[0], $emissiveColor[1], $emissiveColor[2]);
+  }
+
+  $: {
     if ($zoomedIn && $activePlanet == parent) {
       variablePosition.set(moonZoomLocations[index]);
+      emissiveColor.set(emissiveRawColor.toArray());
     }
     if (!$zoomedIn) {
       variablePosition.set(position);
+      emissiveColor.set([0, 0, 0]);
     }
   }
 </script>
