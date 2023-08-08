@@ -14,7 +14,12 @@
 
   const displaceScale = spring(5, { stiffness: 0.03, damping: 0.3 });
   const videoOpacity = tweened(0);
-  const playPauseButtonScale = spring(1);
+  const playButtonScale = spring(1);
+  const pauseButtonScale = spring(1);
+  const restartButtonScale = spring(1);
+  const playButtonColor = new Color(0.05, 0.05, 0.05);
+  const pauseButtonColor = new Color(0.05, 0.05, 0.05);
+  const restartButtonColor = new Color(0.05, 0.05, 0.05);
   const lightIntensity = tweened(0);
   const emissiveColor = spring([0, 0, 0], { stiffness: 0.01, damping: 0.6 });
   let videoGroup: Group;
@@ -69,13 +74,14 @@
     if ($zoomedIn && $activePlanet == "Sun") {
       // Show video
       displaceScale.set(0);
-      if (video) {
+      if (video && videoGroup) {
         videoGroup.lookAt(new Vector3($camera.position.x, 0, $camera.position.z));
         video.play();
       }
     } else {
       // Hide video and reset playback
       displaceScale.set(4);
+      videoOpacity.set(0);
       if (video) {
         video.pause();
         video.currentTime = 0;
@@ -86,11 +92,6 @@
   $: {
     // @ts-expect-error The props on displace are not picked up for some reason.
     materialDisplace.strength = $displaceScale;
-  }
-
-  $: {
-    if ($displaceScale > 0) videoOpacity.set(0);
-    if ($displaceScale == 0) videoOpacity.set(1);
   }
 
   onMount(() => {
@@ -129,6 +130,7 @@
     if (!$zoomedIn) {
       zoomInSun();
       lightIntensity.set(0);
+      videoOpacity.set(1);
     }
   }}
 >
@@ -138,48 +140,36 @@
 <!-- Light -->
 <T.PointLight intensity={$lightIntensity} color="#ffffff" />
 
-<!-- Video -->
-<T.Group bind:ref={videoGroup}>
-  <!-- <T.Mesh let:ref rotation.y={-90 * DEG2RAD}
-      on:click={() => {
-        if (!$zoomedIn) {
-          zoomInSun();
-        }
-      }}
-    >
-    <T.SphereGeometry args={[6.01, 64, 64]} />
-    <T.MeshBasicMaterial map={texture} transparent={true} opacity={$videoOpacity} />
-  </T.Mesh> -->
+{#if $zoomedIn && $activePlanet == "Sun"}
+  <!-- Video -->
+  <T.Group bind:ref={videoGroup}>
+    <T.Mesh rotation.y={-90 * DEG2RAD}>
+      <T.SphereGeometry args={[4.05, 64, 64, 2.2, 1.9, 1, 1]} />
+      <T.MeshBasicMaterial map={texture} transparent={true} opacity={$videoOpacity} />
+    </T.Mesh>
 
-  <!-- Projector -->
-  {#if $zoomedIn && $activePlanet == "Sun"}
+    <!-- Projector -->
     <Float>
-      <T.Group position={[-4, 0, 9]} rotation.y={150 * DEG2RAD}>
+      <T.Group position={[-2, 0, 9]} rotation.y={150 * DEG2RAD}>
         <Projector visible={$zoomedIn && $activePlanet == "Sun"} />
-      </T.Group>
-
-      <!-- Projector Screen -->/
-      <T.Group
-        position={[-1, -0.4, 7]}
-        rotation.x={90 * DEG2RAD}
-        rotation.z={5 * DEG2RAD}
-        scale={2}
-      >
-        <T.Mesh position.y={0.05} rotation.x={-90 * DEG2RAD}>
-          <T.PlaneGeometry args={[2.5, 1.4]} />
-          <T.MeshBasicMaterial map={texture} transparent={true} opacity={$videoOpacity} />
-        </T.Mesh>
       </T.Group>
     </Float>
 
     <!-- Playback Controls -->
-    <Float>
+    <Float
+      position={[0, -2, 5]}
+      floatingRange={[-0.0005, 0.0005]}
+      rotationIntensity={1}
+      rotationSpeed={1}
+      floatIntensity={1}
+      speed={1}
+      seed={0}
+    >
       <T.Mesh
-        position={[4, -2, 7]}
-        scale={$playPauseButtonScale}
+        scale={$playButtonScale}
         visible={$zoomedIn && $activePlanet == "Sun"}
-        on:pointerenter={() => playPauseButtonScale.set(1.2)}
-        on:pointerleave={() => playPauseButtonScale.set(1)}
+        on:pointerenter={() => playButtonScale.set(1.2)}
+        on:pointerleave={() => playButtonScale.set(1)}
         on:click={() => {
           if (video.paused) {
             video.play();
@@ -189,8 +179,65 @@
         }}
       >
         <T.BoxGeometry args={[0.5, 0.5, 0.5]} />
-        <T.MeshStandardMaterial color="#303060" />
+        <T.MeshStandardMaterial color={playButtonColor} />
       </T.Mesh>
     </Float>
-  {/if}
-</T.Group>
+
+    <Float
+      position={[-1, -2, 5]}
+      floatingRange={[-0.0005, 0.0005]}
+      rotationIntensity={1}
+      rotationSpeed={1}
+      floatIntensity={1}
+      speed={1}
+      seed={134}
+    >
+      <T.Mesh
+        scale={$restartButtonScale}
+        visible={$zoomedIn && $activePlanet == "Sun"}
+        on:pointerenter={() => restartButtonScale.set(1.2)}
+        on:pointerleave={() => restartButtonScale.set(1)}
+        on:click={() => {
+          if (video.paused) {
+            video.play();
+          } else {
+            video.pause();
+          }
+        }}
+      >
+        <T.BoxGeometry args={[0.5, 0.5, 0.5]} />
+        <T.MeshStandardMaterial color={restartButtonColor} />
+      </T.Mesh>
+    </Float>
+
+    <Float
+      position={[1, -2, 5]}
+      floatingRange={[-0.0005, 0.0005]}
+      rotationIntensity={1}
+      rotationSpeed={1}
+      floatIntensity={1}
+      speed={1}
+      seed={434}
+    >
+      <T.Mesh
+        scale={$pauseButtonScale}
+        visible={$zoomedIn && $activePlanet == "Sun"}
+        on:pointerenter={() => {
+          pauseButtonScale.set(1.2);
+          pauseButtonColor.r = 1;
+        }}
+        on:pointerleave={() => pauseButtonScale.set(1)}
+        on:click={() => {
+          if (video.paused) {
+            video.play();
+          } else {
+            video.pause();
+          }
+        }}
+      >
+        <T.BoxGeometry args={[0.5, 0.5, 0.5]} />
+        <T.MeshStandardMaterial color={pauseButtonColor} />
+      </T.Mesh>
+    </Float>
+  </T.Group>
+{/if}

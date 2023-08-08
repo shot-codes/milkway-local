@@ -20,7 +20,7 @@
   });
 </script>
 
-{#if !dev}
+{#if dev}
   <LandingPage />
 {/if}
 
