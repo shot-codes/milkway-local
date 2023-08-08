@@ -148,6 +148,7 @@
       on:click={() => {
         activePlanet.set(planet.title);
         zoomIn(position, planet.moons.length);
+        emissiveColor.set(color.toArray());
         moonRotation.set($moonRotation - ($moonRotation % (2 * Math.PI)));
       }}
       on:pointerenter={() => {
